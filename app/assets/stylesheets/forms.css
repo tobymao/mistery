@@ -1,0 +1,43 @@
+form {
+	margin-bottom: 1em;
+}
+
+input, textarea {
+	border: 0.1em solid #755E17;
+	border-radius: 0.5em;
+	display: block;
+	margin: 0.5em 0.4em;
+	padding: 0.2em 0.5em;
+	background-color: #F2E9CB;
+	font-family: 'pt_sansregular', sans-serif;
+}
+
+input:focus, textarea:focus {
+	outline: none;
+}
+
+label {
+
+}
+
+textarea {
+	width: 30em;
+	height: 10em;
+}
+
+input[type=submit]:hover {
+	background: #E3C66F;
+	border-color: #E3C66F;
+}
+
+input[type=submit]:active {
+	background: #C2A244;
+	border-color: #C2A244;
+}
+
+input[type=submit] {
+	transition: all 0.2s ease;
+	-webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+}
