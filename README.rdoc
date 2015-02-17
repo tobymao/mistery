@@ -3,5 +3,3 @@
 This is a website that allows people to create and play choose your own adventure/mystery games similiar to the boardgame Sherlock: Consulting Detective.
 
 This is still heavily in development.
-
-<tt>rake doc:app</tt>.
