@@ -4,7 +4,7 @@ class Views::Layouts::Navbar < Views::Base
       div class: 'navTab' do
         link_to "Home", root_path
         link_to "Universes", universes_path
-        link_to "Scenarios", root_path
+        link_to "Scenarios", scenarios_path
       end
 
       div class: 'navSetting' do

@@ -73,6 +73,6 @@ class ScenariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scenario_params
-      params.require(:scenario).permit(:name, :text, :universe_id)
+      params.require(:scenario).permit(:name, :description, :solution, :universe_id)
     end
 end

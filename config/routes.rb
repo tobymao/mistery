@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   # Resources
   resources :universes
   resources :locations
-  resources :scenarios
-  resources :contacts
   resources :users
   resources :questions
   resources :plays
+  resources :scenarios do
+    resources :contacts
+  end
 
   # Login Controller
   get 'login' => 'login#index'

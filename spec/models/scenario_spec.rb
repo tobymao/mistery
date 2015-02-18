@@ -4,7 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string           not null
-#  text        :text
+#  description :text
+#  solution    :text
 #  universe_id :integer          not null
 #  user_id     :integer          not null
 #  created_at  :datetime         not null

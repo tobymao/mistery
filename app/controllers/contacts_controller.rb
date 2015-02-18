@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_scenario
 
   # GET /contacts
   # GET /contacts.json
@@ -25,10 +26,11 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    @contact.scenario = @scenario
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { redirect_to [@scenario, @contact], notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -62,13 +64,15 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_scenario
+      @scenario = Scenario.find(params[:scenario_id])
+    end
+
     def contact_params
-      params[:contact]
+      params.require(:contact).permit(:name, :text, :location_id)
     end
 end

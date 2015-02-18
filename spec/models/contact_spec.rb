@@ -1,12 +1,12 @@
 # == Schema Information
 #
-# Table name: scenarios
+# Table name: contacts
 #
 #  id          :integer          not null, primary key
 #  name        :string           not null
 #  text        :text
-#  universe_id :integer          not null
-#  user_id     :integer          not null
+#  scenario_id :integer          not null
+#  location_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
