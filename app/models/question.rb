@@ -11,5 +11,5 @@
 #
 
 class Question < ActiveRecord::Base
-  belongs_to: :scenario, inverse_of: :questions
+  belongs_to :scenario, inverse_of: :questions
 end
