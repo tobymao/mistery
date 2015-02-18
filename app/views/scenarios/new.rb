@@ -15,8 +15,11 @@ class Views::Scenarios::New < Views::Layouts::Page
       f.label :name, 'Name'
       f.text_field :name
 
-      f.label :text, 'Description'
-      f.text_area :text
+      f.label :description, 'Description'
+      f.text_area :description
+
+      f.label :solution, 'Solution'
+      f.text_area :solution
 
       f.submit
     end
