@@ -3,13 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  attr_reader :current_user
-
   # Auth section
   def authenticate
     unless current_user
       self.headers['WWW-Authenticate'] = 'Token realm="Application"'
-      render json: 'Bad credentials', status: 401
+      render_bad_credentials
     end
   end
 
@@ -30,23 +28,23 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-    authenticate_with_http_token do |token, options|
-      set_user_with_token(token)
+    @current_user ||= begin
+      authenticate_with_http_token do |token, options|
+        user = user_with_token(token)
+      end
+      user = user_with_token(cookies[:auth_token]) unless user
     end
-
-    unless @current_user
-      token = cookies[:auth_token]
-      set_user_with_token(token)
-    end
-
-    @current_user
   end
 
-  def set_user_with_token(token)
+  def user_with_token(token)
     session = Session.find_by(token: token)
 
     if session && session.token_valid?
-      @current_user = session.user
+      session.user
     end
+  end
+
+  def render_bad_credentials
+    render json: 'Bad credentials', status: 401
   end
 end

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    return render :show, id: @current_user.id if @current_user
+    return render :show, id: current_user.id if current_user
     redirect_to action: :new
   end
 

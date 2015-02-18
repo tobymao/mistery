@@ -27,7 +27,7 @@ class UniversesController < ApplicationController
   # POST /universes.json
   def create
     @universe = Universe.new(universe_params)
-    @universe.user = @current_user
+    @universe.user = current_user
 
     respond_to do |format|
       if @universe.save

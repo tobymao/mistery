@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UniversesController do
   let(:user) {create(:user)}
   let(:universe) {create(:universe, user: user)}
-  let(:authenticate) {controller.instance_variable_set(:@current_user, user)}
+  let(:authenticate) {expect(controller).to receive(:current_user).and_return(user)}
 
   let(:valid_attributes) {{
     name: "changed name",

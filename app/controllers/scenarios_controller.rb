@@ -1,6 +1,7 @@
 class ScenariosController < ApplicationController
-  before_action :set_scenario, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_scenario, only: [:show, :edit, :update, :destroy]
+  before_action :check_ownership, only: [:edit, :update, :destroy]
 
   # GET /scenarios
   # GET /scenarios.json
@@ -28,7 +29,7 @@ class ScenariosController < ApplicationController
   # POST /scenarios.json
   def create
     @scenario = Scenario.new(scenario_params)
-    @scenario.user = @current_user
+    @scenario.user = current_user
 
     respond_to do |format|
       if @scenario.save
@@ -66,12 +67,15 @@ class ScenariosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_scenario
       @scenario = Scenario.find(params[:id])
+      @can_edit = @scenario.user == current_user
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def check_ownership
+      render_bad_credentials unless @can_edit
+    end
+
     def scenario_params
       params.require(:scenario).permit(:name, :description, :solution, :universe_id)
     end
