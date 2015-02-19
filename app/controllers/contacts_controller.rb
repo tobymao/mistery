@@ -1,11 +1,12 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :set_scenario
+  before_action :require_permission
 
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = @scenario.contacts
   end
 
   # GET /contacts/1
@@ -44,7 +45,7 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.html { redirect_to [@scenario, @contact], notice: 'Contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
@@ -70,6 +71,10 @@ class ContactsController < ApplicationController
 
     def set_scenario
       @scenario = Scenario.find(params[:scenario_id])
+    end
+
+    def require_permission
+      render_bad_credentials root unless @scenario.user == current_user
     end
 
     def contact_params

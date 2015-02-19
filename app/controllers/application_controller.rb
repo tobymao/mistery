@@ -44,6 +44,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_permission
+    raise NotImplementedError
+  end
+
   def render_bad_credentials
     render json: 'Bad credentials', status: 401
   end

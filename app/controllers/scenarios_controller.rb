@@ -1,7 +1,7 @@
 class ScenariosController < ApplicationController
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_scenario, only: [:show, :edit, :update, :destroy]
-  before_action :check_ownership, only: [:edit, :update, :destroy]
+  before_action :require_permission, only: [:edit, :update, :destroy]
 
   # GET /scenarios
   # GET /scenarios.json
@@ -69,11 +69,11 @@ class ScenariosController < ApplicationController
   private
     def set_scenario
       @scenario = Scenario.find(params[:id])
-      @can_edit = @scenario.user == current_user
+      @owner = @scenario.user == current_user
     end
 
-    def check_ownership
-      render_bad_credentials unless @can_edit
+    def require_permission
+      render_bad_credential unless @owner
     end
 
     def scenario_params
