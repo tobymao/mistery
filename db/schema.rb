@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150218062505) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "contacts", ["scenario_id"], name: "index_contacts_on_scenario_id", using: :btree
+  add_index "contacts", ["scenario_id", "location_id"], name: "index_contacts_on_scenario_id_and_location_id", unique: true, using: :btree
 
   create_table "guesses", force: :cascade do |t|
     t.text     "text"
