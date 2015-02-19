@@ -1,8 +1,9 @@
 require 'csv'
 
 class UniversesController < ApplicationController
-  before_action :set_universe, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_universe, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission, only: [:edit, :update, :destroy]
 
   # GET /universes
   # GET /universes.json
@@ -21,6 +22,11 @@ class UniversesController < ApplicationController
 
   # GET /universes/1/edit
   def edit
+    @locations_csv = CSV.generate do |csv|
+      @universe.locations.each do |location|
+        csv << [location.name, " #{location.address}"]
+      end
+    end
   end
 
   # POST /universes
@@ -65,49 +71,54 @@ class UniversesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_universe
-      @universe = Universe.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_universe
+    @universe = Universe.find(params[:id])
+    @owner = @universe.user == current_user
+  end
 
-    # Parse CSV if :locations_csv is populated.
-    # Add the location to :locations_attributes
-    # Find missing locations and add destroy records to the hash
-    # Returns sanitized params.
-    def universe_params
-      p = params.dup
-      p[:universe][:locations_attributes] ||= []
+  def require_permission
+    render_bad_credential unless @owner
+  end
 
-      all_locations = @universe.try(:locations) || []
-      included_locations = []
+  # Parse CSV if :locations_csv is populated.
+  # Add the location to :locations_attributes
+  # Find missing locations and add destroy records to the hash
+  # Returns sanitized params.
+  def universe_params
+    p = params.dup
+    p[:universe][:locations_attributes] ||= []
 
-      # Parse CSV
-      CSV.parse(p[:universe].delete(:locations_csv)).each do |row|
-        name = row[0].strip
-        address = row[1].strip
+    all_locations = @universe.try(:locations) || []
+    included_locations = []
 
-        location_hash = {
-          name: name,
-          address: address,
-        }
+    # Parse CSV
+    CSV.parse(p[:universe].delete(:locations_csv)).each do |row|
+      name = row[0].strip
+      address = row[1].strip
 
-        if match = all_locations.find{|location| location.address == address}
-          location_hash[:id] = match.id
-          included_locations << match.id
-        end
+      location_hash = {
+        name: name,
+        address: address,
+      }
 
-        p[:universe][:locations_attributes] << location_hash
-      end if p[:universe][:locations_csv]
-
-      # Find Missing Records
-      removed_location = all_locations.map(&:id)-included_locations
-      removed_location.each do |id|
-        p[:universe][:locations_attributes] << {
-          id: id,
-          _destroy: true,
-        }
+      if match = all_locations.find{|location| location.address == address}
+        location_hash[:id] = match.id
+        included_locations << match.id
       end
 
-      p.require(:universe).permit(:name, :description, locations_attributes: [:id, :name, :address, :_destroy])
+      p[:universe][:locations_attributes] << location_hash
+    end if p[:universe][:locations_csv]
+
+    # Find Missing Records
+    removed_location = all_locations.map(&:id)-included_locations
+    removed_location.each do |id|
+      p[:universe][:locations_attributes] << {
+        id: id,
+        _destroy: true,
+      }
     end
+
+    p.require(:universe).permit(:name, :description, locations_attributes: [:id, :name, :address, :_destroy])
+  end
 end
