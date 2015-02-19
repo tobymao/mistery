@@ -3,28 +3,28 @@ class ContactsController < ApplicationController
   before_action :set_scenario
   before_action :require_permission
 
-  # GET /contacts
-  # GET /contacts.json
+  # GET /scenario/:id/contacts
+  # GET /scenarios/:id//contacts.json
   def index
     @contacts = @scenario.contacts
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.json
+  # GET /scenarios/:id/contacts/1
+  # GET /scenarios/:id/contacts/1.json
   def show
   end
 
-  # GET /contacts/new
+  # GET /scenarios/:id/contacts/new
   def new
     @contact = Contact.new
   end
 
-  # GET /contacts/1/edit
+  # GET /scenarios/:id/contacts/1/edit
   def edit
   end
 
-  # POST /contacts
-  # POST /contacts.json
+  # POST /scenarios/:id/contacts
+  # POST /scenarios/:id/contacts.json
   def create
     @contact = Contact.new(contact_params)
     @contact.scenario = @scenario
@@ -40,8 +40,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contacts/1
-  # PATCH/PUT /contacts/1.json
+  # PATCH/PUT /scenarios/:id/contacts/1
+  # PATCH/PUT /scenarios/:id/contacts/1.json
   def update
     respond_to do |format|
       if @contact.update(contact_params)
@@ -54,8 +54,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
+  # DELETE /scenarios/:id/contacts/1
+  # DELETE /scenarios/:id/contacts/1.json
   def destroy
     @contact.destroy
     respond_to do |format|

@@ -24,6 +24,7 @@ class Views::Scenarios::Edit < Views::Layouts::Page
         end
       end
 
+      br
       link_to('Add Contact', new_scenario_contact_path(scenario))
     end
 
@@ -33,6 +34,9 @@ class Views::Scenarios::Edit < Views::Layouts::Page
           link_to(question.text, [scenario, contact])
         end
       end
+
+      br
+      #link_to('Add Question', new_scenario_question_path(scenario))
     end
   end
 end

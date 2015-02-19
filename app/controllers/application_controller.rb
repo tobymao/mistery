@@ -3,30 +3,50 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  private
   # Auth section
   def authenticate
     unless current_user
-      self.headers['WWW-Authenticate'] = 'Token realm="Application"'
-      render_bad_credentials
+      respond_to do |format|
+        format.html do
+          session[:return_to] = request.fullpath
+          redirect_to(login_url)
+        end
+
+        format.json do
+          self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+          render_bad_credentials
+        end
+      end
     end
   end
 
   def login_user(user)
-    session = Session.new
-    session.token = SecureRandom.hex
-    session.ip_address = request.remote_ip
-    session.user = user
+    s = Session.create({
+      token: SecureRandom.hex,
+      ip_address: request.remote_ip,
+      user: user,
+    })
 
-    cookies[:auth_token] = {
-      value: session.token,
-      expires: Time.now + Session::TOKEN_EXPIRE_TIME,
-      domain: :all,
-    }
+    respond_to do |format|
+      format.html do
+        cookies[:auth_token] = {
+          value: s.token,
+          expires: Time.now + Session::TOKEN_EXPIRE_TIME,
+          domain: :all,
+        }
 
-    session.save!
+        url = session[:return_to] || root_path
+        session[:return_to] = nil
+        redirect_to(url)
+      end
+
+      format.json do
+        render json: s.token
+      end
+    end
   end
 
-  private
   def current_user
     @current_user ||= begin
       authenticate_with_http_token do |token, options|

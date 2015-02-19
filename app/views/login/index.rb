@@ -13,5 +13,7 @@ class Views::Login::Index < Views::Layouts::Page
         f.submit 'Login'
       end
     end
+
+    link_to("Create Account", new_user_path)
   end
 end
