@@ -3,7 +3,7 @@
 # Table name: contacts
 #
 #  id          :integer          not null, primary key
-#  name        :string           not null
+#  name        :string
 #  text        :text
 #  scenario_id :integer          not null
 #  location_id :integer

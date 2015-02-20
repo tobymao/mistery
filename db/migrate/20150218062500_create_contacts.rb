@@ -3,7 +3,7 @@ class CreateContacts < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.string :name, null: false
+      t.string :name
       t.text :text
       t.references :scenario, null: false
       t.references :location

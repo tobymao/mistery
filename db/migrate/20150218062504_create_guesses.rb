@@ -3,10 +3,11 @@ class CreateGuesses < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.text :text
       t.references :play, index: true, null: false
       t.references :question, index: true, null: false
       t.references :answer
+      t.references :location
+      t.references :contact
 
       t.timestamps null: false
     end

@@ -3,9 +3,11 @@
 # Table name: answers
 #
 #  id          :integer          not null, primary key
-#  text        :text             not null
-#  points      :integer          default("0"), not null
 #  question_id :integer          not null
+#  location_id :integer
+#  contact_id  :integer
+#  text        :text
+#  correct     :boolean          default("true"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

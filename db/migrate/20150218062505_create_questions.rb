@@ -4,7 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
   def change
     create_table TABLE do |t|
       t.text :text, null: false
-      t.boolean :multiple_choice, default: false, null: false
+      t.integer :points, null: false
       t.references :scenario, index: true, null: false
 
       t.timestamps null: false

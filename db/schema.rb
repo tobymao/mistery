@@ -27,17 +27,20 @@ ActiveRecord::Schema.define(version: 20150218062505) do
   add_index "actions", ["play_id"], name: "index_actions_on_play_id", using: :btree
 
   create_table "answers", force: :cascade do |t|
-    t.text     "text",                    null: false
-    t.integer  "points",      default: 0, null: false
-    t.integer  "question_id",             null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "question_id",                null: false
+    t.integer  "location_id"
+    t.integer  "contact_id"
+    t.text     "text"
+    t.boolean  "correct",     default: true, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "answers", ["question_id", "text"], name: "index_answers_on_question_id_and_text", unique: true, using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name"
     t.text     "text"
     t.integer  "scenario_id", null: false
     t.integer  "location_id"
@@ -48,10 +51,11 @@ ActiveRecord::Schema.define(version: 20150218062505) do
   add_index "contacts", ["scenario_id", "location_id"], name: "index_contacts_on_scenario_id_and_location_id", unique: true, using: :btree
 
   create_table "guesses", force: :cascade do |t|
-    t.text     "text"
     t.integer  "play_id",     null: false
     t.integer  "question_id", null: false
     t.integer  "answer_id"
+    t.integer  "location_id"
+    t.integer  "contact_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -80,11 +84,11 @@ ActiveRecord::Schema.define(version: 20150218062505) do
   add_index "plays", ["user_id"], name: "index_plays_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
-    t.text     "text",                            null: false
-    t.boolean  "multiple_choice", default: false, null: false
-    t.integer  "scenario_id",                     null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.text     "text",        null: false
+    t.integer  "points",      null: false
+    t.integer  "scenario_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "questions", ["scenario_id"], name: "index_questions_on_scenario_id", using: :btree
