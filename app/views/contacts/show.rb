@@ -9,8 +9,11 @@ class Views::Contacts::Show < Views::Layouts::Page
       div "Scenario: #{scenario.name}"
       div "Name #{contact.name}"
       div "Text: #{contact.text}"
-      div "Location Name: #{contact.location.name}"
-      div "Location Address: #{contact.location.address}"
+
+      if contact.location
+        div "Location Name: #{contact.location.name}"
+        div "Location Address: #{contact.location.address}"
+      end
     end
 
     link_to("Edit Contact", [:edit, scenario, contact])

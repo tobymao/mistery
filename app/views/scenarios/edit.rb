@@ -31,12 +31,12 @@ class Views::Scenarios::Edit < Views::Layouts::Page
     p 'Questions' do
       scenario.questions.each do |question|
         div do
-          link_to(question.text, [scenario, contact])
+          link_to(question.text, [scenario, question])
         end
       end
 
       br
-      #link_to('Add Question', new_scenario_question_path(scenario))
+      link_to('Add Question', new_scenario_question_path(scenario))
     end
   end
 end

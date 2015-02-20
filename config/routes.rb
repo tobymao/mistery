@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   resources :universes
   resources :locations
   resources :users
-  resources :questions
   resources :plays
   resources :scenarios do
     resources :contacts
+    resources :questions
   end
 
   # Login Controller

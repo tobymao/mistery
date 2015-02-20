@@ -17,6 +17,6 @@ class Session < ActiveRecord::Base
   TOKEN_EXPIRE_TIME = 30.days
 
   def token_valid?
-    created_at + TOKEN_EXPIRE_TIME > DateTime.now
+    created_at > TOKEN_EXPIRE_TIME.ago
   end
 end

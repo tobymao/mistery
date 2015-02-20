@@ -5,8 +5,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    return render :show, id: current_user.id if current_user
-    redirect_to action: :new
+    if current_user
+      render :show, id: current_user.id
+    else
+      redirect_to action: :new
+    end
   end
 
   # GET /users/1
@@ -28,14 +31,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        # login_user will handle redirect / response
-        login_user(@user)
-      else
-        format.html {redirect_to new_user_url, flash: {error: "Error creating user"}}
-        format.json {render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      # login_user will handle redirect / response
+      login_user(@user)
+    else
+      format.html {redirect_to new_user_url, flash: {error: "Error creating user"}}
+      format.json {render json: @user.errors, status: :unprocessable_entity }
     end
   end
 

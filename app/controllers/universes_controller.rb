@@ -94,12 +94,14 @@ class UniversesController < ApplicationController
 
     # Parse CSV
     CSV.parse(p[:universe].delete(:locations_csv)).each do |row|
-      name = row[0].strip
-      address = row[1].strip
+      name = row[0]
+      address = row[1]
+
+      next if name.nil? || address.nil?
 
       location_hash = {
-        name: name,
-        address: address,
+        name: name.strip,
+        address: address.strip,
       }
 
       if match = all_locations.find{|location| location.address == address}

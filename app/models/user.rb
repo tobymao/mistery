@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
 
   def password=(new_password)
     return if new_password.empty?
-    password = BCrypt::Password.create(new_password)
-    write_attribute(:password, password)
+    super(BCrypt::Password.create(new_password))
   end
 end
