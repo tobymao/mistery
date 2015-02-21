@@ -12,6 +12,8 @@ class CreateAnswers < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    add_index(TABLE, [:question_id, :location_id], unique:true)
+    add_index(TABLE, [:question_id, :contact_id], unique:true)
     add_index(TABLE, [:question_id, :text], unique:true)
   end
 end

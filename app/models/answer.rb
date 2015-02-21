@@ -18,7 +18,11 @@ class Answer < ActiveRecord::Base
   belongs_to :contact
 
   validates_presence_of :question_id
-  validates_presence_of :location, :if => Proc.new {|a| a.contact.nil? && text.empty?}
-  validates_presence_of :contact, :if => Proc.new {|a| a.location.nil? && a.text.empty?}
-  validates_presence_of :text, allow_blank: false, :if => Proc.new {|a| a.location.nil? && a.contact.nil?}
+  validates_presence_of :location, :if => lambda {|a| a.contact.nil? && text.nil?}
+  validates_presence_of :contact, :if => lambda {|a| a.location.nil? && a.text.nil?}
+  validates_presence_of :text, allow_blank: false, :if => lambda {|a| a.location.nil? && a.contact.nil?}
+
+  def text=(new_text)
+    super(new_text) if new_text.present? && new_text.strip.present?
+  end
 end

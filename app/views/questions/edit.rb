@@ -15,8 +15,8 @@ class Views::Questions::Edit < Views::Layouts::Page
       answers = question.answers.map{|answer| answer} << Answer.new
 
       answers.each do |answer|
-        f.fields_for :answers, answer do |a|
-          answer_fields(a)
+        f.fields_for :answers, answer do |f|
+          answer_fields(f, answer)
         end
       end
 
@@ -24,14 +24,15 @@ class Views::Questions::Edit < Views::Layouts::Page
     end
   end
 
-  def answer_fields(a)
-    a.label :text, 'Multiple Choice Answer'
-    a.text_field :text
-    a.label :contact_id, 'Contact Answer'
-    a.collection_select :contact_id, scenario.contacts, :id, :name, include_blank: true
-    a.label :location_id, 'Location Answer'
-    a.collection_select :location_id, scenario.universe.locations, :id, :name, include_blank: true
-    a.label :correct, 'Correct'
-    a.check_box :correct
+  def answer_fields(form, answer)
+    form.label :text, 'Multiple Choice Answer'
+    form.text_field :text
+    form.label :contact_id, 'Contact Answer'
+    form.collection_select :contact_id, scenario.contacts, :id, :name, include_blank: true
+    form.label :location_id, 'Location Answer'
+    form.collection_select :location_id, scenario.universe.locations, :id, :name, include_blank: true
+    form.label :correct, 'Correct'
+    form.check_box :correct
+    form.hidden_field :id, value: answer.id
   end
 end

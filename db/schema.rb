@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20150218062505) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "answers", ["question_id", "contact_id"], name: "index_answers_on_question_id_and_contact_id", unique: true, using: :btree
+  add_index "answers", ["question_id", "location_id"], name: "index_answers_on_question_id_and_location_id", unique: true, using: :btree
   add_index "answers", ["question_id", "text"], name: "index_answers_on_question_id_and_text", unique: true, using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 

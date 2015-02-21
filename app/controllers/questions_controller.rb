@@ -79,6 +79,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:text, :points, answers_attributes:[:location_id, :contact_id, :text, :correct])
+      params.require(:question).permit(:text, :points, answers_attributes:[:id, :location_id, :contact_id, :text, :correct])
     end
 end
