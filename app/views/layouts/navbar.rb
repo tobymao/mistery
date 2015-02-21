@@ -4,6 +4,7 @@ class Views::Layouts::Navbar < Views::Base
       div class: 'logo' do
         img src: image_path('logo.gif'), height: '45px'
       end
+
       div class: 'navSetting' do
         link_to "Login", login_path
         link_to "Register", new_user_path
