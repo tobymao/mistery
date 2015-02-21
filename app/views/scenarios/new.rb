@@ -7,10 +7,7 @@ class Views::Scenarios::New < Views::Layouts::Page
 
     form_for scenario do |f|
       f.label :universe, 'Select a Universe'
-      br
       f.collection_select :universe_id, universes, :id, :name
-      br
-      br
 
       f.label :name, 'Name'
       f.text_field :name

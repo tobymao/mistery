@@ -9,8 +9,8 @@ class Views::Questions::New < Views::Layouts::Page
       f.label :text, 'Text'
       f.text_area :text
 
-      f.label :multiple_choice, 'Multiple Choice'
-      f.check_box :multiple_choice
+      f.label :points, 'Points'
+      f.text_field :points
 
       f.submit
     end

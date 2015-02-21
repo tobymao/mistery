@@ -2,13 +2,13 @@ form {
 	margin-bottom: 1em;
 }
 
-input, textarea {
-	border: 0.1em solid #755E17;
-	border-radius: 0.5em;
+input, textarea, select {
+	border: 0.1em solid #555555;
+	border-radius: 0em;
 	display: block;
 	margin: 0.5em 0.4em;
 	padding: 0.2em 0.5em;
-	background-color: #F2E9CB;
+	background-color: #F5F5F5;
 	font-family: 'pt_sansregular', sans-serif;
 }
 
@@ -26,18 +26,18 @@ textarea {
 }
 
 input[type=submit]:hover {
-	background: #E3C66F;
-	border-color: #E3C66F;
+	background: #CCCCCC;
+	border-color: #555555;
 }
 
 input[type=submit]:active {
-	background: #C2A244;
-	border-color: #C2A244;
+	background: #828282;
+	border-color: #555555;
 }
 
 input[type=submit] {
-	transition: all 0.2s ease;
-	-webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
+	transition: all 0.1s ease;
+	-webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
 }

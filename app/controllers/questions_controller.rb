@@ -26,6 +26,7 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
+    puts question_params
     @question = Question.new(question_params)
     @question.scenario = @scenario
 
@@ -78,6 +79,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:text, :multiple_choice)
+      params.require(:question).permit(:text, :points, answers_attributes:[:location_id, :contact_id, :text, :correct])
     end
 end

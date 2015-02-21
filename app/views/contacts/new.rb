@@ -10,7 +10,7 @@ class Views::Contacts::New < Views::Layouts::Page
       f.text_field :name
 
       f.label :location, 'Select a location'
-      f.collection_select :location_id, scenario.universe.locations, :id, :name, blank: true
+      f.collection_select :location_id, scenario.universe.locations, :id, :name, include_blank: true
       br
       br
 

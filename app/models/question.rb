@@ -12,4 +12,6 @@
 
 class Question < ActiveRecord::Base
   belongs_to :scenario, inverse_of: :questions
+  has_many :answers, inverse_of: :question
+  accepts_nested_attributes_for :answers, allow_destroy: true
 end
