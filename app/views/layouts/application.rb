@@ -2,7 +2,7 @@ class Views::Layouts::Application < Views::Base
   def content
     html do
       head do
-        title "Sherlock"
+        title "Mistery"
         stylesheet_link_tag    'application', media: 'all'
         javascript_include_tag 'application'
         csrf_meta_tags
