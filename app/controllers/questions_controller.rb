@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
         format.html { redirect_to [@scenario, @question], notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
-        format.html { render :edit }
+        format.html {redirect_to [@scenario, @question]}
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end

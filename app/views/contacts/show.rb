@@ -5,6 +5,8 @@ class Views::Contacts::Show < Views::Layouts::Page
   def main
     h1 "Contact"
 
+    link_to("Back To Scenario", scenario)
+
     p do
       div "Scenario: #{scenario.name}"
       div "Name #{contact.name}"

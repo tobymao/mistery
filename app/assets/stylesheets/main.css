@@ -44,3 +44,14 @@ h1 {
   border: solid 0.1em #26722D;
   background-color: #A4E7A0;
 }
+
+.flash.notice {
+  border: solid 0.1em #26722D;
+  background-color: #A4E7A0;
+}
+
+.fade {
+  visibility:hidden;
+  opacity:0;
+  transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+}

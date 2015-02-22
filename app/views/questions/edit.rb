@@ -12,9 +12,9 @@ class Views::Questions::Edit < Views::Layouts::Page
       f.label :points, 'Points'
       f.text_field :points
 
-      answers = question.answers.map{|answer| answer} << Answer.new
+      question.answers << Answer.new
 
-      answers.each do |answer|
+      question.answers.each do |answer|
         f.fields_for :answers, answer do |f|
           answer_fields(f, answer)
         end
