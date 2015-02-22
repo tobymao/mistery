@@ -3,7 +3,7 @@ class Views::Layouts::Navbar < Views::Base
     html do
       div class: 'logo' do
         link_to root_path do
-          image_tag('logo.png', height: '45px')
+          image_tag('logo_io.png', height: '45px')
         end
       end
 
