@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   # Resources
   resources :universes
   resources :locations
-  resources :users
-  resources :plays
+  resources :plays, only: :index
+  resources :users do
+    resources :plays, shallow: true, only: [:index, :show, :create]
+  end
   resources :scenarios do
     resources :contacts
     resources :questions

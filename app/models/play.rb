@@ -10,4 +10,7 @@
 #
 
 class Play < ActiveRecord::Base
+  belongs_to :user, inverse_of: :plays
+  belongs_to :scenario, inverse_of: :plays
+  validates_presence_of :user, :scenario
 end

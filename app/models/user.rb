@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :sessions, inverse_of: :user
   has_many :universes, inverse_of: :user
   has_many :scenarios, inverse_of: :user
+  has_many :plays, inverse_of: :user
   validates_presence_of :login, :email, :password
 
   def password

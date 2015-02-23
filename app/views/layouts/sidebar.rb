@@ -13,7 +13,7 @@ class Views::Layouts::Sidebar < Views::Base
         end
 
         div 'sideSection' do
-          link_to "Play", new_scenario_path
+          link_to "Play", plays_path
         end
       end
     end

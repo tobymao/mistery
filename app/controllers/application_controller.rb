@@ -49,10 +49,13 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= begin
+      user = user_with_token(cookies[:auth_token])
+
       authenticate_with_http_token do |token, options|
         user = user_with_token(token)
-      end
-      user = user_with_token(cookies[:auth_token]) unless user
+      end unless user
+
+      user
     end
   end
 
