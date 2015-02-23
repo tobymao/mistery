@@ -10,4 +10,6 @@
 #
 
 class Action < ActiveRecord::Base
+  belongs_to :play, inverse_of: :actions
+  belongs_to :location
 end

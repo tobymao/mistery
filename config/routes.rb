@@ -3,11 +3,18 @@ Rails.application.routes.draw do
 
   # Resources
   resources :universes
-  resources :locations
-  resources :plays, only: :index
+
   resources :users do
-    resources :plays, shallow: true, only: [:index, :show, :create]
+    resources :plays, shallow: true, only: [:index, :create]
   end
+
+  resources :plays, only: [:index, :show] do
+    member do
+      get 'location/:location_id', to: 'plays#visit', as: :visit
+      post 'location', to: 'plays#book', as: :book
+    end
+  end
+
   resources :scenarios do
     resources :contacts
     resources :questions

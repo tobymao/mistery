@@ -12,5 +12,6 @@
 class Play < ActiveRecord::Base
   belongs_to :user, inverse_of: :plays
   belongs_to :scenario, inverse_of: :plays
+  has_many :actions, inverse_of: :play
   validates_presence_of :user, :scenario
 end
