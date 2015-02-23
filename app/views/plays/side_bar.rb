@@ -2,11 +2,11 @@ class Views::Plays::SideBar < Views::Base
   needs :play
 
   def content
+    visited_locations = play.actions.includes(:location).map {|action| action.location}
+
     html do
       div class: 'sideButton' do
         div 'sideSection' do
-          visited_locations = play.actions.includes(:location).map {|action| action.location}
-
           play.scenario.locations.each do |location|
             if visited_locations.include?(location)
               link_to location.name, visit_play_path(play.id, location.id)
@@ -17,6 +17,10 @@ class Views::Plays::SideBar < Views::Base
               end
             end
           end
+        end
+
+        div 'sideSection' do
+          link_to 'Solve Mystery'
         end
       end
     end

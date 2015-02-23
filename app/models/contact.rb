@@ -14,5 +14,5 @@
 class Contact < ActiveRecord::Base
   belongs_to :location
   belongs_to :scenario, inverse_of: :contacts
-  validates_presence_of :name, :scenario
+  validates_presence_of :scenario
 end

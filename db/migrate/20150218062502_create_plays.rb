@@ -5,6 +5,7 @@ class CreatePlays < ActiveRecord::Migration
     create_table TABLE do |t|
       t.references :user, index: true, null: false
       t.references :scenario, index: true, null: false
+      t.bool :active, null: false, defaul: false
 
       t.timestamps null: false
     end

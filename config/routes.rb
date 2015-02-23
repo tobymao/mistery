@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   end
 
   resources :plays, only: [:index, :show] do
+    resources :guesses
+
     member do
-      get 'location/:location_id', to: 'plays#visit', as: :visit
-      post 'location', to: 'plays#book', as: :book
+      get 'visit/:location_id', to: 'plays#visit', as: :visit
+      post 'visit', to: 'plays#book', as: :book
     end
   end
 

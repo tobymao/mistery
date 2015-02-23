@@ -4,7 +4,7 @@ class Views::Plays::Show < Views::Layouts::Page
   def main
     h1 "Play Scenario: #{play.scenario.name}"
     div do
-      play.scenario.description
+      text play.scenario.description
     end
   end
 

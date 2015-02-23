@@ -34,13 +34,14 @@ class PlaysController < ApplicationController
     end
   end
 
-  # GET /plays/1/location/1
+  # GET /plays/1/visit/1
   # Shows a booked location.
   def visit
+    return render :show unless Action.exists?(play: @play, location: @location)
     @contact = @play.scenario.contacts.find_by(location: @location)
   end
 
-  # POST /plays/1/location
+  # POST /plays/1/visit
   # Creates an action to visit a location.
   def book
     @action = Action.new(play: @play, location: @location)

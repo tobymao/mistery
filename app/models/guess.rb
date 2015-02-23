@@ -13,4 +13,10 @@
 #
 
 class Guess < ActiveRecord::Base
+  belongs_to :play, inverse_of: :guesses
+  belongs_to :question
+  belongs_to :answer
+  belongs_to :location
+  belongs_to :contact
+
 end

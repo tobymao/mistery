@@ -23,8 +23,7 @@ ActiveRecord::Schema.define(version: 20150218062505) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "actions", ["location_id"], name: "index_actions_on_location_id", using: :btree
-  add_index "actions", ["play_id"], name: "index_actions_on_play_id", using: :btree
+  add_index "actions", ["play_id", "location_id"], name: "index_actions_on_play_id_and_location_id", unique: true, using: :btree
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id",                null: false
