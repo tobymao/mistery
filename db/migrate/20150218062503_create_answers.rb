@@ -6,8 +6,8 @@ class CreateAnswers < ActiveRecord::Migration
       t.references :question, index: true, null: false
       t.references :location
       t.references :contact
-      t.text :text
-      t.boolean :correct, null: false, default: true
+      t.text       :text
+      t.boolean    :correct, null: false, default: true
 
       t.timestamps null: false
     end

@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20150218062505) do
   create_table "plays", force: :cascade do |t|
     t.integer  "user_id",     null: false
     t.integer  "scenario_id", null: false
+    t.boolean  "active",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -130,13 +131,12 @@ ActiveRecord::Schema.define(version: 20150218062505) do
   add_index "universes", ["user_id"], name: "index_universes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "login",      null: false
-    t.string   "email",      null: false
-    t.string   "fname"
-    t.string   "lname"
-    t.string   "password",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "login",                      null: false
+    t.string   "email"
+    t.string   "password"
+    t.boolean  "guest",      default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

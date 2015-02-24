@@ -4,10 +4,9 @@
 #
 #  id         :integer          not null, primary key
 #  login      :string           not null
-#  email      :string           not null
-#  fname      :string
-#  lname      :string
-#  password   :string           not null
+#  email      :string
+#  password   :string
+#  guest      :boolean          default("false"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -17,7 +16,8 @@ class User < ActiveRecord::Base
   has_many :universes, inverse_of: :user
   has_many :scenarios, inverse_of: :user
   has_many :plays, inverse_of: :user
-  validates_presence_of :login, :email, :password
+  validates_presence_of :login, message: "Username is required"
+  validates_presence_of :email, :password, if: :guest
 
   def password
     pass = read_attribute(:password)

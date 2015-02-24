@@ -11,12 +11,6 @@ class Views::Users::New < Views::Layouts::Page
       f.label :email, 'Email Address'
       f.text_field :email
 
-      f.label :fname, 'First Name'
-      f.text_field :fname
-
-      f.label :lname, 'Last Name'
-      f.text_field :lname
-
       f.label :password, 'Password'
       f.password_field :password
 

@@ -3,11 +3,10 @@ class CreateUsers < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.string :login, null: false
-      t.string :email, null: false
-      t.string :fname
-      t.string :lname
-      t.string :password, null: false
+      t.string  :login, null: false
+      t.string  :email
+      t.string  :password
+      t.boolean :guest, null: false, default: false
 
       t.timestamps null: false
     end
