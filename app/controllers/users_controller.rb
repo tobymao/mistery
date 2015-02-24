@@ -31,6 +31,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    #TO DO: merge user
+    if current_user.guest
+    end
+
     if @user.save
       # login_user will handle redirect / response
       login_user(@user)

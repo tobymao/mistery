@@ -21,7 +21,14 @@ class PlaysController < ApplicationController
   # POST /plays.json
   def create
     @play = Play.new(play_params)
-    @play.user = current_user
+    @play.active = true
+    @play.user = if current_user
+                   current_user
+                 else
+                   user = User.new_guest_user
+                   login_user(user, redirect=false)
+                   user
+                 end
 
     respond_to do |format|
       if @play.save

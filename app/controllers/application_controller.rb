@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
   # Auth section
   def authenticate
-    unless current_user
+    if !current_user || current_user.guest
       respond_to do |format|
         format.html do
           session[:return_to] = request.fullpath
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def login_user(user)
+  def login_user(user, redirect=true)
     s = Session.create({
       token: SecureRandom.hex,
       ip_address: request.remote_ip,
@@ -36,9 +36,11 @@ class ApplicationController < ActionController::Base
           domain: :all,
         }
 
-        url = session[:return_to] || root_path
-        session[:return_to] = nil
-        redirect_to(url)
+        if redirect
+          url = session[:return_to] || root_path
+          session[:return_to] = nil
+          redirect_to(url)
+        end
       end
 
       format.json do

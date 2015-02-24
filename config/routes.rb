@@ -3,12 +3,9 @@ Rails.application.routes.draw do
 
   # Resources
   resources :universes
+  resources :users
 
-  resources :users do
-    resources :plays, shallow: true, only: [:index, :create]
-  end
-
-  resources :plays, only: [:index, :show] do
+  resources :plays, only: [:index, :show, :create] do
     resources :guesses
 
     member do

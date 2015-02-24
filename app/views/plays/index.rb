@@ -13,7 +13,7 @@ class Views::Plays::Index < Views::Layouts::Page
     end
 
     plays.each do |play|
-      form_for [user, play] do |f|
+      form_for play do |f|
         f.label :scenario_id, play.scenario.name
         f.hidden_field :scenario_id, value: play.scenario.id
         f.submit
