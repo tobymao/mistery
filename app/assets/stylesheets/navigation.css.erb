@@ -13,7 +13,11 @@
 	text-align: center;
 }
 
-.sideButton a {
+.sideSection {
+  margin: 2em 0;
+}
+
+.sideLink {
   display: block;
 	transition: all 0.2s ease;
 	-webkit-transition: all 0.2s ease;
@@ -23,11 +27,24 @@
 	padding: 0.2em .5em;
 	font-size: 1.1em;
 	white-space: nowrap;
-	margin-bottom: 0.5em;
-  color: #CCCCCC
+	margin: 0 0 0.5em 0;
+  color: #CCCCCC;
+  background: #2B2B2B;
+  border: none;
+  font-family: 'pt_sansregular', sans-serif;
+  cursor: pointer;
 }
 
-.sideButton a:hover {
+button.sideLink{
+  width: 100%;
+}
+
+.visited {
+  text-decoration: line-through;
+  color: #8F8F8F;
+}
+
+.sideLink:hover {
 	background: #006699;
 }
 

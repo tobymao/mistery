@@ -6,7 +6,6 @@ html {
 body {
   color: #2B2B2B;
   font-family: 'LatoLatin', sans-serif;
-  font-size: 0.9em;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -54,4 +53,13 @@ h1 {
   visibility:hidden;
   opacity:0;
   transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+}
+
+.mainLink {
+  border: none;
+  background-color: white;
+  color: #006699;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'LatoLatin', sans-serif;
 }

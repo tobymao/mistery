@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     super(BCrypt::Password.create(new_password))
   end
 
+  def email=(new_email)
+    super(new_email.downcase)
+  end
+
   def display_name
     guest ? "guest" : login
   end

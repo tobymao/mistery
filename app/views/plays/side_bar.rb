@@ -6,21 +6,21 @@ class Views::Plays::SideBar < Views::Base
 
     html do
       div class: 'sideButton' do
-        div 'sideSection' do
+        div class: 'sideSection' do
           play.scenario.locations.each do |location|
             if visited_locations.include?(location)
-              link_to location.name, visit_play_path(play.id, location.id)
+              link_to location.name, visit_play_path(play.id, location.id), class: 'sideLink visited'
             else
               form_tag book_play_path(play) do
                 hidden_field_tag :location_id, location.id
-                submit_tag location.name
+                button_tag location.name, class: 'sideLink'
               end
             end
           end
         end
 
-        div 'sideSection' do
-          link_to 'Solve Mystery'
+        div class: 'sideSection' do
+          link_to 'Solve Mystery', root_path, class: 'sideLink'
         end
       end
     end
