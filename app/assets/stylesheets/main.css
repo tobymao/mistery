@@ -6,6 +6,7 @@ html {
 body {
   color: #2B2B2B;
   font-family: 'LatoLatin', sans-serif;
+  font-size: 0.9em;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -62,4 +63,8 @@ h1 {
   text-decoration: none;
   cursor: pointer;
   font-family: 'LatoLatin', sans-serif;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  outline: none;
 }
