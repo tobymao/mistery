@@ -4,10 +4,10 @@ class CreateAnswers < ActiveRecord::Migration
   def change
     create_table TABLE do |t|
       t.references :question, index: true, null: false
+      t.boolean    :correct, null: false, default: true
       t.references :location
       t.references :contact
       t.text       :text
-      t.boolean    :correct, null: false, default: true
 
       t.timestamps null: false
     end

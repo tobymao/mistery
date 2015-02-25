@@ -10,6 +10,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  fk__contacts_location_id                       (location_id)
+#  fk__contacts_scenario_id                       (scenario_id)
+#  index_contacts_on_scenario_id_and_location_id  (scenario_id,location_id) UNIQUE
+#
 
 require 'rails_helper'
 

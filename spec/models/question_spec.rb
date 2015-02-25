@@ -9,6 +9,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_questions_on_scenario_id  (scenario_id)
+#
 
 require 'rails_helper'
 

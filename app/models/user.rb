@@ -3,12 +3,18 @@
 # Table name: users
 #
 #  id         :integer          not null, primary key
-#  login      :string           not null
+#  login      :string
 #  email      :string
 #  password   :string
 #  guest      :boolean          default("false"), not null
+#  admin      :boolean          default("false"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email) UNIQUE
+#  index_users_on_login  (login) UNIQUE
 #
 
 class User < ActiveRecord::Base
@@ -16,15 +22,14 @@ class User < ActiveRecord::Base
   has_many :universes, inverse_of: :user
   has_many :scenarios, inverse_of: :user
   has_many :plays, inverse_of: :user
-  validates_presence_of :login, message: "Username is required"
-  validates_presence_of :email, :password, unless: :guest
+
+  validates_presence_of :login, message: "Username is required", unless: :guest
+  validates_presence_of :email, message: "Email is required", unless: :guest
+  validates_uniqueness_of :login, message: "Username is taken", case_sensitive: false, unless: :guest
+  validates_uniqueness_of :email, message: "Email is already registered",case_sensitive: false, unless: :guest
 
   def self.new_guest_user
-    # TO DO: Seems really hacky. Should Change.
-    User.new({
-      login: "guest#{User.last.id+1}",
-      guest: true,
-    })
+    User.new({guest: true})
   end
 
   def password
@@ -39,9 +44,5 @@ class User < ActiveRecord::Base
 
   def email=(new_email)
     super(new_email.downcase)
-  end
-
-  def display_name
-    guest ? "guest" : login
   end
 end

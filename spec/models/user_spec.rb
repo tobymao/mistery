@@ -3,12 +3,18 @@
 # Table name: users
 #
 #  id         :integer          not null, primary key
-#  login      :string           not null
+#  login      :string
 #  email      :string
 #  password   :string
 #  guest      :boolean          default("false"), not null
+#  admin      :boolean          default("false"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email) UNIQUE
+#  index_users_on_login  (login) UNIQUE
 #
 
 require 'rails_helper'

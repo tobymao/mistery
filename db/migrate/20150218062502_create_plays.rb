@@ -3,9 +3,9 @@ class CreatePlays < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
+      t.boolean    :active, null: false, defaul: false
       t.references :user, index: true, null: false
       t.references :scenario, index: true, null: false
-      t.boolean    :active, null: false, defaul: false
 
       t.timestamps null: false
     end

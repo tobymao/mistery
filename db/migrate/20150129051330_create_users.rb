@@ -3,14 +3,13 @@ class CreateUsers < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.string  :email
-      t.string  :name
+      t.string  :login, index: {case_sensitive: false, unique: true}
+      t.string  :email, index: {case_sensitive: false, unique: true}
       t.string  :password
       t.boolean :guest, null: false, default: false
+      t.boolean :admin, null: false, default: false
 
       t.timestamps null: false
     end
-
-    add_index(TABLE, :email, unique:true)
   end
 end

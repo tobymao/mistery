@@ -32,15 +32,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     #TO DO: merge user
-    if current_user.guest
-    end
+    #if current_user.guest
+    #end
 
     if @user.save
       # login_user will handle redirect / response
       login_user(@user)
     else
-      format.html {redirect_to new_user_url, flash: {error: "Error creating user"}}
-      format.json {render json: @user.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        format.html {redirect_to new_user_url, flash: {error: @user.errors.map{|attr, msg| msg}.join(', ')}}
+        format.json {render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -69,13 +71,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:login, :email, :password)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:login, :email, :password)
+  end
 end

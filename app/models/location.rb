@@ -9,6 +9,11 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  fk__locations_universe_id                   (universe_id)
+#  index_locations_on_universe_id_and_address  (universe_id,address) UNIQUE
+#
 
 class Location < ActiveRecord::Base
   belongs_to :universe, inverse_of: :locations

@@ -9,6 +9,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_sessions_on_token    (token) UNIQUE
+#  index_sessions_on_user_id  (user_id)
+#
 
 require 'rails_helper'
 
