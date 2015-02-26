@@ -11,7 +11,6 @@
 #
 # Indexes
 #
-#  index_universes_on_name     (name) UNIQUE
 #  index_universes_on_user_id  (user_id)
 #
 

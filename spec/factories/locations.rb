@@ -14,7 +14,10 @@
 #  index_locations_on_universe_id_and_address  (universe_id,address) UNIQUE
 #
 
-class Location < ActiveRecord::Base
-  belongs_to :universe, inverse_of: :locations
-  validates_presence_of :address, :name, :universe
+FactoryGirl.define do
+  factory :location do
+    address 'a1'
+    name 'location'
+    association :universe
+  end
 end

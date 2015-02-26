@@ -11,7 +11,6 @@
 #
 # Indexes
 #
-#  fk__locations_universe_id                   (universe_id)
 #  index_locations_on_universe_id_and_address  (universe_id,address) UNIQUE
 #
 
