@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates_presence_of :login, message: "Username is required", unless: :guest
   validates_presence_of :email, message: "Email is required", unless: :guest
   validates_uniqueness_of :login, message: "Username is taken", case_sensitive: false, unless: :guest
-  validates_uniqueness_of :email, message: "Email is already registered",case_sensitive: false, unless: :guest
+  validates_uniqueness_of :email, message: "Email is already registered", case_sensitive: false, unless: :guest
 
   def self.new_guest_user
     User.new({guest: true})

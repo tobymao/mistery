@@ -10,7 +10,6 @@ gem 'sdoc', group: :doc
 gem 'fortitude'
 gem 'annotate'
 gem 'bcrypt'
-gem "schema_plus"
 
 group :development, :test do
   gem 'rspec-rails'

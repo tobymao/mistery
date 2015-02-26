@@ -1,9 +1,9 @@
 class CreateScenarios < ActiveRecord::Migration
   TABLE = :scenarios
 
-  def change
+  def up
     create_table TABLE do |t|
-      t.string :name, index: {case_sensitive: false, unique: true, null: false}
+      t.string :name
       t.text :description
       t.text :solution
       t.references :universe, index: true, null: false
@@ -11,5 +11,12 @@ class CreateScenarios < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    execute "CREATE UNIQUE INDEX index_scenarios_on_name
+                 ON scenarios USING btree (lower(name));"
+  end
+
+  def down
+    drop_table TABLE
   end
 end
