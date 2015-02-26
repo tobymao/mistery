@@ -1,4 +1,6 @@
 class Views::Layouts::Page < Views::Base
+  needs :current_user
+
   def content
     html do
       div class: 'navBar' do
@@ -16,7 +18,7 @@ class Views::Layouts::Page < Views::Base
   end
 
   def side_bar
-    widget Views::Layouts::Sidebar.new
+    widget Views::Layouts::Sidebar.new(current_user: current_user)
   end
 
   def nav_bar

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :universes, :scenarios]
   before_action :authenticate, only: [:edit, :update, :destroy]
 
   # GET /users
@@ -15,6 +15,17 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+  end
+
+  # GET /users1/universes
+  # GET /users/1/universes.json
+  def universes
+    @user = current_user
+  end
+
+  # GET /users/1/scenarios
+  # GET /users/1/scenarios.json
+  def scenarios
   end
 
   # GET /users/new

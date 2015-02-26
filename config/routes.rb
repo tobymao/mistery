@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   # Resources
   resources :universes
-  resources :users
+
+  resources :users do
+    member do
+      get 'universes', to: 'users#universes', as: :universes
+      get 'scenarios', to: 'users#scenarios', as: :scenarios
+    end
+  end
 
   resources :plays, only: [:index, :show, :create] do
     resources :guesses, only: [:index, :new, :create]

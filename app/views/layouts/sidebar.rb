@@ -1,4 +1,6 @@
 class Views::Layouts::Sidebar < Views::Base
+  needs :current_user
+
   def content
     html do
       div class: 'sideButton' do
@@ -8,8 +10,8 @@ class Views::Layouts::Sidebar < Views::Base
         end
 
         div class: 'sideSection' do
-          link_to "My Universes", root_path, class: 'sideLink'
-          link_to "My Scenarios", root_path, class: 'sideLink'
+          link_to "My Universes", universes_user_path(current_user), class: 'sideLink'
+          link_to "My Scenarios", scenarios_user_path(current_user), class: 'sideLink'
         end
 
         div class: 'sideSection' do
