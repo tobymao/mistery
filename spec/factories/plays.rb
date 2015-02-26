@@ -17,6 +17,8 @@
 
 FactoryGirl.define do
   factory :play do
-
+    active      true
+    association :user
+    association :scenario
   end
 end
