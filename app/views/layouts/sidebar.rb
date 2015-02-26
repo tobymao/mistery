@@ -12,7 +12,7 @@ class Views::Layouts::Sidebar < Views::Base
         div class: 'sideSection' do
           link_to "My Universes", universes_user_path(current_user), class: 'sideLink'
           link_to "My Scenarios", scenarios_user_path(current_user), class: 'sideLink'
-        end
+        end if current_user
 
         div class: 'sideSection' do
           link_to "Play", plays_path, class: 'sideLink'
