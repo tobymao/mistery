@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       login_user(@user)
     else
       respond_to do |format|
-        format.html {redirect_to new_user_url, flash: {error: @user.errors.map{|attr, msg| msg}.join(', ')}}
+        format.html {redirect_to new_user_url, flash: {error: @user.errors.full_messages}}
         format.json {render json: @user.errors, status: :unprocessable_entity }
       end
     end

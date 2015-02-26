@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :plays, only: [:index, :show, :create] do
-    resources :guesses
+    resources :guesses, only: [:index, :new, :create]
 
     member do
       get 'visit/:location_id', to: 'plays#visit', as: :visit

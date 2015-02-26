@@ -1,5 +1,6 @@
 class Views::Scenarios::Index < Views::Layouts::Page
   needs :scenarios
+
   def main
     h1 "Scenarios"
 

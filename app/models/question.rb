@@ -19,4 +19,16 @@ class Question < ActiveRecord::Base
   has_many :answers, inverse_of: :question
   validates_presence_of :text, :points
   accepts_nested_attributes_for :answers, allow_destroy: true
+
+  def multiple_choice?
+    answers.first.text.present?
+  end
+
+  def contact?
+    !!answers.first.contact
+  end
+
+  def location?
+    !!answers.first.location
+  end
 end

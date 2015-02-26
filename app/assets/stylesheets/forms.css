@@ -16,10 +16,6 @@ input:focus, textarea:focus {
 	outline: none;
 }
 
-label {
-
-}
-
 textarea {
 	width: 30em;
 	height: 10em;
@@ -40,4 +36,9 @@ input[type=submit] {
 	-webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
   -ms-transition: all 0.1s ease;
+}
+
+input[type=radio], label {
+	display: inline;
+	vertical-align: middle;
 }
