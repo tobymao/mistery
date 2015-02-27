@@ -18,5 +18,20 @@
 class Contact < ActiveRecord::Base
   belongs_to :location
   belongs_to :scenario, inverse_of: :contacts
+
   validates_presence_of :scenario
+  validate :name_or_location
+  validate :text_and_location
+
+  def name_or_location
+    if !name && !location
+      errors.add(:base, 'Name or location must be present.')
+    end
+  end
+
+  def text_and_location
+    if location && !text
+      errors.add(:text, 'Text must be present when contact attached to location.')
+    end
+  end
 end

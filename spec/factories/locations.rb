@@ -16,8 +16,8 @@
 
 FactoryGirl.define do
   factory :location do
-    address 'a1'
     name 'location'
+    group 'group'
     association :universe
   end
 end

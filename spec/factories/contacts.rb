@@ -17,6 +17,8 @@
 
 FactoryGirl.define do
   factory :contact do
-
+    name "contact"
+    text "contact text"
+    association :scenario
   end
 end
