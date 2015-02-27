@@ -14,6 +14,9 @@ class Views::Scenarios::Edit < Views::Layouts::Page
       f.label :solution, 'Solution'
       f.text_area :solution
 
+      f.label :par, 'Par'
+      f.number_field :par
+
       f.submit
     end
 

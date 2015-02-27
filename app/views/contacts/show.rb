@@ -5,7 +5,9 @@ class Views::Contacts::Show < Views::Layouts::Page
   def main
     h1 "Contact"
 
-    link_to("Back To Scenario", scenario)
+    link_to("Go To Scenario", scenario)
+    br
+    link_to("Edit Scenario", edit_scenario_path(scenario)) if current_user == scenario.user
 
     p do
       div "Scenario: #{scenario.name}"

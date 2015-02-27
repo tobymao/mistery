@@ -8,6 +8,7 @@ class Views::Scenarios::Show < Views::Layouts::Page
     p do
       div "Universe: #{scenario.universe.name}"
       div "Name: #{scenario.name}"
+      div "Par: #{scenario.par}"
       div "Description:"
       div simple_format scenario.description
     end

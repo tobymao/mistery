@@ -3,9 +3,10 @@ class CreateScenarios < ActiveRecord::Migration
 
   def up
     create_table TABLE do |t|
-      t.string :name
-      t.text :description
-      t.text :solution
+      t.string :name, null: false
+      t.text :description, null: false
+      t.text :solution, null: false
+      t.integer :par, null: false, default: 0
       t.references :universe, index: true, null: false
       t.references :user, index: true, null: false
 

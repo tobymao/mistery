@@ -270,9 +270,10 @@ ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
 
 CREATE TABLE scenarios (
     id integer NOT NULL,
-    name character varying,
-    description text,
-    solution text,
+    name character varying NOT NULL,
+    description text NOT NULL,
+    solution text NOT NULL,
+    par integer DEFAULT 0 NOT NULL,
     universe_id integer NOT NULL,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
