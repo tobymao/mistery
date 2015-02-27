@@ -3,17 +3,21 @@
 # Table name: locations
 #
 #  id          :integer          not null, primary key
+#  address     :string           not null
 #  name        :string           not null
-#  group       :string
 #  universe_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 # Indexes
 #
-#  index_locations_on_universe_id_and_group  (universe_id, group) UNIQUE
+#  index_locations_on_universe_id_and_address  (universe_id,address) UNIQUE
+#
 
-class Location < ActiveRecord::Base
-  belongs_to :universe, inverse_of: :locations
-  validates_presence_of :name, :universe
+FactoryGirl.define do
+  factory :location do
+    address 'a1'
+    name 'location'
+    association :universe
+  end
 end

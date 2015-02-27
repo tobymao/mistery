@@ -19,6 +19,10 @@
 
 FactoryGirl.define do
   factory :scenario do
-
+    name        'test scenario'
+    description 'a scenario for a test'
+    solution    'the solution'
+    association :universe
+    association :user
   end
 end

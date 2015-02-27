@@ -1,24 +1,23 @@
 # == Schema Information
 #
-# Table name: plays
+# Table name: universes
 #
 #  id          :integer          not null, primary key
-#  active      :boolean          not null
+#  name        :string
+#  description :text
 #  user_id     :integer          not null
-#  scenario_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 # Indexes
 #
-#  index_plays_on_scenario_id  (scenario_id)
-#  index_plays_on_user_id      (user_id)
+#  index_universes_on_user_id  (user_id)
 #
 
 FactoryGirl.define do
-  factory :play do
-    active      true
+  factory :universe do
+    name 'test name'
+    description 'test description'
     association :user
-    association :scenario
   end
 end
