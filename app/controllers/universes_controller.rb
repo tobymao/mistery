@@ -97,14 +97,14 @@ class UniversesController < ApplicationController
       name = row[0]
       group = row[1]
 
-      next if name.nil? || group.nil?
+      next if name.nil?
 
       location_hash = {
         name: name.strip,
-        group: group.strip,
+        group: group.try(:strip),
       }
 
-      if match = all_locations.find{|location| location.group == group}
+      if match = all_locations.find{|location| location.name == name}
         location_hash[:id] = match.id
         included_locations << match.id
       end
