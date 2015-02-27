@@ -6,7 +6,7 @@ class Views::Universes::Show < Views::Layouts::Page
     h1 "Universe: #{universe.name}"
 
     p do
-      div "Description: #{universe.description}"
+      div simple_format universe.description
 
       p "Locations:" do
         universe.locations.each do |location|
