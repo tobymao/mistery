@@ -24,7 +24,7 @@ class UniversesController < ApplicationController
   def edit
     @locations_csv = CSV.generate do |csv|
       @universe.locations.each do |location|
-        csv << [location.name, " #{location.address}"]
+        csv << [location.name, " #{location.group}"]
       end
     end
   end
@@ -95,16 +95,16 @@ class UniversesController < ApplicationController
     # Parse CSV
     CSV.parse(p[:universe].delete(:locations_csv)).each do |row|
       name = row[0]
-      address = row[1]
+      group = row[1]
 
-      next if name.nil? || address.nil?
+      next if name.nil? || group.nil?
 
       location_hash = {
         name: name.strip,
-        address: address.strip,
+        group: group.strip,
       }
 
-      if match = all_locations.find{|location| location.address == address}
+      if match = all_locations.find{|location| location.group == group}
         location_hash[:id] = match.id
         included_locations << match.id
       end
@@ -121,6 +121,6 @@ class UniversesController < ApplicationController
       }
     end
 
-    p.require(:universe).permit(:name, :description, locations_attributes: [:id, :name, :address, :_destroy])
+    p.require(:universe).permit(:name, :description, locations_attributes: [:id, :name, :group, :_destroy])
   end
 end

@@ -13,8 +13,6 @@
 #
 # Indexes
 #
-#  fk__answers_contact_id                        (contact_id)
-#  fk__answers_location_id                       (location_id)
 #  index_answers_on_question_id                  (question_id)
 #  index_answers_on_question_id_and_contact_id   (question_id,contact_id) UNIQUE
 #  index_answers_on_question_id_and_location_id  (question_id,location_id) UNIQUE

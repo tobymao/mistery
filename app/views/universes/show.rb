@@ -12,7 +12,7 @@ class Views::Universes::Show < Views::Layouts::Page
         universe.locations.each do |location|
           div do
             text "Name: #{location.name} "
-            text "Address: #{location.address} "
+            text "Group: #{location.group} "
           end
         end
       end

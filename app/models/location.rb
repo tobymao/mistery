@@ -3,16 +3,15 @@
 # Table name: locations
 #
 #  id          :integer          not null, primary key
-#  address     :string           not null
 #  name        :string           not null
+#  group       :string
 #  universe_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 # Indexes
 #
-#  fk__locations_universe_id                   (universe_id)
-#  index_locations_on_universe_id_and_address  (universe_id,address) UNIQUE
+#  index_locations_on_universe_id_and_address  (universe_id) UNIQUE
 #
 
 class Location < ActiveRecord::Base

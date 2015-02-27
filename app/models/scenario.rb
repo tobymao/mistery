@@ -13,7 +13,6 @@
 #
 # Indexes
 #
-#  index_scenarios_on_name         (name) UNIQUE
 #  index_scenarios_on_universe_id  (universe_id)
 #  index_scenarios_on_user_id      (user_id)
 #

@@ -15,7 +15,7 @@ class Views::Scenarios::Show < Views::Layouts::Page
       scenario.contacts.each do |contact|
         div do
           label "Name: #{contact.name}"
-          label "Address: #{contact.location.address}" if contact.location
+          label "Group: #{contact.location.group}" if contact.location
         end
       end
     end

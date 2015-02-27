@@ -14,7 +14,7 @@ class Views::Contacts::Show < Views::Layouts::Page
 
       if contact.location
         div "Location Name: #{contact.location.name}"
-        div "Location Address: #{contact.location.address}"
+        div "Location Group: #{contact.location.group}"
       end
     end
 
