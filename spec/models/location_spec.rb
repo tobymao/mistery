@@ -11,7 +11,7 @@
 #
 # Indexes
 #
-#  index_locations_on_universe_id_and_group  (universe_id, group) UNIQUE
+#  index_locations_on_universe_id_and_name  (universe_id) UNIQUE
 #
 
 require 'rails_helper'

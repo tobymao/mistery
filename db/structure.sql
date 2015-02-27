@@ -632,10 +632,10 @@ CREATE INDEX index_guesses_on_question_id ON guesses USING btree (question_id);
 
 
 --
--- Name: index_locations_on_universe_id_and_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_locations_on_universe_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_locations_on_universe_id_and_address ON locations USING btree (universe_id, lower((name)::text));
+CREATE UNIQUE INDEX index_locations_on_universe_id_and_name ON locations USING btree (universe_id, lower((name)::text));
 
 
 --

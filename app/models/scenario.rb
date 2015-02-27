@@ -3,9 +3,10 @@
 # Table name: scenarios
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  solution    :text
+#  name        :string           not null
+#  description :text             not null
+#  solution    :text             not null
+#  par         :integer          default("0"), not null
 #  universe_id :integer          not null
 #  user_id     :integer          not null
 #  created_at  :datetime         not null

@@ -10,7 +10,7 @@ class CreateLocations < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    execute "CREATE UNIQUE INDEX index_locations_on_universe_id_and_address
+    execute "CREATE UNIQUE INDEX index_locations_on_universe_id_and_name
                  ON locations USING btree (universe_id, lower(name));"
   end
 
