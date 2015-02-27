@@ -171,8 +171,8 @@ ALTER SEQUENCE guesses_id_seq OWNED BY guesses.id;
 
 CREATE TABLE locations (
     id integer NOT NULL,
-    address character varying NOT NULL,
     name character varying NOT NULL,
+    "group" character varying,
     universe_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -634,7 +634,7 @@ CREATE INDEX index_guesses_on_question_id ON guesses USING btree (question_id);
 -- Name: index_locations_on_universe_id_and_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_locations_on_universe_id_and_address ON locations USING btree (universe_id, address);
+CREATE UNIQUE INDEX index_locations_on_universe_id_and_address ON locations USING btree (universe_id, lower((name)::text));
 
 
 --

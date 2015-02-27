@@ -1,15 +1,20 @@
 class CreateLocations < ActiveRecord::Migration
   TABLE = :locations
 
-  def change
+  def up
     create_table TABLE do |t|
-      t.string :address, null: false
-      t.string :name, null: false
+      t.string :name, null:false
+      t.string :group
       t.references :universe, null: false
 
       t.timestamps null: false
     end
 
-    add_index(TABLE, [:universe_id, :address], unique: true)
+    execute "CREATE UNIQUE INDEX index_locations_on_universe_id_and_address
+                 ON locations USING btree (universe_id, lower(name));"
+  end
+
+  def down
+    drop_table TABLE
   end
 end

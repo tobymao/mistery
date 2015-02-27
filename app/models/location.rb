@@ -17,5 +17,5 @@
 
 class Location < ActiveRecord::Base
   belongs_to :universe, inverse_of: :locations
-  validates_presence_of :address, :name, :universe
+  validates_presence_of :name, :universe
 end
