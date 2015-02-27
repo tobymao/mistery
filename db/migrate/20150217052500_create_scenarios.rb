@@ -7,6 +7,7 @@ class CreateScenarios < ActiveRecord::Migration
       t.text :description, null: false
       t.text :solution, null: false
       t.integer :par, null: false, default: 0
+      t.boolean :published, null: false, default: false
       t.references :universe, index: true, null: false
       t.references :user, index: true, null: false
 

@@ -3,8 +3,9 @@ class CreateUniverses < ActiveRecord::Migration
 
   def up
     create_table TABLE do |t|
-      t.string :name
-      t.text :description
+      t.string :name, null: false
+      t.text :description, null: false
+      t.boolean :published, null: false, default: false
       t.references :user, index: true, null: false
 
       t.timestamps null: false

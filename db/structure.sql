@@ -274,6 +274,7 @@ CREATE TABLE scenarios (
     description text NOT NULL,
     solution text NOT NULL,
     par integer DEFAULT 0 NOT NULL,
+    published boolean DEFAULT false NOT NULL,
     universe_id integer NOT NULL,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -348,8 +349,9 @@ ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 CREATE TABLE universes (
     id integer NOT NULL,
-    name character varying,
-    description text,
+    name character varying NOT NULL,
+    description text NOT NULL,
+    published boolean DEFAULT false NOT NULL,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
