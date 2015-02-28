@@ -18,4 +18,14 @@
 require 'rails_helper'
 
 describe Play do
+  let(:user) {create(:user)}
+  let(:universe) {create(:universe, user: user)}
+  let(:scenario) {create(:scenario, user: user, universe: universe)}
+
+  it 'should create with play' do
+    play = Play.new
+    play.user = user
+    play.scenario = scenario
+    expect(play.save).to be_truthy
+  end
 end
