@@ -22,4 +22,57 @@
 require 'rails_helper'
 
 describe Answer do
+  let(:user) {create(:user)}
+  let(:universe) {create(:universe, user: user)}
+  let(:scenario) {create(:scenario, user: user, universe: universe)}
+  let(:location) {create(:location, universe: universe)}
+  let(:contact) {create(:contact, scenario: scenario)}
+  let(:question) {create(:question, scenario: scenario)}
+  let(:play) {create(:play, user: user, scenario: scenario)}
+
+  it 'should create with text' do
+    answer = Answer.new
+    answer.question = question
+    answer.text = "answer"
+    expect(answer.save).to be_truthy
+  end
+
+  it 'should create with location' do
+    answer = Answer.new
+    answer.question = question
+    answer.location = location
+    expect(answer.save).to be_truthy
+  end
+
+  it 'should create with contact' do
+    answer = Answer.new
+    answer.question = question
+    answer.contact = contact
+    expect(answer.save).to be_truthy
+  end
+
+  it 'should validate question' do
+    answer = Answer.new
+    answer.text = "answer"
+    expect(answer.save).to be_falsey
+  end
+
+  it 'should validate location, contact, and text' do
+    answer = Answer.new
+    answer.question = question
+    expect(answer.save).to be_falsey
+  end
+
+  it 'should not allow spaces' do
+    answer = Answer.new
+    answer.text = '  '
+    expect(answer.save).to be_falsey
+  end
+
+  it 'should not strip nil' do
+    answer = Answer.new
+    answer.text = nil
+    answer.question = question
+    expect(answer.save).to be_falsey
+  end
 end

@@ -22,29 +22,29 @@ describe Location do
 
   it 'should create' do
     location = Location.new
-    location.address = "a1"
+    location.group = "a1"
     location.name = "name"
     location.universe = universe
     expect(location.save).to be_truthy
   end
 
-  it 'should validate address' do
+  it 'should create with no group' do
     location = Location.new
     location.name = "name"
     location.universe = universe
-    expect(location.save).to be_falsey
+    expect(location.save).to be_truthy
   end
 
   it 'should validate name' do
     location = Location.new
-    location.address = "a1"
+    location.group = "a1"
     location.universe = universe
     expect(location.save).to be_falsey
   end
 
   it 'should validate universe' do
     location = Location.new
-    location.address = "a1"
+    location.group = "a1"
     location.name = "name"
     expect(location.save).to be_falsey
   end

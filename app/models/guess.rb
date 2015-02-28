@@ -25,4 +25,11 @@ class Guess < ActiveRecord::Base
   belongs_to :contact
 
   validates_presence_of :play, :question
+  validate :any_answer
+
+  def any_answer
+    if !answer && !location && !contact
+      errors.add(:base, "Need to have an answer, location, or contact.")
+    end
+  end
 end

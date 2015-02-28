@@ -16,6 +16,8 @@
 
 FactoryGirl.define do
   factory :question do
-
+    text "question"
+    points 25
+    association :scenario
   end
 end
