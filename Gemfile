@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'unicorn'
 gem 'rails'
 gem 'pg'
 gem 'sass-rails'
