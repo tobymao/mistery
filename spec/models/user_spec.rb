@@ -47,9 +47,8 @@ describe User do
   end
 
   context 'guest' do
-    let(:guest) {create(:user, guest: true, login: nil, email: nil)}
-
     it 'should not validate' do
+      guest = User.new_guest_user
       expect(guest.save).to be_truthy
     end
   end

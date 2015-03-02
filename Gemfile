@@ -13,6 +13,7 @@ gem 'bcrypt'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'simplecov'
   gem "factory_girl_rails"
   gem 'spring'
   gem 'query_trail'

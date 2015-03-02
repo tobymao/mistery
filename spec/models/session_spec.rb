@@ -48,4 +48,20 @@ describe Session do
     session.ip_address = "127.0.0.1"
     expect(session.save).to be_falsey
   end
+
+  describe '.token_valid?' do
+    let(:session) {create(:session, user: user)}
+    it 'should be valid' do
+      expect(session.token_valid?).to be_truthy
+    end
+
+    it 'should not be valid' do
+      session = Session.new
+      session.token = "session1"
+      session.ip_address = "127.0.0.1"
+      session.save
+      expect(session).to receive(:created_at).and_return(31.days.ago)
+      expect(session.token_valid?).to be_falsey
+    end
+  end
 end
