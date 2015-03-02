@@ -19,37 +19,39 @@ describe User do
     user = User.new
     user.login = "user1"
     user.email = "user@example.com"
-    user.fname = "jon"
-    user.lname = "doe"
     user.password = "password"
     expect(user.save).to be_truthy
   end
 
-  it 'should validate login' do
-    user = User.new
-    user.email = "user@example.com"
-    user.fname = "jon"
-    user.lname = "doe"
-    user.password = "password"
-    expect(user.save).to be_falsey
+  context 'normal user' do
+    it 'should validate login' do
+      user = User.new
+      user.email = "user@example.com"
+      user.password = "password"
+      expect(user.save).to be_falsey
+    end
+
+    it 'should validate email' do
+      user = User.new
+      user.login = "user1"
+      user.password = "password"
+      expect(user.save).to be_falsey
+    end
+
+    it 'should validate password' do
+      user = User.new
+      user.login = "user1"
+      user.email = "user@example.com"
+      expect(user.save).to be_falsey
+    end
   end
 
-  it 'should validate email' do
-    user = User.new
-    user.login = "user1"
-    user.fname = "jon"
-    user.lname = "doe"
-    user.password = "password"
-    expect(user.save).to be_falsey
-  end
+  context 'guest' do
+    let(:guest) {create(:user, guest: true, login: nil, email: nil)}
 
-  it 'should validate password' do
-    user = User.new
-    user.login = "user1"
-    user.email = "user@example.com"
-    user.fname = "jon"
-    user.lname = "doe"
-    expect(user.save).to be_falsey
+    it 'should not validate' do
+      expect(guest.save).to be_truthy
+    end
   end
 
   describe '.password' do

@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :login, message: "Username is required", unless: :guest
   validates_presence_of :email, message: "Email is required", unless: :guest
+  validates_presence_of :password, message: "Password is required", unless: :guest
   validates_uniqueness_of :login, message: "Username is taken", case_sensitive: false, unless: :guest
   validates_uniqueness_of :email, message: "Email is already registered", case_sensitive: false, unless: :guest
 
@@ -35,9 +36,5 @@ class User < ActiveRecord::Base
   def password=(new_password)
     return if new_password.empty?
     super(BCrypt::Password.create(new_password))
-  end
-
-  def email=(new_email)
-    super(new_email.downcase)
   end
 end
