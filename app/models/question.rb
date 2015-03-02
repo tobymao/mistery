@@ -21,14 +21,14 @@ class Question < ActiveRecord::Base
   accepts_nested_attributes_for :answers, allow_destroy: true
 
   def multiple_choice?
-    answers.first.text.present?
+    !!answers.first.try(:text)
   end
 
   def contact?
-    !!answers.first.contact
+    !!answers.first.try(:contact)
   end
 
   def location?
-    !!answers.first.location
+    !!answers.first.try(:location)
   end
 end
