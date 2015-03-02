@@ -3,7 +3,8 @@ class CreatePlays < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.boolean    :active, null: false, defaul: false
+      t.boolean    :active, null: false, default: false
+      t.integer    :points
       t.references :user, index: true, null: false
       t.references :scenario, index: true, null: false
 

@@ -204,7 +204,8 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 CREATE TABLE plays (
     id integer NOT NULL,
-    active boolean NOT NULL,
+    active boolean DEFAULT false NOT NULL,
+    points integer,
     user_id integer NOT NULL,
     scenario_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
