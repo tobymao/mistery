@@ -26,4 +26,6 @@ class Scenario < ActiveRecord::Base
   has_many :questions, inverse_of: :scenario
   has_many :plays, inverse_of: :scenario
   has_many :locations, through: :universe
+
+  validates_presence_of :name, :description, :solution, :universe, :user
 end

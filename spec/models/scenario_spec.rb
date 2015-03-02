@@ -22,4 +22,59 @@
 require 'rails_helper'
 
 describe Scenario do
+  let(:user) {create(:user)}
+  let(:universe) {create(:universe, user: user)}
+
+  it 'should create' do
+    scenario = Scenario.new
+    scenario.name = "test"
+    scenario.description = "description"
+    scenario.solution = "solution"
+    scenario.universe = universe
+    scenario.user = user
+    expect(scenario.save).to be_truthy
+  end
+
+  it 'should validate name' do
+    scenario = Scenario.new
+    scenario.description = "description"
+    scenario.solution = "solution"
+    scenario.universe = universe
+    scenario.user = user
+    expect(scenario.save).to be_falsey
+  end
+
+  it 'should validate description' do
+    scenario = Scenario.new
+    scenario.name = "test"
+    scenario.solution = "solution"
+    scenario.universe = universe
+    scenario.user = user
+    expect(scenario.save).to be_falsey
+  end
+  it 'should validate solution' do
+    scenario = Scenario.new
+    scenario.name = "test"
+    scenario.description = "description"
+    scenario.universe = universe
+    scenario.user = user
+    expect(scenario.save).to be_falsey
+  end
+  it 'should validate universe' do
+    scenario = Scenario.new
+    scenario.name = "test"
+    scenario.description = "description"
+    scenario.solution = "solution"
+    scenario.user = user
+    expect(scenario.save).to be_falsey
+  end
+
+  it 'should validate user' do
+    scenario = Scenario.new
+    scenario.name = "test"
+    scenario.description = "description"
+    scenario.solution = "solution"
+    scenario.universe = universe
+    expect(scenario.save).to be_falsey
+  end
 end
