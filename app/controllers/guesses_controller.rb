@@ -18,8 +18,8 @@ class GuessesController < ApplicationController
     })
   end
 
-  # POST /plays/:play_id/guesss
-  # POST /plays/:play_id/guesss.json
+  # POST /plays/:play_id/guesses
+  # POST /plays/:play_id/guesses.json
   def create
     @guess = Guess.new(guess_params)
     @guess.play = @play

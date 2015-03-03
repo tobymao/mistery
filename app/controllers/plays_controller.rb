@@ -1,5 +1,5 @@
 class PlaysController < ApplicationController
-  before_action :set_play, only: [:show, :visit, :book]
+  before_action :set_play, only: [:show, :visit, :book, :finish, :result]
   before_action :set_location, only: [:visit, :book]
 
   # GET /plays
@@ -64,16 +64,45 @@ class PlaysController < ApplicationController
     end
   end
 
+  def result
+    @guesses = guesses
+  end
+
+  # POST /plays/1/finish
+  # POST /plays/1/finish.json
+  def finish
+    @play.points = 0
+
+    guesses.each do |guess|
+      @play.points += guess.points if guess.points
+    end
+
+    respond_to do |format|
+      if @play.save
+        format.html {redirect_to result_play_path(@play)}
+        format.json {render json: @play.points}
+      else
+        format.html {redirect_to play_guesses_path(@play)}
+        format.json {render json: @action.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+
   private
-    def set_play
-      @play = Play.find(params[:id])
-    end
+  def guesses
+    Guess.includes({question: :answers}, :answer, :location, :contact).where(play: @play)
+  end
 
-    def set_location
-      @location = Location.find(params[:location_id])
-    end
+  def set_play
+    @play = Play.find(params[:id])
+  end
 
-    def play_params
-      params.require(:play).permit(:scenario_id)
-    end
+  def set_location
+    @location = Location.find(params[:location_id])
+  end
+
+  def play_params
+    params.require(:play).permit(:scenario_id)
+  end
 end

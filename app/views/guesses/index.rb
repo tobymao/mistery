@@ -24,5 +24,9 @@ class Views::Guesses::Index < Views::Layouts::Page
         label guess.answer.text if guess.answer
       end
     end
+
+    form_tag finish_play_path(play) do
+      button_tag 'Finish Game'
+    end
   end
 end

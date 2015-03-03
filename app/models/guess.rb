@@ -27,6 +27,31 @@ class Guess < ActiveRecord::Base
   validates_presence_of :play, :question
   validate :any_answer
 
+  def points
+    points = nil
+
+    if answer.correct ||
+       (contact_id && contact_id == question.answer.contact_id) ||
+       (location_id && location_id == question.answer.location_id)
+      points = question.points
+    end
+
+    points
+  end
+
+  def guess_string
+    if answer
+      answer.text
+    elsif contact_id
+      contact.name
+    elsif location_id
+      location.name
+    else
+      raise "Unknown answer type."
+    end
+  end
+
+  private
   def any_answer
     if !answer && !location && !contact
       errors.add(:base, "Need to have an answer, location, or contact.")

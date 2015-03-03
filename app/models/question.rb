@@ -20,6 +20,22 @@ class Question < ActiveRecord::Base
   validates_presence_of :text, :points
   accepts_nested_attributes_for :answers, allow_destroy: true
 
+  def answer
+    answers.find(&:correct)
+  end
+
+  def answer_string
+    if multiple_choice?
+      answer.text
+    elsif contact?
+      answer.contact.name
+    elsif location?
+      answer.location.name
+    else
+      raise "Unknown answer type."
+    end
+  end
+
   def multiple_choice?
     !!answers.first.try(:text)
   end
