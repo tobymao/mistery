@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UniversesController do
   let(:user) {create(:user)}
   let(:universe) {create(:universe, user: user)}
-  let(:authenticate) {expect(controller).to receive(:current_user).and_return(user)}
+  let(:authenticate) {allow(controller).to receive(:current_user).and_return(user)}
 
   let(:valid_attributes) {{
     name: "changed name",
@@ -51,7 +51,7 @@ describe UniversesController do
       end
 
       it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
+      it {expect(response.status).to eq(302)}
     end
 
     context "authenticated" do
@@ -65,23 +65,26 @@ describe UniversesController do
   end
 
   describe "GET edit" do
-    it "should raise without universe" do
-      expect{get :edit, {id: 1}}.to raise_error
-    end
-
-    context 'with universe' do
-      context 'unauthenticated' do
-        before :each do
-          get :edit, {id: universe.id}
-        end
-
-        it {expect(response).not_to be_success}
-        it {expect(response.status).to eq(401)}
+    context 'unauthenticated' do
+      before :each do
+        get :edit, {id: universe.id}
       end
 
-      context 'authenticated' do
+      it {expect(response).not_to be_success}
+      it {expect(response.status).to eq(302)}
+    end
+
+    context 'authenticated' do
+      before :each do
+        authenticate
+      end
+
+      it "should raise without universe" do
+        expect{get :edit, {id: 1}}.to raise_error
+      end
+
+      context 'with universe' do
         before :each do
-          authenticate
           get :edit, {id: universe.id}
         end
 
@@ -98,7 +101,7 @@ describe UniversesController do
       end
 
       it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
+      it {expect(response.status).to eq(302)}
     end
 
     context 'authenticated' do
@@ -117,9 +120,9 @@ describe UniversesController do
 
         subject(:my_universe) {Universe.first}
         it {expect(my_universe.name).to eq("changed name")}
-        it {expect(my_universe.locations.first.address).to eq("a1")}
+        it {expect(my_universe.locations.first.group).to eq("a1")}
         it {expect(my_universe.locations.first.name).to eq("ambie")}
-        it {expect(my_universe.locations.second.address).to eq("a2")}
+        it {expect(my_universe.locations.second.group).to eq("a2")}
         it {expect(my_universe.locations.second.name).to eq("toby")}
       end
 
@@ -138,6 +141,7 @@ describe UniversesController do
 
   describe "PUT update" do
     it "should raise without universe" do
+      authenticate
       expect{put :update, {id: 1}}.to raise_error
     end
 
@@ -147,7 +151,7 @@ describe UniversesController do
       end
 
       it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
+      it {expect(response.status).to eq(302)}
     end
 
     context 'authenticated' do
@@ -165,7 +169,7 @@ describe UniversesController do
         subject(:my_universe) {Universe.find(universe.id)}
         it {expect(my_universe.name).to eq("changed name")}
         it {expect(my_universe.description).to eq("changed description")}
-        it {expect(my_universe.locations.first.address).to eq("a1")}
+        it {expect(my_universe.locations.first.group).to eq("a1")}
         it {expect(my_universe.locations.first.name).to eq("ambie")}
 
         context 'twice' do
@@ -200,22 +204,25 @@ describe UniversesController do
   end
 
   describe "DELETE destroy" do
-    it "should raise without universe" do
-      expect{delete :destroy, {id: 1}}.to raise_error
-    end
-
     context 'unauthenticated' do
       before :each do
         delete :destroy, {id: universe.id}
       end
 
       it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
+      it {expect(response.status).to eq(302)}
     end
 
     context 'authenticated' do
       before :each do
         authenticate
+      end
+
+      it "should raise without universe" do
+        expect{delete :destroy, {id: 1}}.to raise_error
+      end
+
+      before :each do
         delete :destroy, {id: universe.id}
       end
 
