@@ -3,8 +3,8 @@ class ContactsController < ApplicationController
   before_action :set_scenario
   before_action :require_permission
 
-  # GET /scenario/:id/contacts
-  # GET /scenarios/:id//contacts.json
+  # GET /scenarios/:id/contacts
+  # GET /scenarios/:id/contacts.json
   def index
     @contacts = @scenario.contacts
   end
@@ -31,11 +31,11 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to [@scenario, @contact], notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
+        format.html{redirect_to([@scenario, @contact], notice: 'Contact was successfully created.')}
+        format.json{render :show, status: :created, location: @contact}
       else
-        format.html { render :new }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.html{redirect_to :back, flash: {error: "Error saving contact"}}
+        format.json{render json: @contact.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -45,11 +45,11 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to [@scenario, @contact], notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
+        format.html{redirect_to([@scenario, @contact], notice: 'Contact was successfully updated.')}
+        format.json{render :show, status: :ok, location: @contact}
       else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.html{redirect_to :back, flash: {error: "Error saving contact"}}
+        format.json{render json: @contact.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -74,7 +74,7 @@ class ContactsController < ApplicationController
     end
 
     def require_permission
-      render_bad_credentials root unless @scenario.user == current_user
+      render_bad_credentials unless @scenario.user == current_user
     end
 
     def contact_params
