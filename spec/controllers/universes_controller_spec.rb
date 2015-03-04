@@ -8,7 +8,7 @@ describe UniversesController do
   let(:valid_attributes) {{
     name: "changed name",
     description: "changed description",
-    locations_csv: "ambie, a1\n toby, a2",
+    locations_csv: "ambie, a1\n toby \n",
   }}
 
   let(:deleted_location) {{
@@ -18,7 +18,7 @@ describe UniversesController do
   }}
 
   let(:invalid_attributes) {{
-    bad_field: "bad stuff"
+    name: nil
   }}
 
 
@@ -76,6 +76,7 @@ describe UniversesController do
 
     context 'authenticated' do
       before :each do
+        create(:location, universe: universe)
         authenticate
       end
 
@@ -122,7 +123,7 @@ describe UniversesController do
         it {expect(my_universe.name).to eq("changed name")}
         it {expect(my_universe.locations.first.group).to eq("a1")}
         it {expect(my_universe.locations.first.name).to eq("ambie")}
-        it {expect(my_universe.locations.second.group).to eq("a2")}
+        it {expect(my_universe.locations.second.group).to be_nil}
         it {expect(my_universe.locations.second.name).to eq("toby")}
       end
 
@@ -193,6 +194,7 @@ describe UniversesController do
 
       context 'invalid params' do
         before :each do
+          request.env["HTTP_REFERER"] = "back"
           put :update, {id: universe.id, universe: invalid_attributes}
         end
 
