@@ -17,10 +17,9 @@ class UsersController < ApplicationController
   def show
   end
 
-  # GET /users1/universes
+  # GET /users/1/universes
   # GET /users/1/universes.json
   def universes
-    @user = current_user
   end
 
   # GET /users/1/scenarios

@@ -11,7 +11,7 @@ describe UsersController do
   }}
 
   let(:invalid_attributes) {{
-    bad_field: "bad stuff"
+    login: nil
   }}
 
 
@@ -57,6 +57,22 @@ describe UsersController do
     it {expect(response).to be_success}
   end
 
+  describe 'GET universes' do
+    before :each do
+      get :universes, {id: user.id}
+    end
+
+    it {expect(response).to be_success}
+  end
+
+  describe 'GET scenarios' do
+    before :each do
+      get :scenarios, {id: user.id}
+    end
+
+    it {expect(response).to be_success}
+  end
+
   describe "GET edit" do
     it "should raise without user" do
       expect{get :edit, {id: 1}}.to raise_error
@@ -69,7 +85,7 @@ describe UsersController do
         end
 
         it {expect(response).not_to be_success}
-        it {expect(response.status).to eq(401)}
+        it {expect(response.status).to eq(302)}
       end
 
       context 'authenticated' do
@@ -91,7 +107,7 @@ describe UsersController do
       end
 
       it {expect(User.count).to be(1)}
-      it {expect(response).to redirect_to(User.first)}
+      it {expect(response).to redirect_to(root_url)}
     end
 
     context 'invalid params' do
@@ -115,7 +131,7 @@ describe UsersController do
       end
 
       it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
+      it {expect(response.status).to eq(302)}
     end
 
     context 'authenticated' do
@@ -134,8 +150,6 @@ describe UsersController do
         it {expect(my_user.login).to eq("new_login")}
         it {expect(my_user.email).to eq("new_email@example.com")}
         it {expect(my_user.password).to eq("test_password")}
-        it {expect(my_user.fname).to eq("first")}
-        it {expect(my_user.lname).to eq("last")}
       end
 
       context 'invalid params' do
@@ -146,8 +160,6 @@ describe UsersController do
         subject(:my_user) {User.find(user.id)}
         it {expect(my_user.login).to eq("test")}
         it {expect(my_user.email).to eq("test@example.com")}
-        it {expect(my_user.fname).to eq("first")}
-        it {expect(my_user.lname).to eq("last")}
         it {expect(my_user.password).to eq("password")}
       end
     end
@@ -164,7 +176,7 @@ describe UsersController do
       end
 
       it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
+      it {expect(response.status).to eq(302)}
     end
 
     context 'authenticated' do
