@@ -17,7 +17,7 @@
 
 FactoryGirl.define do
   factory :session do
-    token 'test_token'
+    sequence(:token) {|n| "token#{n}"}
     ip_address '127.0.0.1'
     association :user
   end

@@ -74,11 +74,10 @@ class UniversesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_universe
     @universe = Universe.find(params[:id])
-    @owner = @universe.user == current_user
   end
 
   def require_permission
-    render_bad_credential unless @owner
+    render_bad_credentials if @universe.user != current_user
   end
 
   # Parse CSV if :locations_csv is populated.

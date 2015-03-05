@@ -17,7 +17,6 @@
 require 'rails_helper'
 
 describe Location do
-  let(:user) {create(:user)}
   let(:universe) {create(:universe)}
 
   it 'should create' do

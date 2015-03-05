@@ -20,8 +20,7 @@ require 'rails_helper'
 
 describe Play do
   let(:user) {create(:user)}
-  let(:universe) {create(:universe, user: user)}
-  let(:scenario) {create(:scenario, user: user, universe: universe)}
+  let(:scenario) {create(:scenario, user: user)}
 
   it 'should create' do
     play = Play.new

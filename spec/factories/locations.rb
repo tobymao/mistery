@@ -16,7 +16,7 @@
 
 FactoryGirl.define do
   factory :location do
-    name 'location'
+    sequence(:name) {|n| "location#{n}"}
     group 'group'
     association :universe
   end

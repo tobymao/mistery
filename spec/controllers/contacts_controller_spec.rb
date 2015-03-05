@@ -3,16 +3,14 @@ require 'rails_helper'
 describe ContactsController do
   let(:user) {create(:user)}
   let(:authenticate) {allow(controller).to receive(:current_user).and_return(user)}
-  let(:universe) {create(:universe, user: user)}
-  let(:scenario) {create(:scenario, user: user, universe: universe)}
-  let(:location) {create(:location, universe: universe)}
+  let(:scenario) {create(:scenario, user: user)}
   let(:contact) {create(:contact, scenario: scenario)}
 
-  let(:auth_other) {
+  let(:auth_other) do
     allow(controller).to receive(:current_user).and_return(
       create(:user, login: 'a', email: 'a@a.com', password: 'a')
     )
-  }
+  end
 
   let(:valid_attributes) {{
     name: "changed name",

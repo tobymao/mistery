@@ -73,7 +73,7 @@ class ScenariosController < ApplicationController
     end
 
     def require_permission
-      render_bad_credential unless @owner
+      render_bad_credentials unless @owner
     end
 
     def scenario_params

@@ -19,6 +19,7 @@
 
 FactoryGirl.define do
   factory :guess do
-
+    association :play
+    association :question
   end
 end

@@ -21,9 +21,9 @@
 
 FactoryGirl.define do
   factory :scenario do
-    name        'test scenario'
-    description 'a scenario for a test'
-    solution    'the solution'
+    sequence(:name) {|n| "name#{n}"}
+    description 'description'
+    solution    'solution'
     association :universe
     association :user
   end

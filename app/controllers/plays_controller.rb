@@ -1,6 +1,7 @@
 class PlaysController < ApplicationController
   before_action :set_play, only: [:show, :visit, :book, :finish, :result]
   before_action :set_location, only: [:visit, :book]
+  before_action :require_permission, except: [:index, :create]
 
   # GET /plays
   # GET /plays.json
@@ -100,6 +101,10 @@ class PlaysController < ApplicationController
 
   def set_location
     @location = Location.find(params[:location_id])
+  end
+
+  def require_permission
+    render_bad_credentials if @play.user != current_user
   end
 
   def play_params

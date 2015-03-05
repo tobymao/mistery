@@ -17,9 +17,7 @@
 require 'rails_helper'
 
 describe Question do
-  let(:user) {create(:user)}
-  let(:universe) {create(:universe, user: user)}
-  let(:scenario) {create(:scenario, user: user, universe: universe)}
+  let(:scenario) {create(:scenario)}
 
   it 'should create' do
     question = Question.new
@@ -44,7 +42,7 @@ describe Question do
   end
 
   let(:question) {create(:question, scenario: scenario)}
-  let(:location) {create(:location, universe: universe)}
+  let(:location) {create(:location)}
   let(:contact) {create(:contact, scenario: scenario)}
   let(:multi_answer) {create(:answer, question: question, text: 'blah')}
   let(:location_answer) {create(:answer, question: question, location: location)}

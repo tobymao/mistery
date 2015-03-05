@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe LoginController do
-  let(:user) {create(:user)}
+  let(:user) {create(:user, login: 'test', password: 'password')}
 
   let(:valid_attributes) {{
     login: 'test',

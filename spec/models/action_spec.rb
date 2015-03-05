@@ -16,11 +16,8 @@
 require 'rails_helper'
 
 describe Action do
-  let(:user){create(:user)}
-  let(:universe){create(:universe, user: user)}
-  let(:location){create(:location, universe: universe)}
-  let(:scenario){create(:scenario, user: user, universe: universe)}
-  let(:play){create(:play, user: user, scenario: scenario)}
+  let(:location) {create(:location)}
+  let(:play) {create(:play)}
 
   it 'should create' do
     action = Action.new

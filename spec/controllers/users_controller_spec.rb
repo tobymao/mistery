@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe UsersController do
-  let(:user) {create(:user)}
+  let(:user) {create(:user, login: "test", email: "test@example.com")}
   let(:authenticate) {allow(controller).to receive(:current_user).and_return(user)}
 
   let(:valid_attributes) {{

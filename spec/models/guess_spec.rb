@@ -20,13 +20,10 @@
 require 'rails_helper'
 
 describe Guess do
-  let(:user) {create(:user)}
-  let(:universe) {create(:universe, user: user)}
-  let(:scenario) {create(:scenario, user: user, universe: universe)}
-  let(:location) {create(:location, universe: universe)}
-  let(:contact) {create(:contact, scenario: scenario)}
-  let(:question) {create(:question, scenario: scenario)}
-  let(:play) {create(:play, user: user, scenario: scenario)}
+  let(:location) {create(:location)}
+  let(:contact) {create(:contact)}
+  let(:question) {create(:question)}
+  let(:play) {create(:play)}
   let(:answer) {create(:answer, question: question, text: 'answer')}
 
   it 'should create with location' do

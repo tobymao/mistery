@@ -17,7 +17,7 @@
 
 FactoryGirl.define do
   factory :universe do
-    name 'test name'
+    sequence(:name) {|n| "universe#{n}"}
     description 'test description'
     association :user
   end

@@ -15,7 +15,7 @@
 
 FactoryGirl.define do
   factory :action do
-    
+    association :play
+    association :location
   end
-
 end

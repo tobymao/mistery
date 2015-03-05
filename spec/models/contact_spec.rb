@@ -18,10 +18,8 @@
 require 'rails_helper'
 
 describe Contact do
-  let(:user) {create(:user)}
-  let(:universe) {create(:universe, user: user)}
-  let(:scenario) {create(:scenario, user: user, universe: universe)}
-  let(:location) {create(:location, universe: universe)}
+  let(:scenario) {create(:scenario)}
+  let(:location) {create(:location)}
 
   it 'should create' do
     contact = Contact.new

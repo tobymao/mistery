@@ -22,13 +22,9 @@
 require 'rails_helper'
 
 describe Answer do
-  let(:user) {create(:user)}
-  let(:universe) {create(:universe, user: user)}
-  let(:scenario) {create(:scenario, user: user, universe: universe)}
-  let(:location) {create(:location, universe: universe)}
-  let(:contact) {create(:contact, scenario: scenario)}
-  let(:question) {create(:question, scenario: scenario)}
-  let(:play) {create(:play, user: user, scenario: scenario)}
+  let(:location) {create(:location)}
+  let(:contact) {create(:contact)}
+  let(:question) {create(:question)}
 
   it 'should create with text' do
     answer = Answer.new
