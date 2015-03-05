@@ -3,7 +3,16 @@ require 'rails_helper'
 describe PlaysController do
   let(:user) {create(:user)}
   let(:authenticate) {allow(controller).to receive(:current_user).and_return(user)}
+  let(:scenario) {create(:scenario)}
   let(:play) {create(:play, user: user)}
+
+  let(:valid_attributes) {{
+    scenario_id: scenario.id
+  }}
+
+  let(:invalid_attributes) {{
+    scenario_id: 1
+  }}
 
   describe "GET index" do
     context 'unauthenticated' do
@@ -41,6 +50,25 @@ describe PlaysController do
       end
 
       it {expect(response).to be_success}
+    end
+  end
+
+  describe "POST create" do
+    context 'unauthenticated' do
+      before :each do
+        post :create, {play: valid_attributes}
+      end
+
+      it {expect(response).to redirect_to(Play.first)}
+    end
+
+    context 'authenticated' do
+      before :each do
+        authenticate
+        post :create, {play: valid_attributes}
+      end
+
+      it {expect(response).to redirect_to(Play.first)}
     end
   end
 end
