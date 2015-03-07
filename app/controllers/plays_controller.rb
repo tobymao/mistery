@@ -65,6 +65,7 @@ class PlaysController < ApplicationController
     end
   end
 
+  # GET /plays/result
   def result
     @guesses = guesses
   end
