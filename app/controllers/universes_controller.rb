@@ -74,6 +74,7 @@ class UniversesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_universe
     @universe = Universe.find(params[:id])
+    @owner = @universe.user == current_user
   end
 
   def require_permission
