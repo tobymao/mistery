@@ -68,7 +68,7 @@ class ScenariosController < ApplicationController
 
   private
     def set_scenario
-      @scenario = Scenario.find(params[:id])
+      @scenario = Scenario.includes(:contacts).find(params[:id])
       @owner = @scenario.user == current_user
     end
 

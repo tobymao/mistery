@@ -13,16 +13,16 @@ class Views::Scenarios::Show < Views::Layouts::Page
       div simple_format scenario.description
     end
 
-    p 'Contacts' do
-      scenario.contacts.each do |contact|
-        div do
-          label "Name: #{contact.name}"
-          label "Group: #{contact.location.group}" if contact.location
+    if owner
+      p 'Contacts' do
+        scenario.contacts.each do |contact|
+          div do
+            label "Name: #{contact.name}"
+            label "Group: #{contact.location.group}" if contact.location
+          end
         end
       end
-    end
 
-    if owner
       link_to "Edit Scenario", edit_scenario_path(scenario)
     end
   end
