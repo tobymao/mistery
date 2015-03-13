@@ -9,9 +9,7 @@ class Views::Plays::Index < Views::Layouts::Page
     h3 "Active Games"
     user_plays.each do |play|
       if play.active
-        div do
-          link_to play.scenario.name, play, class: 'mainLink'
-        end
+        widget Views::Shared::Tile.new(object: play.scenario, link: play)
       end
     end
 

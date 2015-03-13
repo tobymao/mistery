@@ -4,10 +4,10 @@ class Views::Shared::Tile < Views::Base
 
   def content
     div class: 'tile' do
-      div object.name
-      div "by #{object.user.login}"
-      div truncate(object.description)
-      div object.created_at.strftime('%D')
+      div object.name, class: 'title'
+      div "by #{object.user.login}", class: 'author'
+      div truncate(object.description, length:100), class: 'desc'
+      div object.created_at.strftime('%D'), class: 'date'
       link_to(link) {span class: 'titleSpan'}
     end
   end

@@ -40,7 +40,7 @@ button.sideLink{
 
 .sideSection .group {
   font-size: 1.5em;
-  text-decoration: underline;
+  border-bottom: 1px solid #CCCCCC;
   margin-bottom: 0.5em;
 }
 

@@ -5,9 +5,7 @@ class Views::Users::Universes < Views::Layouts::Page
     h1 "Your universes"
 
     user.universes.each do |universe|
-      div do
-        link_to(universe.name, universe)
-      end
+      widget Views::Shared::Tile.new(object: universe, link: universe_path(universe))
     end
   end
 end

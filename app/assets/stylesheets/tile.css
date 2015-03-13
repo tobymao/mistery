@@ -1,8 +1,15 @@
 .tile {
   position: relative;
   display: inline-block;
-  background-color: #CCCCCC;
   color: #2B2B2B;
+  padding: 1em;
+  border-bottom: 1px solid #CCCCCC;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  width: 15em;
+}
+
+.tile:hover {
 }
 
 .tile span {
@@ -12,4 +19,24 @@
   top:0;
   left: 0;
   z-index: 1;
+}
+
+.tile .title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #006699;
+}
+
+.tile .author {
+
+}
+
+.tile .desc {
+  font-size: 0.9em;
+  font-style: italic;
+  height: 4em;
+}
+
+.tile .date {
+  font-size: 0.9em;
 }

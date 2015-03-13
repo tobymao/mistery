@@ -5,9 +5,7 @@ class Views::Users::Scenarios < Views::Layouts::Page
     h1 "Your scenarios"
 
     user.scenarios.each do |scenario|
-      div do
-        link_to(scenario.name, scenario)
-      end
+      widget Views::Shared::Tile.new(object: scenario, link: scenario_path(scenario))
     end
   end
 end
