@@ -17,7 +17,7 @@ class Views::Plays::Index < Views::Layouts::Page
 
     h3 "Start A New Game"
     plays.each do |play|
-      unless user_plays.any? { |userplay| userplay.active && (userplay.scenario == play.scenario)}
+      unless user_plays.any?{|user_play| user_play.active && (user_play.scenario == play.scenario)}
         form_for play do |f|
           f.hidden_field :scenario_id, value: play.scenario.id
           f.button play.scenario.name, class: 'mainLink'
@@ -26,7 +26,6 @@ class Views::Plays::Index < Views::Layouts::Page
     end
 
     h3 "Game History"
-
     user_plays.each do |play|
       unless play.active
         div do
