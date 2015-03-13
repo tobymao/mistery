@@ -11,7 +11,7 @@ class Views::Plays::SideBar < Views::Base
     html do
       div class: 'sideSection' do
         groups.each do |group, locations|
-          label group
+          label group, class: 'group'
 
           locations.each do |location|
             if visited_locations.include?(location)
