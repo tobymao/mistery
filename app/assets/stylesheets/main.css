@@ -22,7 +22,7 @@ h1 {
   top: 3em;
   left: 16em;
   bottom: 0;
-  right: 0;
+  right: 1em;
   overflow: auto;
 }
 
