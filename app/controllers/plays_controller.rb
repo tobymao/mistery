@@ -7,7 +7,7 @@ class PlaysController < ApplicationController
   # GET /plays.json
   def index
     @user = current_user
-    @active_plays = Play.where(user: @user).includes(:scenario)
+    @user_plays = Play.where(user: @user).includes(:scenario)
     @plays = Scenario.all.map do |scenario|
       Play.new(scenario: scenario)
     end
@@ -74,6 +74,7 @@ class PlaysController < ApplicationController
   # POST /plays/1/finish.json
   def finish
     @play.points = 0
+    @play.active = false
 
     guesses.each do |guess|
       @play.points += guess.points if guess.points
