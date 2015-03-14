@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   end
 
   resources :plays, only: [:index, :show, :create] do
-    resources :guesses, only: [:index, :new, :edit, :create]
+    resources :guesses, only: [:index, :new, :edit, :create] do
+      collection do
+        post 'start', to: 'guesses#start', as: :start
+      end
+    end
 
     member do
       get 'visit/:location_id', to: 'plays#visit', as: :visit

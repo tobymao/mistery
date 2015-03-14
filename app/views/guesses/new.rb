@@ -38,4 +38,8 @@ class Views::Guesses::New < Views::Layouts::Page
       f.submit 'Make Guess!'
     end
   end
+
+  def side_bar
+    widget Views::Plays::SideBar.new(play: play)
+  end
 end

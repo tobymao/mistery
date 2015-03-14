@@ -32,7 +32,9 @@ class Views::Plays::SideBar < Views::Base
 
       div class: 'sideSection' do
         link_to 'Back To Introduction', play_path(play), class: 'sideLink'
-        link_to 'Solve Mystery', play_guesses_path(play), class: 'sideLink'
+        form_tag start_play_guesses_path(play) do
+          button_tag "Solve Mystery", class: 'sideLink'
+        end
       end
     end
   end

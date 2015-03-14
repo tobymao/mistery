@@ -29,4 +29,8 @@ class Views::Guesses::Index < Views::Layouts::Page
       button_tag 'Finish Game'
     end
   end
+
+  def side_bar
+    widget Views::Plays::SideBar.new(play: play)
+  end
 end
