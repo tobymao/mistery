@@ -25,7 +25,7 @@ class Views::Questions::Edit < Views::Layouts::Page
   end
 
   def answer_fields(form, answer)
-    contacts = scenario.contacts.select.map{|c| c.name.present?}
+    contacts = scenario.contacts.where.not(name: nil)
 
     form.label :text, 'Multiple Choice Answer'
     form.text_field :text
