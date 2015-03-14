@@ -1,6 +1,7 @@
 class Views::Contacts::Edit < Views::Layouts::Page
   needs :scenario
   needs :contact
+  needs :locations
 
   def main
     h1 "Edit Contact!"
@@ -10,7 +11,7 @@ class Views::Contacts::Edit < Views::Layouts::Page
       f.text_field :name
 
       f.label :location, 'Select a location'
-      f.collection_select :location_id, scenario.universe.locations.where(hidden: false), :id, :name, include_blank: true
+      f.collection_select :location_id, locations, :id, :name, include_blank: true
       br
       br
 

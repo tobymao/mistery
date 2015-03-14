@@ -1,6 +1,7 @@
 class Views::Contacts::New < Views::Layouts::Page
   needs :scenario
   needs :contact
+  needs :locations
 
   def main
     h1 "Create a contact!"
@@ -10,7 +11,7 @@ class Views::Contacts::New < Views::Layouts::Page
       f.text_field :name
 
       f.label :location, 'Select a location'
-      f.collection_select :location_id, scenario.universe.locations.where(hidden: false).sorted_by_name, :id, :name, include_blank: true
+      f.collection_select :location_id, locations, :id, :name, include_blank: true
       br
       br
 

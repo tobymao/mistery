@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :set_scenario
+  before_action :set_unused_locations, only: [:new, :edit]
   before_action :require_permission
 
   # GET /scenarios/:id/contacts
@@ -71,6 +72,12 @@ class ContactsController < ApplicationController
 
     def set_scenario
       @scenario = Scenario.find(params[:scenario_id])
+    end
+
+    def set_unused_locations
+      all_locations = @scenario.universe.locations.where(hidden: false).sorted_by_name
+      used_locations = Contact.includes(:location).where(scenario: @scenario).map(&:location).compact
+      @locations = all_locations -  used_locations
     end
 
     def require_permission
