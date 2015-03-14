@@ -18,7 +18,7 @@ class Views::Plays::Index < Views::Layouts::Page
 
     h3 "Start A New Game"
     plays.each do |play|
-      unless user_plays.any?{|user_play| user_play.active && (user_play.scenario == play.scenario)}
+      unless user_plays.any?{|user_play| user_play.scenario == play.scenario}
         widget Views::Shared::Tile.new(
           object: play.scenario,
           title_widget: Views::Shared::PlayTitle.new(play: play),
