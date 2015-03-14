@@ -24,7 +24,6 @@
 	text-decoration: none;
 	padding: 0.2em 0.5em;
 	font-size: 1em;
-	white-space: nowrap;
 	margin: 0 0 0.5em 0;
   background: #2B2B2B;
   border: none;
@@ -41,7 +40,7 @@ button.sideLink{
 .sideSection .group {
   font-size: 1.5em;
   border-bottom: 1px solid #CCCCCC;
-  margin-bottom: 0.5em;
+  margin: 0 1em 0.5em 1em;
 }
 
 .sideSection .visited {
