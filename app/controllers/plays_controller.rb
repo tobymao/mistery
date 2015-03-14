@@ -44,17 +44,17 @@ class PlaysController < ApplicationController
   # GET /plays/1/visit/1
   # Shows a booked location.
   def visit
-    return render :show unless Action.exists?(play: @play, location: @location)
+    return render :show if @play.active && !Action.exists?(play: @play, location: @location)
     @contact = @play.scenario.contacts.find_by(location: @location)
   end
 
   # POST /plays/1/visit
   # Creates an action to visit a location.
   def book
-    @action = Action.new(play: @play, location: @location)
+    @action = Action.new(play: @play, location: @location) if @play.active
 
     respond_to do |format|
-      if @action.save
+      if !@play.active || @action.save
         format.html {redirect_to visit_play_path(@play.id, @location.id)}
         format.json {render :show, status: :created, location: @action}
       else
@@ -72,16 +72,18 @@ class PlaysController < ApplicationController
   # POST /plays/1/finish
   # POST /plays/1/finish.json
   def finish
-    @play.points = 0
-    @play.active = false
-    @play.points -= [@play.actions.size - @play.scenario.par, 0].max * Play::LOCATION_PENTALTY
+    if @play.active
+      @play.points = 0
+      @play.active = false
+      @play.points -= (@play.actions.size - @play.scenario.par) * Play::LOCATION_PENTALTY
 
-    guesses.each do |guess|
-      @play.points += guess.points if guess.points
+      guesses.each do |guess|
+        @play.points += guess.points if guess.points
+      end
     end
 
     respond_to do |format|
-      if @play.save
+      if !@play.active || @play.save
         format.html {redirect_to result_play_path(@play)}
         format.json {render json: @play.points}
       else

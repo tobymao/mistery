@@ -32,7 +32,7 @@ class Views::Plays::Index < Views::Layouts::Page
       unless play.active
         widget Views::Shared::Tile.new(
           object: play.scenario,
-          title_widget: Views::Shared::PlayTitle.new(play: play),
+          title_widget: Views::Shared::Title.new(name: play.scenario.name, path: play),
           metadata: "Score #{play.points}",
         )
       end
