@@ -4,7 +4,11 @@ class Views::Plays::SideBar < Views::Base
   def content
     groups = Hash.new{|hash, key| hash[key] = []}
 
-    play.scenario.locations.each{|location| groups[location.group] << location}
+    ids = play.scenario.contacts.map{|c| c.location_id}.compact
+
+    play.scenario.locations.each do |location|
+      groups[location.group] << location if !location.hidden || ids.include?(location.id)
+    end
 
     visited_locations = play.actions.includes(:location).map {|action| action.location}
 
