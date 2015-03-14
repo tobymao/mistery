@@ -16,6 +16,9 @@ class Views::Universes::Edit < Views::Layouts::Page
         f.label 'Locations - CSV'
         text_area_tag 'universe[locations_csv]', locations_csv
 
+        f.label :publish, 'Published'
+        f.check_box :published
+
         f.submit 'Update Universe'
       end
     end

@@ -6,7 +6,7 @@ class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.json
   def index
-    @scenarios = Scenario.all
+    @scenarios = Scenario.where(published: true)
   end
 
   # GET /scenarios/1
@@ -16,8 +16,10 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/new
   def new
-    # TO DO: Paging
-    @universes = Universe.all.limit(10).offset(0)
+    # To Do: Handle a lot of universes.
+    @universes = Universe
+      .where('published = true OR user_id = ?', current_user)
+      .order(:name)
     @scenario = Scenario.new
   end
 
@@ -77,6 +79,6 @@ class ScenariosController < ApplicationController
     end
 
     def scenario_params
-      params.require(:scenario).permit(:name, :description, :solution, :par, :universe_id)
+      params.require(:scenario).permit(:name, :description, :solution, :par, :universe_id, :published)
     end
 end

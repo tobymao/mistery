@@ -17,6 +17,9 @@ class Views::Scenarios::Edit < Views::Layouts::Page
       f.label :par, 'Par'
       f.number_field :par
 
+      f.label :published, 'Published'
+      f.check_box :published
+
       f.submit
     end
 

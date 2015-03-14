@@ -8,7 +8,7 @@ class UniversesController < ApplicationController
   # GET /universes
   # GET /universes.json
   def index
-    @universes = Universe.all
+    @universes = Universe.where(published: true)
   end
 
   # GET /universes/1
@@ -121,6 +121,6 @@ class UniversesController < ApplicationController
       }
     end
 
-    p.require(:universe).permit(:name, :description, locations_attributes: [:id, :name, :group, :_destroy])
+    p.require(:universe).permit(:name, :description, :published, locations_attributes: [:id, :name, :group, :_destroy])
   end
 end

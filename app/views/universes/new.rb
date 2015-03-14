@@ -13,6 +13,9 @@ class Views::Universes::New < Views::Layouts::Page
         f.label 'Locations - CSV'
         f.text_area :locations_csv
 
+        f.label :publish, 'Published'
+        f.check_box :published
+
         f.submit 'Finalize Universe'
       end
     end
