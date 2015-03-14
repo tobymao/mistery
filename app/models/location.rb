@@ -19,6 +19,5 @@ class Location < ActiveRecord::Base
   validates_presence_of :name, :universe
 
   default_scope{order(:group, :name)}
-  default_scope{where(hidden: false)}
   scope :sorted_by_name, -> {order(:name)}
 end

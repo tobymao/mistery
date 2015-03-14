@@ -9,7 +9,7 @@ class Views::Universes::Show < Views::Layouts::Page
       div simple_format universe.description
 
       p "Locations:" do
-        universe.locations.each do |location|
+        universe.locations.where(hidden: false).each do |location|
           div do
             text "Name: #{location.name} "
             text "Group: #{location.group} "

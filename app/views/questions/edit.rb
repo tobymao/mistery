@@ -30,7 +30,7 @@ class Views::Questions::Edit < Views::Layouts::Page
     form.label :contact_id, 'Contact Answer'
     form.collection_select :contact_id, scenario.contacts, :id, :name, include_blank: true
     form.label :location_id, 'Location Answer'
-    form.collection_select :location_id, scenario.universe.locations, :id, :name, include_blank: true
+    form.collection_select :location_id, scenario.universe.locations.where(hidden: false), :id, :name, include_blank: true
     form.label :correct, 'Correct'
     form.check_box :correct
     form.hidden_field :id, value: answer.id

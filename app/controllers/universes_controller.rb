@@ -25,7 +25,7 @@ class UniversesController < ApplicationController
   # GET /universes/1/edit
   def edit
     @locations_csv = CSV.generate do |csv|
-      @universe.locations.each do |location|
+      @universe.locations.where(hidden: false).each do |location|
         csv << [location.name, " #{location.group}"]
       end
     end
