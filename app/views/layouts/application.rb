@@ -3,8 +3,9 @@ class Views::Layouts::Application < Views::Base
     html do
       head do
         title "Mistery"
-        stylesheet_link_tag    'application', media: 'all'
+        stylesheet_link_tag 'application', media: 'all'
         javascript_include_tag 'application'
+        favicon_link_tag 'favicon.ico'
         csrf_meta_tags
       end
 
