@@ -7,11 +7,11 @@ class Views::Plays::Index < Views::Layouts::Page
 
     h3 "Active Games"
     user_plays.each do |play|
-      if play.active
+      if !play.points
         widget Views::Shared::Tile.new(
           object: play.scenario,
           title_widget: Views::Shared::Title.new(name: play.scenario.name, path: play),
-          metadata: "Moves #{play.actions.size}"
+          metadata: play.active ? "Moves #{play.actions.size}" : "Ready To Guess"
         )
       end
     end
@@ -29,7 +29,7 @@ class Views::Plays::Index < Views::Layouts::Page
 
     h3 "Game History"
     user_plays.each do |play|
-      unless play.active
+      if play.points
         widget Views::Shared::Tile.new(
           object: play.scenario,
           title_widget: Views::Shared::Title.new(name: play.scenario.name, path: play),
