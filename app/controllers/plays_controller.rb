@@ -74,6 +74,7 @@ class PlaysController < ApplicationController
   def finish
     @play.points = 0
     @play.active = false
+    @play.points -= [@play.actions.size - @play.scenario.par, 0].max * Play::LOCATION_PENTALTY
 
     guesses.each do |guess|
       @play.points += guess.points if guess.points

@@ -30,7 +30,7 @@ class Guess < ActiveRecord::Base
   def points
     points = nil
 
-    if answer.correct ||
+    if (answer && answer.correct) ||
        (contact_id && contact_id == question.answer.contact_id) ||
        (location_id && location_id == question.answer.location_id)
       points = question.points

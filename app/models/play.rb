@@ -22,4 +22,6 @@ class Play < ActiveRecord::Base
   has_many :actions, inverse_of: :play
   has_many :guesses, inverse_of: :play
   validates_presence_of :user, :scenario
+
+  LOCATION_PENTALTY = 5
 end
