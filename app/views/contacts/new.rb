@@ -16,7 +16,9 @@ class Views::Contacts::New < Views::Layouts::Page
       br
 
       f.label :text, 'Text (story)'
-      f.text_area :text
+      f.text_area :text, placeholder: 'You can input a Name and/or Select a Location. The name is only used for the list of suspects when answering questions.
+
+This is the text that will appear when the player visits the selected location. If you do not choose a location, there will be no way to see the text (the contact will only be included for answering questions).'
 
       f.submit
     end

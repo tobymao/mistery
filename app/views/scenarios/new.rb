@@ -13,15 +13,15 @@ class Views::Scenarios::New < Views::Layouts::Page
       f.text_field :name
 
       f.label :description, 'Description'
-      f.text_area :description
+      f.text_area :description, placeholder: 'This is the introduction text to your mistery story'
 
       f.label :solution, 'Solution'
-      f.text_area :solution
+      f.text_area :solution, placeholder: 'This is the solution text at the end of your mistery story'
 
-      f.label :par, 'Par'
+      f.label :par, 'Par # of Locations Visited'
       f.number_field :par
 
-      f.label :published, 'Published'
+      f.label :published, 'Published (check to make public)'
       f.check_box :published
 
       f.submit

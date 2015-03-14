@@ -8,16 +8,20 @@ class Views::Universes::New < Views::Layouts::Page
         f.text_field :name
 
         f.label :description, 'Description'
-        f.text_area :description
+        f.text_area :description, placeholder: 'This will show up on the Universe page'
 
         f.label 'Locations - CSV'
-        f.text_area :locations_csv
+        f.text_area :locations_csv, placeholder: 'Locations that can be visited, separated into groups
+Location 1, Group 1
+Location 2, Group 1
+Location 3, Group 2'
 
-        f.label :publish, 'Published'
+        f.label :publish, 'Published (check to make public)'
         f.check_box :published
 
         f.submit 'Finalize Universe'
       end
     end
   end
+
 end
