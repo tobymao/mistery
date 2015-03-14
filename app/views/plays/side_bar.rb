@@ -27,6 +27,7 @@ class Views::Plays::SideBar < Views::Base
       end
 
       div class: 'sideSection' do
+        link_to 'Back To Introduction', play_path(play), class: 'sideLink'
         link_to 'Solve Mystery', play_guesses_path(play), class: 'sideLink'
       end
     end
