@@ -27,6 +27,10 @@ class Contact < ActiveRecord::Base
     super(new_name.present? ? new_name : nil)
   end
 
+  def text=(new_text)
+    super(new_text.present? ? new_text : nil)
+  end
+
   def name_or_location
     if !name && !location
       errors.add(:base, 'Name or location must be present.')
