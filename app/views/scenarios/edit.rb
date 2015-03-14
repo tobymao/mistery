@@ -26,7 +26,7 @@ class Views::Scenarios::Edit < Views::Layouts::Page
     p 'Contacts' do
       scenario.contacts.each do |contact|
         div do
-          link_to(contact.name, [scenario, contact])
+          link_to(contact.name || contact.location.name, [scenario, contact])
         end
       end
 

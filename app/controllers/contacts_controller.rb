@@ -22,6 +22,7 @@ class ContactsController < ApplicationController
 
   # GET /scenarios/:id/contacts/1/edit
   def edit
+    @locations << @contact.location if @contact.location
   end
 
   # POST /scenarios/:id/contacts
@@ -77,7 +78,7 @@ class ContactsController < ApplicationController
     def set_unused_locations
       all_locations = @scenario.universe.locations.where(hidden: false).sorted_by_name
       used_locations = Contact.includes(:location).where(scenario: @scenario).map(&:location).compact
-      @locations = all_locations -  used_locations
+      @locations = all_locations - used_locations
     end
 
     def require_permission

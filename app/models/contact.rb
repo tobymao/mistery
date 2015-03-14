@@ -23,6 +23,10 @@ class Contact < ActiveRecord::Base
   validate :name_or_location
   validate :text_and_location
 
+  def name=(new_name)
+    super(new_name.present? ? new_name : nil)
+  end
+
   def name_or_location
     if !name && !location
       errors.add(:base, 'Name or location must be present.')
