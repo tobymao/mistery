@@ -39,6 +39,8 @@
   font-size: 0.9em;
   font-style: italic;
   height: 4em;
+  text-overflow: ellipsis;
+  overflow:hidden;
 }
 
 .tile .date {
