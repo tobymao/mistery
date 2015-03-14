@@ -107,9 +107,10 @@ class UniversesController < ApplicationController
       group = row[1]
 
       next if name.nil?
+      name.strip!
 
       location_hash = {
-        name: name.strip,
+        name: name,
         group: group.try(:strip),
       }
 

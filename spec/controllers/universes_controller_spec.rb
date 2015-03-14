@@ -188,7 +188,7 @@ describe UniversesController do
           end
 
           it {expect(Universe.count).to be(1)}
-          it {expect(Location.count).to be(1)}
+          it {expect(Location.count).to be(2)}
         end
       end
 
