@@ -12,7 +12,7 @@ class Views::Contacts::Show < Views::Layouts::Page
     p do
       div "Scenario: #{scenario.name}"
       div "Name #{contact.name}"
-      div "Text: #{contact.text}"
+      div simple_format contact.text
 
       if contact.location
         div "Location Name: #{contact.location.name}"
