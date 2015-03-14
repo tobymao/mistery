@@ -5,6 +5,8 @@ class UniversesController < ApplicationController
   before_action :set_universe, only: [:show, :edit, :update, :destroy]
   before_action :require_permission, only: [:edit, :update, :destroy]
 
+  LOCATION_MAX = 200
+
   # GET /universes
   # GET /universes.json
   def index
@@ -93,7 +95,9 @@ class UniversesController < ApplicationController
     included_locations = []
 
     # Parse CSV
-    CSV.parse(p[:universe].delete(:locations_csv)).each do |row|
+    CSV.parse(p[:universe].delete(:locations_csv)).each.with_index do |row, index|
+      break if index >= LOCATION_MAX
+
       name = row[0]
       group = row[1]
 
