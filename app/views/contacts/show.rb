@@ -5,14 +5,12 @@ class Views::Contacts::Show < Views::Layouts::Page
   def main
     h1 "Contact"
 
-    link_to("Go To Scenario", scenario)
-    br
-    link_to("Edit Scenario", edit_scenario_path(scenario)) if current_user == scenario.user
-
     p do
       div "Scenario: #{scenario.name}"
-      div "Name #{contact.name}"
-      div simple_format contact.text
+      div "Name: #{contact.name}"
+      div 'Text:' do
+        text simple_format contact.text
+      end
 
       if contact.location
         div "Location Name: #{contact.location.name}"
@@ -21,5 +19,11 @@ class Views::Contacts::Show < Views::Layouts::Page
     end
 
     link_to("Edit Contact", [:edit, scenario, contact])
+    br
+    link_to("Go To Scenario", scenario)
+    br
+    link_to("Edit Scenario", edit_scenario_path(scenario))
+    br
+    link_to('Add Another Contact', new_scenario_contact_path(scenario))
   end
 end
