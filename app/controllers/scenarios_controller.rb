@@ -12,6 +12,7 @@ class ScenariosController < ApplicationController
   # GET /scenarios/1
   # GET /scenarios/1.json
   def show
+    @play = Play.new(scenario: @scenario)
   end
 
   # GET /scenarios/new

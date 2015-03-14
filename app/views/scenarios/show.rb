@@ -1,5 +1,6 @@
 class Views::Scenarios::Show < Views::Layouts::Page
   needs :scenario
+  needs :play
   needs :owner
 
   def main
@@ -11,6 +12,11 @@ class Views::Scenarios::Show < Views::Layouts::Page
       div "Par: #{scenario.par}"
       div "Description:"
       div simple_format scenario.description
+    end
+
+    form_for play do |f|
+      f.hidden_field :scenario_id, value: scenario.id
+      f.button 'Play This Scenario', class: 'mainLink'
     end
 
     if owner
