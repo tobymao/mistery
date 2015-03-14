@@ -1,7 +1,6 @@
 class Views::Plays::Index < Views::Layouts::Page
   needs :user_plays
   needs :plays
-  needs :user
 
   def main
     h1 'Play a Scenario'
@@ -9,28 +8,33 @@ class Views::Plays::Index < Views::Layouts::Page
     h3 "Active Games"
     user_plays.each do |play|
       if play.active
-        widget Views::Shared::Tile.new(object: play.scenario, link: play)
+        widget Views::Shared::Tile.new(
+          object: play.scenario,
+          title_widget: Views::Shared::Title.new(name: play.scenario.name, path: play),
+          metadata: "Moves #{play.actions.size}"
+        )
       end
     end
 
     h3 "Start A New Game"
     plays.each do |play|
       unless user_plays.any?{|user_play| user_play.active && (user_play.scenario == play.scenario)}
-        form_for play do |f|
-          f.hidden_field :scenario_id, value: play.scenario.id
-          f.button play.scenario.name, class: 'mainLink'
-        end
+        widget Views::Shared::Tile.new(
+          object: play.scenario,
+          title_widget: Views::Shared::PlayTitle.new(play: play),
+          metadata: "",
+        )
       end
     end
 
     h3 "Game History"
     user_plays.each do |play|
       unless play.active
-        div do
-          link_to play.scenario.name, play_path(play), class: 'mainLink'
-          div "Points Earned: #{play.points}"
-        end
-        br
+        widget Views::Shared::Tile.new(
+          object: play.scenario,
+          title_widget: Views::Shared::PlayTitle.new(play: play),
+          metadata: "Score #{play.points}",
+        )
       end
     end
   end

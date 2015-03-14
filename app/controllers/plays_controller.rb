@@ -6,8 +6,7 @@ class PlaysController < ApplicationController
   # GET /plays
   # GET /plays.json
   def index
-    @user = current_user
-    @user_plays = Play.where(user: @user).includes(:scenario)
+    @user_plays = Play.where(user: current_user).includes({scenario: :user}, :actions)
     @plays = Scenario.all.map do |scenario|
       Play.new(scenario: scenario)
     end
