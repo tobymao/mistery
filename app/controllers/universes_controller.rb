@@ -91,7 +91,12 @@ class UniversesController < ApplicationController
     p = params.dup
     p[:universe][:locations_attributes] ||= []
 
-    all_locations = @universe.try(:locations) || []
+    all_locations = []
+
+    Location.unscoped do
+      all_locations += @universe.locations.to_a
+    end if @universe
+
     included_locations = []
 
     # Parse CSV
@@ -108,8 +113,9 @@ class UniversesController < ApplicationController
         group: group.try(:strip),
       }
 
-      if match = all_locations.find{|location| location.name == name}
+      if match = all_locations.find{|location| location.name.downcase == name.downcase}
         location_hash[:id] = match.id
+        location_hash[:hidden] = false
         included_locations << match.id
       end
 
@@ -121,10 +127,10 @@ class UniversesController < ApplicationController
     removed_location.each do |id|
       p[:universe][:locations_attributes] << {
         id: id,
-        _destroy: true,
+        hidden: true,
       }
     end
 
-    p.require(:universe).permit(:name, :description, :published, locations_attributes: [:id, :name, :group, :_destroy])
+    p.require(:universe).permit(:name, :description, :published, locations_attributes: [:id, :name, :group, :hidden])
   end
 end

@@ -175,7 +175,8 @@ CREATE TABLE locations (
     "group" character varying,
     universe_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    hidden boolean DEFAULT false NOT NULL
 );
 
 
@@ -759,4 +760,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150218062505');
 INSERT INTO schema_migrations (version) VALUES ('20150218062522');
 
 INSERT INTO schema_migrations (version) VALUES ('20150218062604');
+
+INSERT INTO schema_migrations (version) VALUES ('20150314032122');
 

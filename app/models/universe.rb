@@ -21,5 +21,5 @@ class Universe < ActiveRecord::Base
   belongs_to :user, inverse_of: :universes
 
   validates_presence_of :name, :user
-  accepts_nested_attributes_for :locations, allow_destroy: true
+  accepts_nested_attributes_for :locations
 end
