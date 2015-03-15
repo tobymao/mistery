@@ -5,6 +5,10 @@ class Views::Plays::Result < Views::Layouts::Page
   def main
     h1 "Finished Game"
 
+    div 'Solution:' do
+      text simple_format play.scenario.solution
+    end
+
     div "Score #{play.points}"
 
     guesses.each do |guess|
