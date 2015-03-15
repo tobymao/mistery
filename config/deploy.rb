@@ -14,16 +14,24 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   desc 'Initiate a rolling restart by telling Unicorn to start the new application code and kill the old process when done.'
   task :restart do
-    execute "kill -s USR2 `cat /tmp/unicorn.mistery.pid`"
+    on roles :all do
+      execute "kill -s USR2 `cat /tmp/unicorn.mistery.pid`"
+    end
   end
 
   desc "Start the Unicorn process when it isn't already running."
   task :start do
-    execute "cd #{current_path}; bundle exec unicorn -c config/unicorn.rb -D"
+    on roles :all do
+      within "#{fetch(:deploy_to)}/current/" do
+        execute :bundle, "exec unicorn -c config/unicorn.rb -D"
+      end
+    end
   end
 
   desc "Stop unicorn"
   task :stop do
-    execute "kill -s QUIT `cat /tmp/unicorn.mistery.pid`"
+    on roles :all do
+      execute "kill -s QUIT `cat /tmp/unicorn.mistery.pid`"
+    end
   end
 end
