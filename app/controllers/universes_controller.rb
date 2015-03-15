@@ -10,7 +10,10 @@ class UniversesController < ApplicationController
   # GET /universes
   # GET /universes.json
   def index
-    @universes = Universe.published
+    @start = params[:start] || 0
+    # Maybe cache this?
+    @count = (Universe.published.count / 10.0).ceil
+    @universes = Universe.published.limit(10).offset(@start)
   end
 
   # GET /universes/1

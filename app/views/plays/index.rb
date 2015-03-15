@@ -10,8 +10,8 @@ class Views::Plays::Index < Views::Layouts::Page
       if !play.points
         widget Views::Shared::Tile.new(
           object: play.scenario,
-          title_widget: Views::Shared::Title.new(name: play.scenario.name, path: play),
-          metadata: play.active ? "Moves #{play.actions.size}" : "Ready To Guess"
+          title_gen: -> (c) {link_to play.scenario.name, play, class: c},
+          metadata: play.active ? "Moves #{play.actions.size}" : "Ready To Guess",
         )
       end
     end
@@ -21,8 +21,13 @@ class Views::Plays::Index < Views::Layouts::Page
       unless user_plays.any?{|user_play| user_play.scenario == play.scenario}
         widget Views::Shared::Tile.new(
           object: play.scenario,
-          title_widget: Views::Shared::PlayTitle.new(play: play),
           metadata: "",
+          title_gen: -> (c) {
+            form_for play do |f|
+              f.hidden_field :scenario_id, value: play.scenario.id
+              f.button play.scenario.name, class: c
+            end
+          },
         )
       end
     end
@@ -32,7 +37,7 @@ class Views::Plays::Index < Views::Layouts::Page
       if play.points
         widget Views::Shared::Tile.new(
           object: play.scenario,
-          title_widget: Views::Shared::Title.new(name: play.scenario.name, path: play),
+          title_gen: -> (c) {link_to play.scenario.name, play, class: c},
           metadata: "Score #{play.points}",
         )
       end

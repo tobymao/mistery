@@ -7,7 +7,7 @@ class Views::Users::Universes < Views::Layouts::Page
     user.universes.each do |universe|
       widget Views::Shared::Tile.new(
         object: universe,
-        title_widget: Views::Shared::Title.new(name: universe.name, path: universe_path(universe)),
+        title_gen: -> (c) {link_to universe.name, universe, class: c},
         metadata: nil,
       )
     end

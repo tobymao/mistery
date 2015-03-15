@@ -6,7 +6,10 @@ class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.json
   def index
-    @scenarios = Scenario.published
+    @start = params[:start] || 0
+    # Maybe cache this?
+    @count = (Scenario.published.count / 10.0).ceil
+    @scenarios = Scenario.published.limit(10).offset(@start)
   end
 
   # GET /scenarios/1
