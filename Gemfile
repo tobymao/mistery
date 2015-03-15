@@ -11,6 +11,7 @@ gem 'annotate'
 gem 'bcrypt'
 
 group :development, :test do
+  gem "capistrano"
   gem 'rspec-rails'
   gem 'simplecov'
   gem "factory_girl_rails"
