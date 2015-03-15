@@ -81,10 +81,12 @@ class PlaysController < ApplicationController
       guesses.each do |guess|
         @play.points += guess.points if guess.points
       end
+
+      @play.save
     end
 
     respond_to do |format|
-      if !@play.active || @play.save
+      if @play.points
         format.html {redirect_to result_play_path(@play)}
         format.json {render json: @play.points}
       else
