@@ -23,6 +23,8 @@ class Contact < ActiveRecord::Base
   validate :name_or_location
   validate :text_and_location
 
+  scope :named, -> {where.not(name: nil)}
+
   def name=(new_name)
     super(new_name.present? ? new_name : nil)
   end

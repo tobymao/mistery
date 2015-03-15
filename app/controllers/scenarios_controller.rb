@@ -6,7 +6,7 @@ class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.json
   def index
-    @scenarios = Scenario.where(published: true)
+    @scenarios = Scenario.published
   end
 
   # GET /scenarios/1

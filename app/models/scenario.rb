@@ -28,4 +28,6 @@ class Scenario < ActiveRecord::Base
   has_many :locations, through: :universe
 
   validates_presence_of :name, :description, :solution, :universe, :user
+
+  scope :published, -> {where(published: true)}
 end

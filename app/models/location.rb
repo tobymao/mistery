@@ -20,4 +20,6 @@ class Location < ActiveRecord::Base
 
   default_scope{order(:group, :name)}
   scope :sorted_by_name, -> {order(:name)}
+  scope :published, -> {where(published: true)}
+  scope :visible, -> {where(hidden: false)}
 end

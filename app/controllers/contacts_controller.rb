@@ -76,7 +76,7 @@ class ContactsController < ApplicationController
     end
 
     def set_unused_locations
-      all_locations = @scenario.universe.locations.where(hidden: false).sorted_by_name
+      all_locations = @scenario.universe.locations.visible.sorted_by_name
       used_locations = Contact.includes(:location).where(scenario: @scenario).map(&:location).compact
       @locations = all_locations - used_locations
     end

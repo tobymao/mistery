@@ -25,14 +25,14 @@ class Views::Questions::Edit < Views::Layouts::Page
   end
 
   def answer_fields(form, answer)
-    contacts = scenario.contacts.where.not(name: nil)
+    contacts = scenario.contacts.named
 
     form.label :text, 'Multiple Choice Answer'
     form.text_field :text
     form.label :contact_id, 'Contact Answer'
     form.collection_select :contact_id, contacts, :id, :name, include_blank: true
     form.label :location_id, 'Location Answer'
-    form.collection_select :location_id, scenario.universe.locations.where(hidden: false), :id, :name, include_blank: true
+    form.collection_select :location_id, scenario.universe.locations.visible, :id, :name, include_blank: true
     form.label :correct, 'Correct'
     form.check_box :correct
     form.hidden_field :id, value: answer.id

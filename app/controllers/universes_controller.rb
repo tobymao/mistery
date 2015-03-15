@@ -10,7 +10,7 @@ class UniversesController < ApplicationController
   # GET /universes
   # GET /universes.json
   def index
-    @universes = Universe.where(published: true)
+    @universes = Universe.published
   end
 
   # GET /universes/1
@@ -25,7 +25,7 @@ class UniversesController < ApplicationController
   # GET /universes/1/edit
   def edit
     @locations_csv = CSV.generate do |csv|
-      @universe.locations.where(hidden: false).each do |location|
+      @universe.locations.visible.each do |location|
         csv << [location.name, " #{location.group}"]
       end
     end

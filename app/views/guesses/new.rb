@@ -27,7 +27,7 @@ class Views::Guesses::New < Views::Layouts::Page
 
       if question.contact?
         f.label "Choose a contact"
-        f.collection_select :contact_id, play.scenario.contacts, :id, :name
+        f.collection_select :contact_id, play.scenario.contacts.named, :id, :name
       end
 
       if question.location?
