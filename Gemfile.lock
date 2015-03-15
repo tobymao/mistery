@@ -74,6 +74,7 @@ GEM
     i18n (0.7.0)
     json (1.8.2)
     kgio (2.9.3)
+    libv8 (3.16.14.7)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -168,6 +169,9 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -201,5 +205,6 @@ DEPENDENCIES
   sdoc
   simplecov
   spring
+  therubyracer
   uglifier
   unicorn
