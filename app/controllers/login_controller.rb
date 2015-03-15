@@ -16,6 +16,12 @@ class LoginController < ApplicationController
     end
   end
 
+  # POST /logout
+  def logout
+    Session.where(user: current_user).destroy_all
+    redirect_to root_path
+  end
+
   private
   def login_params
     params.require(:login).permit(:login, :password)

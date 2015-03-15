@@ -1,4 +1,6 @@
 class Views::Layouts::Navbar < Views::Base
+  needs :current_user
+
   def content
     html do
       div class: 'logo' do
@@ -8,16 +10,28 @@ class Views::Layouts::Navbar < Views::Base
       end
 
       div class: 'navSetting' do
-        link_to "Login", login_path
-        link_to "Register", new_user_path
+        if !current_user || current_user.guest
+          link_to "Login", login_path
+          link_to "Register", new_user_path
+        else
+          link_to "Welcome #{current_user.login}", current_user
+
+          form_tag logout_path do
+            button_tag "Logout"
+          end
+        end
       end
 
       div class: 'navDivider'
 
       div class: 'navTab' do
-        link_to "Universes", universes_path
-        link_to "Scenarios", scenarios_path
-      end
+        unless current_user.guest
+          link_to "My Universes", universes_user_path(current_user)
+          link_to "My Scenarios", scenarios_user_path(current_user)
+        end
+
+        link_to "My Plays", plays_path
+      end if current_user
     end
   end
 end

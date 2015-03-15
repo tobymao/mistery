@@ -61,11 +61,28 @@ button.sideLink{
   font-family: 'pt_sansregular', sans-serif;
 }
 
+.navBar form {
+  display: inline-block;
+}
+
+.navBar button {
+  font-size: 0.9em;
+  background:none;
+  border:none;
+  cursor: pointer;
+  font-family: 'pt_sansregular', sans-serif;
+  margin: 0.5em 2.5em 0.5em 0.5em;
+}
+
+.navBar button:hover {
+  color: #006699;
+}
+
 .navBar a {
-	text-decoration: none;
-	font-size: 0.9em;
-	white-space: nowrap;
-	margin: 0.5em 2.5em 0.5em 0.5em;
+  text-decoration: none;
+  font-size: 0.9em;
+  white-space: nowrap;
+  margin: 0.5em 2.5em 0.5em 0.5em;
   color: #2B2B2B;
 }
 

@@ -22,7 +22,7 @@ class Views::Layouts::Page < Views::Base
   end
 
   def nav_bar
-    widget Views::Layouts::Navbar.new
+    widget Views::Layouts::Navbar.new(current_user: current_user)
   end
 
   def main

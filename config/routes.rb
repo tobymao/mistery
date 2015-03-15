@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   # Login Controller
   get 'login' => 'login#index'
   post 'login' => 'login#login'
+  post 'logout' => 'login#logout'
 end
