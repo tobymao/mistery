@@ -74,7 +74,7 @@ class PlaysController < ApplicationController
   # POST /plays/1/finish
   # POST /plays/1/finish.json
   def finish
-    if @play.active
+    if !@play.points
       @play.points = 0
       @play.points -= (@play.actions.size - @play.scenario.par) * Play::LOCATION_PENTALTY
 
