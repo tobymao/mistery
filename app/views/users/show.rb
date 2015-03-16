@@ -5,7 +5,7 @@ class Views::Users::Show < Views::Layouts::Page
     h1 "User Profile"
 
     p do
-      text user.email
+      text user.login
     end
   end
 end
