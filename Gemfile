@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'unicorn'
-gem 'rails'
+gem 'unicorn', "~> 4.8.3"
+gem 'rails', "~> 4.2.0"
 gem 'pg'
 gem 'sass-rails'
 gem 'uglifier'

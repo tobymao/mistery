@@ -199,7 +199,7 @@ DEPENDENCIES
   fortitude
   pg
   query_trail
-  rails
+  rails (~> 4.2.0)
   rspec-rails
   sass-rails
   sdoc
@@ -207,4 +207,4 @@ DEPENDENCIES
   spring
   therubyracer
   uglifier
-  unicorn
+  unicorn (~> 4.8.3)
