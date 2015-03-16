@@ -1,7 +1,16 @@
 class Views::Landing::Index < Views::Layouts::Page
-  static :main
+  needs :scenarios_new
+  needs :universes_new
+  needs :scenarios_top
 
   def main
+    intro
+    top_scenarios
+    new_scenarios
+    new_universes
+  end
+
+  def intro
     h1 "Welcome to Mistery.io!"
 
     p do
@@ -35,6 +44,39 @@ class Views::Landing::Index < Views::Layouts::Page
     	link_to("GitHub", "https://github.com/tobymao/mistery", target: "_blank")
     	text "."
     end
+  end
+  static :intro
 
+  def top_scenarios
+    h2 "Trending Scenarios"
+    scenarios_top.each do |scenario|
+      widget Views::Shared::Tile.new(
+        object: scenario,
+        title_gen: -> (c) {link_to scenario.name, scenario, class: c},
+        metadata: "Plays: #{scenario.play_counts}"
+      )
+    end
+  end
+
+  def new_scenarios
+    h2 "New Scenarios"
+    scenarios_new.each do |scenario|
+      widget Views::Shared::Tile.new(
+        object: scenario,
+        title_gen: -> (c) {link_to scenario.name, scenario, class: c},
+        metadata: "Plays: #{scenario.play_counts}"
+      )
+    end
+  end
+
+  def new_universes
+    h2 "New Universes"
+    universes_new.each do |universe|
+      widget Views::Shared::Tile.new(
+        object: universe,
+        title_gen: -> (c) {link_to universe.name, universe, class: c},
+        metadata: ""
+      )
+    end
   end
 end
