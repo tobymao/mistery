@@ -53,7 +53,7 @@ class Views::Landing::Index < Views::Layouts::Page
       widget Views::Shared::Tile.new(
         object: scenario,
         title_gen: -> (c) {link_to scenario.name, scenario, class: c},
-        metadata: "Plays: #{scenario.play_counts}"
+        metadata: "Plays: #{scenario.plays_count}"
       )
     end
   end
@@ -64,7 +64,7 @@ class Views::Landing::Index < Views::Layouts::Page
       widget Views::Shared::Tile.new(
         object: scenario,
         title_gen: -> (c) {link_to scenario.name, scenario, class: c},
-        metadata: "Plays: #{scenario.play_counts}"
+        metadata: "Plays: #{scenario.plays_count}"
       )
     end
   end

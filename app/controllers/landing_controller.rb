@@ -6,12 +6,11 @@ class LandingController < ApplicationController
   def index
     scenarios = Scenario
       .includes(:user)
-      .include_play_counts
       .published
       .last(NEW_SCENARIO_LIMIT)
 
     @scenarios_new = scenarios.last(10).reverse
-    @scenarios_top = scenarios.sort_by(&:play_counts).reverse.take(10)
+    @scenarios_top = scenarios.sort_by(&:plays_count).reverse.take(10)
     @universes_new = Universe
       .includes(:user)
       .published

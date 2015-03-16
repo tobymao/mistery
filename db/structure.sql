@@ -280,7 +280,8 @@ CREATE TABLE scenarios (
     universe_id integer NOT NULL,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    plays_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -762,4 +763,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150218062522');
 INSERT INTO schema_migrations (version) VALUES ('20150218062604');
 
 INSERT INTO schema_migrations (version) VALUES ('20150314032122');
+
+INSERT INTO schema_migrations (version) VALUES ('20150316060538');
 

@@ -30,16 +30,4 @@ class Scenario < ActiveRecord::Base
   validates_presence_of :name, :description, :solution, :universe, :user
 
   scope :published, -> {where(published: true)}
-
-  def self.include_play_counts
-    joins(
-      %{
-       LEFT JOIN (
-         SELECT scenario_id, COUNT(*) play_counts
-         FROM   plays
-         GROUP BY scenario_id
-       ) p ON p.scenario_id = scenarios.id
-      }
-    ).select("scenarios.*, p.play_counts")
-  end
 end
