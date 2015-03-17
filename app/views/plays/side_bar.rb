@@ -1,5 +1,6 @@
 class Views::Plays::SideBar < Views::Base
   needs :play
+  needs :current_path
 
   def content
     groups = Hash.new{|hash, key| hash[key] = []}
@@ -19,12 +20,9 @@ class Views::Plays::SideBar < Views::Base
 
           locations.each do |location|
             if visited_locations.include?(location)
-              link_to location.name, visit_play_path(play.id, location.id), class: 'sideLink visited'
+              link(location.name, visit_play_path(play.id, location.id))
             else
-              form_tag book_play_path(play) do
-                hidden_field_tag :location_id, location.id
-                button_tag location.name, class: 'sideLink'
-              end
+              button(location.name, book_play_path(play), :location_id, location.id)
             end
           end
         end
@@ -32,10 +30,21 @@ class Views::Plays::SideBar < Views::Base
 
       div class: 'sideSection' do
         link_to 'Back To Introduction', play_path(play), class: 'sideLink'
-        form_tag start_play_guesses_path(play) do
-          button_tag "Solve Mystery", class: 'sideLink'
-        end
+        button('Solve Mystery', start_play_guesses_path(play))
       end
+    end
+  end
+
+  def link(text, path)
+    classes = ['sideLink', 'visited']
+    classes << 'selected' if path == current_path
+    link_to text, path, class: classes.join(' ')
+  end
+
+  def button(text, path, tag_name=nil, tag_id=nil)
+    form_tag path do
+      hidden_field_tag tag_name, tag_id if tag_name
+      button_tag text, class: 'sideLink'
     end
   end
 end

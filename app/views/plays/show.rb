@@ -1,14 +1,16 @@
 class Views::Plays::Show < Views::Layouts::Page
   needs :play
+  needs :current_path
 
   def main
-    h1 "Play Scenario: #{play.scenario.name}"
+    h1 play.scenario.name
+
     div do
       div simple_format play.scenario.description
     end
   end
 
   def side_bar
-    widget Views::Plays::SideBar.new(play: play)
+    widget Views::Plays::SideBar.new(play: play, current_path: current_path)
   end
 end

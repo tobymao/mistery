@@ -2,6 +2,7 @@ class Views::Plays::Visit < Views::Layouts::Page
   needs :location
   needs :play
   needs :contact
+  needs :current_path
 
   def main
     h1 location.name
@@ -16,6 +17,6 @@ class Views::Plays::Visit < Views::Layouts::Page
   end
 
   def side_bar
-    widget Views::Plays::SideBar.new(play: play)
+    widget Views::Plays::SideBar.new(play: play, current_path: current_path)
   end
 end

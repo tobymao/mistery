@@ -37,10 +37,8 @@ class Views::Layouts::Navbar < Views::Base
   end
 
   def link(text, path)
-    if path == current_path
-        link_to text, path, class: 'selected'
-    else
-        link_to text, path
-    end
+    classes = []
+    classes << 'selected' if path == current_path
+    link_to text, path, class: classes.join(' ')
   end
 end
