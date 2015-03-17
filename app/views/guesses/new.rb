@@ -1,6 +1,7 @@
 class Views::Guesses::New < Views::Layouts::Page
   needs :play
   needs :guess
+  needs :current_user
 
   def main
     question = guess.question
@@ -40,6 +41,6 @@ class Views::Guesses::New < Views::Layouts::Page
   end
 
   def side_bar
-    widget Views::Plays::SideBar.new(play: play)
+    widget Views::Plays::SideBar.new(play: play, current_user: current_user)
   end
 end
