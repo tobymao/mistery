@@ -1,16 +1,32 @@
+.tileCollection {
+  width: 100%;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 1px solid #CCCCCC;
+}
+
+.tileCollection:first-child {
+  margin-top: 1em;
+}
+
+.tileHeader {
+  font-size: 1.1em;
+  margin-bottom: 0.2em;
+  font-weight: bold;
+}
+
 .tile {
   position: relative;
   display: inline-block;
   color: #2B2B2B;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid #CCCCCC;
-  margin-right: 1em;
-  margin-bottom: 1em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
   width: 15em;
 }
 
 .tile .title {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #006699;
   border: none;
   background-color: white;
@@ -27,6 +43,7 @@
 
 .tile .author {
   color: #2B2B2B;
+  font-size: 0.9em;
   text-decoration: none;
   display: block;
 }

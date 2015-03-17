@@ -4,14 +4,14 @@ class Views::Scenarios::Index < Views::Layouts::Page
   needs :count
 
   def main
-    h1 "Scenarios"
-
-    scenarios.each do |scenario|
-      widget Views::Shared::Tile.new(
-        object: scenario,
-        title_gen: -> (c) {link_to scenario.name, scenario, class: c},
-        metadata: nil,
-      )
+    div class: 'tileCollection' do
+      scenarios.each do |scenario|
+        widget Views::Shared::Tile.new(
+          object: scenario,
+          title_gen: -> (c) {link_to scenario.name, scenario, class: c},
+          metadata: nil,
+        )
+      end
     end
 
     widget Views::Shared::Pager.new(

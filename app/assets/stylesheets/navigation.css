@@ -52,6 +52,10 @@ button.sideLink{
 	background: #006699;
 }
 
+.sideLink.selected {
+	background: #006699;
+}
+
 .navBar {
   position: relative;
   background-color: #CCCCCC;
@@ -75,7 +79,7 @@ button.sideLink{
 }
 
 .navBar button:hover {
-  color: #006699;
+  border-bottom: 3px solid #006699;
 }
 
 .navBar a {
@@ -84,10 +88,15 @@ button.sideLink{
   white-space: nowrap;
   margin: 0.5em 2.5em 0.5em 0.5em;
   color: #2B2B2B;
+  padding-bottom: 0.25em;
 }
 
-.navBar a:hover {
-  color: #006699;
+.navSetting a:hover, .navTab a:hover {
+  border-bottom: 3px solid #006699;
+}
+
+.navBar .selected {
+  border-bottom: 3px solid #006699;
 }
 
 .navTab {

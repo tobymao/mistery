@@ -13,7 +13,7 @@ class UniversesController < ApplicationController
     @start = params[:start] || 0
     # Maybe cache this?
     @count = (Universe.published.count / 10.0).ceil
-    @universes = Universe.published.limit(10).offset(@start)
+    @universes = Universe.includes(:user).published.limit(10).offset(@start)
   end
 
   # GET /universes/1
@@ -78,7 +78,7 @@ class UniversesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_universe
-    @universe = Universe.find(params[:id])
+    @universe = Universe.includes(scenarios: :user).find(params[:id])
     @owner = @universe.user == current_user
   end
 
