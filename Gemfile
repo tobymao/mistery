@@ -20,7 +20,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem "factory_girl_rails"
-  gem 'spring'
+  gem 'spring', '1.3.3'
   gem 'query_trail'
 end
 
