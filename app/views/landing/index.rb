@@ -33,6 +33,18 @@ class Views::Landing::Index < Views::Layouts::Page
       	link_to("scenario", scenarios_path)
       	text " to play through. Visit any of the locations to look for clues, and when you feel like you can solve the case, answer the questions to find out your score!"
       end
+      
+      p do
+      	text "This site is still heavily in development. We appreciate your feedback and we hope to grow a great community here."
+      end
+
+      p do
+      	text "Email us at misterydotio [at] gmail [dot] com with any feedback."
+      	br
+      	text "This project is open source! View our "
+      	link_to("GitHub", "https://github.com/tobymao/mistery", target: "_blank")
+      	text "."
+      end
 
       h2 "How to Play"
 
@@ -45,18 +57,6 @@ class Views::Landing::Index < Views::Layouts::Page
         text "Click on each question to answer it, and when you are finished answering questions, press the 'Finish Game' button to see your final score! You get points for answering locations correctly, and you lose points for visiting too many locations."
         br
         text "Note: Once you press 'Solve Mystery,' you cannot visit any new locations, but you can revisit locations you've seen before. Also, you currently cannot change your answers to a question."
-      end
-      
-      p do
-      	text "This site is still heavily in development. We appreciate your feedback and we hope to grow a great community here."
-      end
-
-      p do
-      	text "Email us at misterydotio [at] gmail [dot] com with any feedback."
-      	br
-      	text "This project is open source! View our "
-      	link_to("GitHub", "https://github.com/tobymao/mistery", target: "_blank")
-      	text "."
       end
     end
   end

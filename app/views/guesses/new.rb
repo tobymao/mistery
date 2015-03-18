@@ -19,7 +19,7 @@ class Views::Guesses::New < Views::Layouts::Page
 
       if question.multiple_choice?
         question.answers.each do |answer|
-          div do
+          div class: 'mainText'do
             f.radio_button :answer_id, answer.id
             f.label :answer_id, answer.text
           end
