@@ -9,7 +9,7 @@ class Views::Universes::Show < Views::Layouts::Page
 
     div class: 'tileCollection' do
       div "Scenarios", class: 'tileHeader'
-      universe.scenarios.each do |scenario|
+      universe.scenarios.published.each do |scenario|
         widget Views::Shared::Tile.new(
           object: scenario,
           title_gen: -> (c) {link_to scenario.name, scenario, class: c},

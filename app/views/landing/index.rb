@@ -81,7 +81,7 @@ class Views::Landing::Index < Views::Layouts::Page
         widget Views::Shared::Tile.new(
           object: universe,
           title_gen: -> (c) {link_to universe.name, universe, class: c},
-          metadata: "Scenarios: #{universe.scenarios.size}"
+          metadata: "Scenarios: #{universe.scenarios.published.size}"
         )
       end
     end
