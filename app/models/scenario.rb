@@ -23,6 +23,7 @@ class Scenario < ActiveRecord::Base
   belongs_to :user, inverse_of: :scenarios
   belongs_to :universe, inverse_of: :scenarios
   has_many :contacts, inverse_of: :scenario
+  has_many :suspects, inverse_of: :scenario
   has_many :questions, inverse_of: :scenario
   has_many :plays, inverse_of: :scenario
   has_many :locations, through: :universe

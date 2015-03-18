@@ -9,9 +9,9 @@ class Views::Questions::Show < Views::Layouts::Page
     br
     link_to("Edit Scenario", edit_scenario_path(scenario)) if current_user == scenario.user
 
-    div "Question: #{question.text}"
+    div "Question: #{question.text}", class: 'mainText'
 
-    div "Answers" do
+    div "Answers", class: 'mainText' do
       question.answers.each do |answer|
         div "Location: #{answer.location.name}" if answer.location
         div "Contact: #{answer.contact.name}" if answer.contact

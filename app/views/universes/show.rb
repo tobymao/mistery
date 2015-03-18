@@ -5,7 +5,7 @@ class Views::Universes::Show < Views::Layouts::Page
   def main
     h1 "Universe: #{universe.name}"
 
-    div simple_format universe.description
+    div simple_format universe.description, class: 'mainText'
 
     div class: 'tileCollection' do
       div "Scenarios", class: 'tileHeader'

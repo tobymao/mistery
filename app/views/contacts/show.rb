@@ -8,13 +8,13 @@ class Views::Contacts::Show < Views::Layouts::Page
     p do
       div "Scenario: #{scenario.name}"
       div "Name: #{contact.name}"
-      div 'Text:' do
+      div 'Text:', class: 'mainText' do
         text simple_format contact.text
       end
 
       if contact.location
-        div "Location Name: #{contact.location.name}"
-        div "Location Group: #{contact.location.group}"
+        div "Location Name: #{contact.location.name}", class: 'mainText'
+        div "Location Group: #{contact.location.group}", class: 'mainText'
       end
     end
 

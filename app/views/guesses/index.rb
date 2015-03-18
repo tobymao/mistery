@@ -10,7 +10,7 @@ class Views::Guesses::Index < Views::Layouts::Page
     unanswered_questions = play.scenario.questions - answered_questions
 
     unanswered_questions.each do |question|
-      div do
+      div class: 'mainText' do
         link_to question.text, new_play_guess_path(play, question: question), class: 'mainLink'
       end
     end
@@ -18,7 +18,7 @@ class Views::Guesses::Index < Views::Layouts::Page
     h1 "Answered Questions"
 
     guesses.each do |guess|
-      div do
+      div class: 'mainText' do
         label guess.question.text
         label guess.contact.name if guess.contact
         label guess.location.name if guess.location

@@ -8,7 +8,7 @@ class Views::Guesses::New < Views::Layouts::Page
 
     h1 "Make the guess"
 
-    div do
+    div class: 'mainText' do
       text "Question: #{question.text}"
       br
       text "Points: #{question.points}"

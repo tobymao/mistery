@@ -6,14 +6,14 @@ class Views::Plays::Result < Views::Layouts::Page
     h1 "Finished Game"
 
     div 'Solution:' do
-      text simple_format play.scenario.solution
+      text simple_format play.scenario.solution, class: 'mainText'
     end
 
     div "Score #{play.points}"
 
     guesses.each do |guess|
       br
-      div do
+      div class: 'mainText' do
         text "Question: #{guess.question.text}"
         br
         text "Your answer: #{guess.guess_string}"

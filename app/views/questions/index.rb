@@ -6,7 +6,7 @@ class Views::Questions::Index < Views::Layouts::Page
     h1 "Questions"
 
     questions.each do |question|
-      div do
+      div class: 'mainText' do
         link_to(question.text, [scenario, question])
       end
     end

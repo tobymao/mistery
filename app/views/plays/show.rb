@@ -6,7 +6,7 @@ class Views::Plays::Show < Views::Layouts::Page
     h1 play.scenario.name
 
     div do
-      div simple_format play.scenario.description
+      div simple_format play.scenario.description, class: 'mainText'
     end
   end
 

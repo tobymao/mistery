@@ -6,7 +6,7 @@ class Views::Contacts::Index < Views::Layouts::Page
     h1 "Contacts"
 
     contacts.each do |contact|
-      div do
+      div class: 'mainText' do
         link_to(contact.name, [scenario, contact])
       end
     end

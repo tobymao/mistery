@@ -6,13 +6,12 @@ class Views::Scenarios::Show < Views::Layouts::Page
   def main
     h1 "Scenario"
 
-    p do
-      div "Universe: #{scenario.universe.name}"
-      div "Name: #{scenario.name}"
-      div "Par: #{scenario.par}"
-      div "Description:"
-      div simple_format scenario.description
-    end
+    div "Universe: #{scenario.universe.name}"
+    div "Name: #{scenario.name}"
+    div "Par: #{scenario.par}"
+    div "Description:"
+    div simple_format scenario.description, class: 'mainText'
+
 
     form_for play do |f|
       f.hidden_field :scenario_id, value: scenario.id

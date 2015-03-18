@@ -9,7 +9,7 @@ class Views::Plays::Visit < Views::Layouts::Page
 
     div do
       if contact
-        div simple_format contact.text
+        div simple_format contact.text, class: 'mainText'
       else
         text "There doesn't seem to be anybody here..."
       end
