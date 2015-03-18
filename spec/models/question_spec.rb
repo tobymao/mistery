@@ -43,10 +43,10 @@ describe Question do
 
   let(:question) {create(:question, scenario: scenario)}
   let(:location) {create(:location)}
-  let(:contact) {create(:contact, scenario: scenario)}
+  let(:suspect) {create(:suspect, scenario: scenario)}
   let(:multi_answer) {create(:answer, question: question, text: 'blah')}
+  let(:suspect_answer) {create(:answer, question: question, suspect: suspect)}
   let(:location_answer) {create(:answer, question: question, location: location)}
-  let(:contact_answer) {create(:answer, question: question, contact: contact)}
 
   describe '.multiple_choice?' do
     it 'should be true' do
@@ -57,26 +57,21 @@ describe Question do
     it 'should be false' do
       expect(question.multiple_choice?).to be_falsey
     end
-
-    it 'should be false with contact' do
-      question.answers << contact_answer
-      expect(question.multiple_choice?).to be_falsey
-    end
   end
 
-  describe '.contact?' do
+  describe '.suspect?' do
     it 'should be true' do
-      question.answers << contact_answer
-      expect(question.contact?).to be_truthy
+      question.answers << suspect_answer
+      expect(question.suspect?).to be_truthy
     end
 
     it 'should be false' do
-      expect(question.contact?).to be_falsey
+      expect(question.suspect?).to be_falsey
     end
 
     it 'should be false with location' do
       question.answers << location_answer
-      expect(question.contact?).to be_falsey
+      expect(question.suspect?).to be_falsey
     end
   end
 

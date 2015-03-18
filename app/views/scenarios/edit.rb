@@ -23,20 +23,18 @@ class Views::Scenarios::Edit < Views::Layouts::Page
       f.submit
     end
 
-    p 'Contacts' do
-      scenario.contacts.each do |contact|
-        div do
-          name = ""
-          name += contact.location.name if contact.location
-          name += " - " if contact.name and contact.location
-          name += contact.name if contact.name
-          link_to(name, [scenario, contact])
-        end
-      end
+    #p 'Contacts' do
+    #  scenario.contacts.each do |contact|
+    #    div do
+    #      name = ""
+    #      name += contact.location.name if contact.location
+    #      link_to(name, [scenario, contact])
+    #    end
+    #  end
 
-      br
-      link_to('Add Contact', new_scenario_contact_path(scenario))
-    end
+    #  br
+    #  link_to('Add Contact', new_scenario_contact_path(scenario))
+    #end
 
     p 'Questions' do
       scenario.questions.each do |question|

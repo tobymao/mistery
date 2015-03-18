@@ -13,8 +13,8 @@ class Views::Questions::Show < Views::Layouts::Page
 
     div "Answers", class: 'mainText' do
       question.answers.each do |answer|
-        div "Location: #{answer.location.name}" if answer.location
-        div "Contact: #{answer.contact.name}" if answer.contact
+        div "Location: #{answer.location.name}" if answer.location_id
+        div "Suspect: #{answer.suspect.name}" if answer.contact_id
         div "Text: #{answer.text}" if answer.text
       end
     end

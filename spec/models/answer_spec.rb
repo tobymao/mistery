@@ -6,7 +6,7 @@
 #  question_id :integer          not null
 #  correct     :boolean          default("true"), not null
 #  location_id :integer
-#  contact_id  :integer
+#  suspect_id  :integer
 #  text        :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -14,7 +14,7 @@
 # Indexes
 #
 #  index_answers_on_question_id                  (question_id)
-#  index_answers_on_question_id_and_contact_id   (question_id,contact_id) UNIQUE
+#  index_answers_on_question_id_and_suspect_id   (question_id,suspect_id) UNIQUE
 #  index_answers_on_question_id_and_location_id  (question_id,location_id) UNIQUE
 #  index_answers_on_question_id_and_text         (question_id,text) UNIQUE
 #
@@ -23,7 +23,7 @@ require 'rails_helper'
 
 describe Answer do
   let(:location) {create(:location)}
-  let(:contact) {create(:contact)}
+  let(:suspect) {create(:suspect)}
   let(:question) {create(:question)}
 
   it 'should create with text' do
@@ -40,10 +40,10 @@ describe Answer do
     expect(answer.save).to be_truthy
   end
 
-  it 'should create with contact' do
+  it 'should create with suspect' do
     answer = Answer.new
     answer.question = question
-    answer.contact = contact
+    answer.suspect = suspect
     expect(answer.save).to be_truthy
   end
 
@@ -53,7 +53,7 @@ describe Answer do
     expect(answer.save).to be_falsey
   end
 
-  it 'should validate location, contact, and text' do
+  it 'should validate location, suspect, and text' do
     answer = Answer.new
     answer.question = question
     expect(answer.save).to be_falsey

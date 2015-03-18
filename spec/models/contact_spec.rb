@@ -23,34 +23,23 @@ describe Contact do
 
   it 'should create' do
     contact = Contact.new
-    contact.name = 'name'
     contact.text = "contact"
     contact.scenario = scenario
     contact.location = location
     expect(contact.save).to be_truthy
   end
 
-  it 'should create without location' do
-    contact = Contact.new
-    contact.name = 'name'
-    contact.text = "contact"
-    contact.scenario = scenario
-    expect(contact.save).to be_truthy
-  end
-
-  it 'should create without name' do
+  it 'should not create without location' do
     contact = Contact.new
     contact.text = "contact"
     contact.scenario = scenario
-    contact.location = location
-    expect(contact.save).to be_truthy
+    expect(contact.save).to be_falsey
   end
 
-  it 'should create without text and location' do
+  it 'should not create without text and location' do
     contact = Contact.new
-    contact.name = 'name'
     contact.scenario = scenario
-    expect(contact.save).to be_truthy
+    expect(contact.save).to be_falsey
   end
 
   it 'should not create without name or location' do
@@ -60,16 +49,15 @@ describe Contact do
     expect(contact.save).to be_falsey
   end
 
-  it 'should not create without text in a location' do
+  it 'should create without text in a location' do
     contact = Contact.new
     contact.location = location
     contact.scenario = scenario
-    expect(contact.save).to be_falsey
+    expect(contact.save).to be_truthy
   end
 
   it 'should validate scenario' do
     contact = Contact.new
-    contact.name = 'name'
     contact.text = "contact"
     contact.location = location
     expect(contact.save).to be_falsey

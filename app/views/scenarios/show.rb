@@ -24,8 +24,6 @@ class Views::Scenarios::Show < Views::Layouts::Page
           div do
             name = ""
             name += contact.location.name + ", " + contact.location.group if contact.location
-            name += " - " if contact.name and contact.location
-            name += contact.name if contact.name
             text name
           end
         end

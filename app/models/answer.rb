@@ -22,12 +22,12 @@
 class Answer < ActiveRecord::Base
   belongs_to :question, inverse_of: :answers
   belongs_to :location
-  belongs_to :contact
+  belongs_to :suspect
 
   validates_presence_of :question_id
-  validates_presence_of :location, :if => lambda {|a| a.contact.nil? && text.nil?}
-  validates_presence_of :contact, :if => lambda {|a| a.location.nil? && a.text.nil?}
-  validates_presence_of :text, allow_blank: false, :if => lambda {|a| a.location.nil? && a.contact.nil?}
+  validates_presence_of :location, :if => lambda {|a| !a.suspect_id && text.nil?}
+  validates_presence_of :suspect, :if => lambda {|a| !a.location_id && a.text.nil?}
+  validates_presence_of :text, allow_blank: false, :if => lambda {|a| !a.location_id && !a.suspect_id}
 
   def text=(new_text)
     super(new_text) if new_text.present? && new_text.strip.present?

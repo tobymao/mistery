@@ -7,7 +7,6 @@ class Views::Contacts::Show < Views::Layouts::Page
 
     p do
       div "Scenario: #{scenario.name}"
-      div "Name: #{contact.name}"
       div 'Text:', class: 'mainText' do
         text simple_format contact.text
       end

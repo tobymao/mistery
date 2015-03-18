@@ -27,8 +27,8 @@ class Question < ActiveRecord::Base
   def answer_string
     if multiple_choice?
       answer.text
-    elsif contact?
-      answer.contact.name
+    elsif suspect?
+      answer.suspect.name
     elsif location?
       answer.location.name
     else
@@ -40,8 +40,8 @@ class Question < ActiveRecord::Base
     !!answers.first.try(:text)
   end
 
-  def contact?
-    !!answers.first.try(:contact)
+  def suspect?
+    !!answers.first.try(:suspect)
   end
 
   def location?
