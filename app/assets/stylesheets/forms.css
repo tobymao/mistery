@@ -42,3 +42,65 @@ input[type=radio], label {
 	display: inline;
 	vertical-align: middle;
 }
+
+.formBlock {
+	width: 30em;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.formContainer {
+	white-space: nowrap;
+}
+
+.textareaBig {
+	width: 30em;
+	height: 25.2em;
+}
+
+form table {
+	font-size: 1em;
+	padding: 0;
+	border-spacing: 0;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+form th {
+	border-bottom: 1px solid #CCCCCC;
+}
+
+form td {
+	font-size: 0.9em;
+}
+
+form td.textPreview {
+	min-width: 20em;
+	max-width: 20em;
+}
+
+form button.edit {
+	border: 0.1em solid #555555;
+	border-radius: 0em;
+	margin: 0.5em 0.4em;
+	padding: 0.2em 0.5em;
+	background-color: #F5F5F5;
+	font-family: 'pt_sansregular', sans-serif;
+	transition: all 0.1s ease;
+	-webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+}
+
+form button.edit:hover {
+	background: #CCCCCC;
+	border-color: #555555;
+}
+
+form button.edit:active {
+	background: #828282;
+	border-color: #555555;
+}

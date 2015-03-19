@@ -30,6 +30,8 @@ class Scenario < ActiveRecord::Base
   has_many :locations, through: :universe
 
   validates_presence_of :name, :description, :solution, :universe, :user
+  accepts_nested_attributes_for :contacts
+  accepts_nested_attributes_for :suspects, allow_destroy: true, reject_if: :all_blank
 
   scope :published, -> {where(published: true)}
 end

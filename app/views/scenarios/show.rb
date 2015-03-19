@@ -4,14 +4,12 @@ class Views::Scenarios::Show < Views::Layouts::Page
   needs :owner
 
   def main
-    h1 "Scenario"
+    h1 scenario.name
+    h2 "by #{scenario.user.login}"
 
     div "Universe: #{scenario.universe.name}"
-    div "Name: #{scenario.name}"
     div "Par: #{scenario.par}"
-    div "Description:"
     div simple_format scenario.description, class: 'mainText'
-
 
     form_for play do |f|
       f.hidden_field :scenario_id, value: scenario.id
@@ -19,17 +17,7 @@ class Views::Scenarios::Show < Views::Layouts::Page
     end
 
     if owner
-      p 'Contacts' do
-        scenario.contacts.each do |contact|
-          div do
-            name = ""
-            name += contact.location.name + ", " + contact.location.group if contact.location
-            text name
-          end
-        end
-      end
-
-      link_to "Edit Scenario", edit_scenario_path(scenario)
+      link_to "Edit Scenario", edit_scenario_path(scenario), class: 'mainLink'
     end
   end
 end

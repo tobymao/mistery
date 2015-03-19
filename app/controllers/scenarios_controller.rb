@@ -29,6 +29,7 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/1/edit
   def edit
+    @selected_location = @scenario.locations.find {|location| location.id.to_s == params[:location]}
   end
 
   # POST /scenarios
@@ -53,11 +54,11 @@ class ScenariosController < ApplicationController
   def update
     respond_to do |format|
       if @scenario.update(scenario_params)
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully updated.' }
-        format.json { render :show, status: :ok, location: @scenario }
+        format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
+        format.json {render :show, status: :ok, location: @scenario}
       else
-        format.html { render :edit }
-        format.json { render json: @scenario.errors, status: :unprocessable_entity }
+        format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
+        format.json {render json: @scenario.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -83,6 +84,15 @@ class ScenariosController < ApplicationController
     end
 
     def scenario_params
-      params.require(:scenario).permit(:name, :description, :solution, :par, :universe_id, :published)
+      params.require(:scenario).permit(
+        :name,
+        :description,
+        :solution,
+        :par,
+        :universe_id,
+        :published,
+        contacts_attributes: [:id, :text, :location_id],
+        suspects_attributes: [:id, :name, :_destroy],
+      )
     end
 end

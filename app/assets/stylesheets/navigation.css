@@ -63,6 +63,7 @@ button.sideLink{
   height: 3em;
   line-height: 3em;
   font-family: 'pt_sansregular', sans-serif;
+  min-width: 60em;
 }
 
 .navBar form {
