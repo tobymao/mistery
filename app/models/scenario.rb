@@ -6,12 +6,13 @@
 #  name        :string           not null
 #  description :text             not null
 #  solution    :text             not null
-#  par         :integer          default("0"), not null
-#  published   :boolean          default("false"), not null
+#  par         :integer          default(0), not null
+#  published   :boolean          default(FALSE), not null
 #  universe_id :integer          not null
 #  user_id     :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  plays_count :integer          default(0), not null
 #
 # Indexes
 #

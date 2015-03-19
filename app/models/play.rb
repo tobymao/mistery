@@ -3,7 +3,7 @@
 # Table name: plays
 #
 #  id          :integer          not null, primary key
-#  active      :boolean          default("false"), not null
+#  active      :boolean          default(FALSE), not null
 #  points      :integer
 #  user_id     :integer          not null
 #  scenario_id :integer          not null

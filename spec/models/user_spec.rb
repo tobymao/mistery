@@ -6,8 +6,8 @@
 #  login      :string
 #  email      :string
 #  password   :string
-#  guest      :boolean          default("false"), not null
-#  admin      :boolean          default("false"), not null
+#  guest      :boolean          default(FALSE), not null
+#  admin      :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

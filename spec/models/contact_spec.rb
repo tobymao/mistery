@@ -3,10 +3,9 @@
 # Table name: contacts
 #
 #  id          :integer          not null, primary key
-#  name        :string
 #  text        :text
 #  scenario_id :integer          not null
-#  location_id :integer
+#  location_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
