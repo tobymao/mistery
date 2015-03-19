@@ -4,7 +4,7 @@ set :deploy_to, "/home/deployer/apps/mistery"
 set :tmp_dir, "/home/deployer/tmp"
 set :ssh_options, {
   forward_agent: true,
-  keys: ['/Users/toby/.ssh/awskey.pem']
+  keys: ['/home/toby/.ssh/awskey.pem']
 }
 
 # Clean up all older releases
