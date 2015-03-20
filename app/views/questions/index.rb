@@ -32,7 +32,7 @@ class Views::Questions::Index < Views::Layouts::Page
                     end
                   elsif question.location?
                     ff.fields_for :answers, answer do |fff|
-                      fff.collection_select :location_id, scenario.locations, :id, :name
+                      fff.collection_select :location_id, scenario.locations.visible, :id, :name
                     end
                   end
                 end
