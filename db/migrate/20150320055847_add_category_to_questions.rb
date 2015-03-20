@@ -6,9 +6,9 @@ class AddCategoryToQuestions < ActiveRecord::Migration
 
     Question.all.each do |question|
       if !!question.answers.first.try(:text)
-        question.type = Question::CATEGORY_MULTIPLE_CHOICE
+        question.category = Question::CATEGORY_MULTIPLE_CHOICE
       elsif !!question.answers.first.try(:location)
-        question.type = Question::CATEGORY_LOCATION
+        question.category = Question::CATEGORY_LOCATION
       end
 
       question.save
