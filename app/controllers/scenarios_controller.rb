@@ -40,7 +40,7 @@ class ScenariosController < ApplicationController
 
     respond_to do |format|
       if @scenario.save
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully created.' }
+        format.html { redirect_to edit_scenario_path(@scenario), notice: 'Scenario was successfully created.' }
         format.json { render :show, status: :created, location: @scenario }
       else
         format.html { render :new }
@@ -52,12 +52,22 @@ class ScenariosController < ApplicationController
   # PATCH/PUT /scenarios/1
   # PATCH/PUT /scenarios/1.json
   def update
+    questions = scenario_params[:questions_attributes]
+
     respond_to do |format|
       if @scenario.update(scenario_params)
-        format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
-        format.json {render :show, status: :ok, location: @scenario}
+        if questions
+          puts "GOT QUESTIONS"
+          format.html {redirect_to scenario_questions_path(@scenario)}
+          format.json {render :show, status: :ok}
+        else
+          puts "NO QUESTIONS"
+          format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
+          format.json {render :show, status: :ok, location: @scenario}
+        end
       else
-        format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
+        puts "ERROR #{@scenario.errors.full_messages}"
+        format.html {redirect_to :back, flash: {error: "Error saving your scenario. #{@scenario.errors.full_messages}"}}
         format.json {render json: @scenario.errors, status: :unprocessable_entity}
       end
     end
@@ -93,6 +103,9 @@ class ScenariosController < ApplicationController
         :published,
         contacts_attributes: [:id, :text, :location_id],
         suspects_attributes: [:id, :name, :_destroy],
+        questions_attributes: [:id, :category, :text, :points, :_destroy, answers_attributes:[
+          :id, :location_id, :suspect_id, :text, :correct, :_destroy
+        ]],
       )
     end
 end

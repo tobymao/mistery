@@ -15,7 +15,9 @@ class Views::Scenarios::Edit < Views::Layouts::Page
           f.text_field :name
 
           f.label :published, 'Published'
-          f.check_box :published
+          f.check_box :published, class: 'inlineBlock'
+
+          f.submit
 
           f.label :description, 'Description'
           f.text_area :description
@@ -24,7 +26,10 @@ class Views::Scenarios::Edit < Views::Layouts::Page
           f.text_area :solution
 
           f.label :par, 'Par'
-          f.number_field :par
+          f.number_field :par, class: 'inlineBlock'
+
+          link_to 'Go To Questions', scenario_questions_path(scenario)
+          br
 
           div class: 'formBlock' do
             h1 'Suspects'
@@ -87,22 +92,7 @@ class Views::Scenarios::Edit < Views::Layouts::Page
             end
           end
         end
-
       end
-
-      f.submit
-    end
-
-
-    p 'Questions' do
-      scenario.questions.each do |question|
-        div do
-          link_to(question.text, [scenario, question])
-        end
-      end
-
-      br
-      link_to('Add Question', new_scenario_question_path(scenario))
     end
   end
 

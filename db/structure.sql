@@ -242,7 +242,8 @@ CREATE TABLE questions (
     points integer NOT NULL,
     scenario_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    category integer DEFAULT 1 NOT NULL
 );
 
 
@@ -815,4 +816,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150316060538');
 INSERT INTO schema_migrations (version) VALUES ('20150318052056');
 
 INSERT INTO schema_migrations (version) VALUES ('20150318053400');
+
+INSERT INTO schema_migrations (version) VALUES ('20150320055847');
 

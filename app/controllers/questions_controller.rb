@@ -46,11 +46,11 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to [@scenario, @question], notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        format.html {redirect_to [@scenario, @question], notice: 'Question was successfully updated.'}
+        format.json {render :show, status: :ok, location: @question}
       else
         format.html {redirect_to [@scenario, @question]}
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.json {render json: @question.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -79,6 +79,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:text, :points, answers_attributes:[:id, :location_id, :contact_id, :text, :correct])
+      params.require(:question).permit(:text, :points, answers_attributes:[:id, :location_id, :suspect_id, :text, :correct])
     end
 end
