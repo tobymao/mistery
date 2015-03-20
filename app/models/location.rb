@@ -19,7 +19,7 @@ class Location < ActiveRecord::Base
   belongs_to :universe, inverse_of: :locations
   validates_presence_of :name, :universe
 
-  default_scope{order(:group, :name)}
+  scope :sorted_by_group_and_name, -> {order(:group, :name)}
   scope :sorted_by_name, -> {order(:name)}
   scope :visible, -> {where(hidden: false)}
 end

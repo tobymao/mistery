@@ -7,7 +7,7 @@ class Views::Plays::SideBar < Views::Base
 
     ids = play.scenario.contacts.map{|c| c.location_id}.compact
 
-    play.scenario.locations.each do |location|
+    play.scenario.locations.sorted_by_group_and_name.each do |location|
       groups[location.group] << location if !location.hidden || ids.include?(location.id)
     end
 
