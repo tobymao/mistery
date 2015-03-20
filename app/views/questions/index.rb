@@ -32,7 +32,7 @@ class Views::Questions::Index < Views::Layouts::Page
                     end
                   elsif question.location?
                     ff.fields_for :answers, answer do |fff|
-                      fff.collection_select :location_id, scenario.locations.visible, :id, :name
+                      fff.collection_select :location_id, scenario.locations.sorted_by_name.visible, :id, :name
                     end
                   end
                 end
@@ -81,6 +81,6 @@ class Views::Questions::Index < Views::Layouts::Page
       end
     end
 
-    h2 "WARNING: If you change the question type. All questions will be deleted."
+    h2 "WARNING: If you change the question type. All answers will be deleted."
   end
 end
