@@ -26,9 +26,9 @@ class Views::Guesses::New < Views::Layouts::Page
         end
       end
 
-      if question.contact?
-        f.label "Choose a contact"
-        f.collection_select :contact_id, play.scenario.contacts.named, :id, :name
+      if question.suspect?
+        f.label "Choose a suspect"
+        f.collection_select :suspect_id, play.scenario.suspects, :id, :name
       end
 
       if question.location?

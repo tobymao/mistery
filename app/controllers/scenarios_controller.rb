@@ -15,6 +15,10 @@ class ScenariosController < ApplicationController
   # GET /scenarios/1
   # GET /scenarios/1.json
   def show
+    if !@scenario.published && !@owner
+      render_bad_credentials
+    end
+
     @play = Play.new(scenario: @scenario)
   end
 
@@ -55,7 +59,7 @@ class ScenariosController < ApplicationController
     respond_to do |format|
       if @scenario.update(scenario_params)
         if params[:scenario][:questions_attributes]
-          format.html {redirect_to scenario_questions_path(@scenario)}
+          format.html {redirect_to scenario_questions_path(@scenario, new_answer: params[:new_answer])}
           format.json {render :show, status: :ok}
         else
           format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
@@ -95,17 +99,19 @@ class ScenariosController < ApplicationController
         questions.each do |q_index, question|
           category = question[:category].to_i
 
-          question[:answers_attributes].each do |a_index, answer|
-            answer.each do |k, v|
-              if v.blank?
-                question[:answers_attributes].delete(a_index)
-                next
+          if answers = question[:answers_attributes]
+            answers.each do |a_index, answer|
+              answer.each do |k, v|
+                if v.blank?
+                  answers.delete(a_index)
+                  next
+                end
               end
-            end
 
-            if (category == Question::CATEGORY_SUSPECT && answer[:location_id].present?) ||
-                (category == Question::CATEGORY_LOCATION && answer[:suspect_id].present?)
-              question[:answers_attributes].delete(a_index)
+              if (category == Question::CATEGORY_SUSPECT && answer[:location_id].present?) ||
+                  (category == Question::CATEGORY_LOCATION && answer[:suspect_id].present?)
+                answers.delete(a_index)
+              end
             end
           end
         end

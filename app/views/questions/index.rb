@@ -1,6 +1,7 @@
 class Views::Questions::Index < Views::Layouts::Page
   needs :scenario
   needs :questions
+  needs :new_answer
 
   def main
     form_for scenario do |f|
@@ -25,16 +26,7 @@ class Views::Questions::Index < Views::Layouts::Page
 
                 td do
                   answer = question.answer || Answer.new
-
-                  if question.suspect?
-                    ff.fields_for :answers, answer do |fff|
-                      fff.collection_select :suspect_id, scenario.suspects, :id, :name, include_blank: true
-                    end
-                  elsif question.location?
-                    ff.fields_for :answers, answer do |fff|
-                      fff.collection_select :location_id, scenario.locations.sorted_by_name.visible, :id, :name, include_blank: true
-                    end
-                  end
+                  answer_field(ff, question, answer, true)
                 end
 
                 td {ff.number_field :points}
@@ -43,7 +35,19 @@ class Views::Questions::Index < Views::Layouts::Page
                   button_tag name: "scenario[questions_attributes][#{index}][_destroy]", value: true, class: 'edit' do
                     'Delete'
                   end
+
+                  button_tag name: 'new_answer', value: question.id, class: 'edit' do
+                    'Add Another Answer'
+                  end
                 end
+              end
+
+              question.answers.offset(1).each do |answer|
+                additional_answer_row {answer_field(ff, question, answer, false)}
+              end
+
+              if new_answer == question.id
+                additional_answer_row {answer_field(ff, question, Answer.new, false)}
               end
             end
           end
@@ -58,19 +62,17 @@ class Views::Questions::Index < Views::Layouts::Page
     form_for scenario do |f|
       table do
         tbody do
-          f.fields_for :questions, Question.new do |ff|
+          question = Question.new
+          f.fields_for :questions, question do |ff|
             tr do
               td do
-                ff.text_field :text
+                ff.text_field :text, placeholder: 'Question Text'
               end
               td do
                 ff.collection_select :category, Question.categories, :id, :name, {}, onchange: ''
               end
               td do
-                ff.text_field :answer
-              end
-              td do
-                ff.number_field :points
+                ff.number_field :points, placeholder: 'Points'
               end
               td do
                 f.submit 'Add Question'
@@ -81,6 +83,40 @@ class Views::Questions::Index < Views::Layouts::Page
       end
     end
 
-    h2 "WARNING: If you change the question type. All answers will be deleted."
+    h2 "After you choose the type of question and add it, you can add answers."
+    h2 "For location and suspect questions, all answers are needed for a correct answer."
+    h2 "For multiple choice, only the first answer will be correct. All others will be shown as options."
+    h2 "WARNING: If you change the question type. All answers for that questions will be deleted"
+    link_to 'Back To Scenario', edit_scenario_path(scenario), class: 'mainLink'
+  end
+
+  def additional_answer_row
+    tr do
+      td
+      td
+      td do
+        yield
+      end
+      td
+    end
+  end
+
+  def answer_field(form, question, answer, first)
+    if question.suspect?
+      form.fields_for :answers, answer do |ff|
+        ff.hidden_field :correct, value: true
+        ff.collection_select :suspect_id, scenario.suspects, :id, :name, include_blank: true
+      end
+    elsif question.location?
+      form.fields_for :answers, answer do |ff|
+        ff.hidden_field :correct, value: true
+        ff.collection_select :location_id, scenario.locations.sorted_by_name.visible, :id, :name, include_blank: true
+      end
+    else
+      form.fields_for :answers, answer do |ff|
+        ff.hidden_field :correct, value: first
+        ff.text_field :text
+      end
+    end
   end
 end

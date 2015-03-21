@@ -34,7 +34,7 @@ class Views::Scenarios::Edit < Views::Layouts::Page
           div class: 'formBlock' do
             h1 'Suspects'
 
-            scenario.suspects.each.with_index do |suspect, index|
+            scenario.suspects.order(:id).each.with_index do |suspect, index|
               f.fields_for :suspects, suspect do |ff|
                 ff.text_field :name, class: 'inlineBlock'
                 button_tag name: "scenario[suspects_attributes][#{index}][_destroy]", value: true, class: 'edit' do
