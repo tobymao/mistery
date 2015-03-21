@@ -37,6 +37,7 @@ describe Guess do
   it 'should create with answer' do
     guess = Guess.new
     guess.play = play
+    question.category = Question::CATEGORY_MULTIPLE_CHOICE
     guess.question = question
     guess.answer = answer
     expect(guess.save).to be_truthy

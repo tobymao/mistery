@@ -50,34 +50,36 @@ describe Question do
 
   describe '.multiple_choice?' do
     it 'should be true' do
-      question.answers << multi_answer
+      question.category = Question::CATEGORY_MULTIPLE_CHOICE
       expect(question.multiple_choice?).to be_truthy
     end
 
     it 'should be false' do
+      question.category = Question::CATEGORY_SUSPECT
       expect(question.multiple_choice?).to be_falsey
     end
   end
 
   describe '.suspect?' do
     it 'should be true' do
-      question.answers << suspect_answer
+      question.category = Question::CATEGORY_SUSPECT
       expect(question.suspect?).to be_truthy
     end
 
     it 'should be false' do
+      question.category = Question::CATEGORY_LOCATION
       expect(question.suspect?).to be_falsey
     end
 
     it 'should be false with location' do
-      question.answers << location_answer
+      question.category = Question::CATEGORY_LOCATION
       expect(question.suspect?).to be_falsey
     end
   end
 
   describe '.location?' do
     it 'should be true' do
-      question.answers << location_answer
+      question.category = Question::CATEGORY_LOCATION
       expect(question.location?).to be_truthy
     end
 
@@ -86,7 +88,7 @@ describe Question do
     end
 
     it 'should be false with multi' do
-      question.answers << multi_answer
+      question.category = Question::CATEGORY_MULTIPLE_CHOICE
       expect(question.location?).to be_falsey
     end
   end

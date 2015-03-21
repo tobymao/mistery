@@ -1,9 +1,10 @@
 class Views::Questions::Index < Views::Layouts::Page
   needs :scenario
-  needs :questions
   needs :new_answer
 
   def main
+    questions = scenario.questions.order(:id)
+
     form_for scenario do |f|
       table do
         tbody do

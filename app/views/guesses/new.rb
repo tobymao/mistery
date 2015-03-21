@@ -18,7 +18,7 @@ class Views::Guesses::New < Views::Layouts::Page
       f.hidden_field :question_id, value: question.id
 
       if question.multiple_choice?
-        question.answers.each do |answer|
+        question.answers.order('random()').each do |answer|
           div class: 'mainText'do
             f.radio_button :answer_id, answer.id
             f.label :answer_id, answer.text
