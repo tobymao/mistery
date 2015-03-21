@@ -25,12 +25,12 @@ class Views::Questions::Edit < Views::Layouts::Page
   end
 
   def answer_fields(form, answer)
-    contacts = scenario.contacts.named
+    suspects = scenario.suspects
 
     form.label :text, 'Multiple Choice Answer'
     form.text_field :text
     form.label :contact_id, 'Contact Answer'
-    form.collection_select :contact_id, contacts, :id, :name, include_blank: true
+    form.collection_select :suspect_id, suspects, :id, :name, include_blank: true
     form.label :location_id, 'Location Answer'
     form.collection_select :location_id, scenario.universe.locations.visible, :id, :name, include_blank: true
     form.label :correct, 'Correct'

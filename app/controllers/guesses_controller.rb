@@ -57,6 +57,6 @@ class GuessesController < ApplicationController
   end
 
   def guess_params
-    params.require(:guess).permit(:question_id, :answer_id, :contact_id, :location_id)
+    params.require(:guess).permit(:question_id, :answer_id, :suspect_id, :location_id)
   end
 end

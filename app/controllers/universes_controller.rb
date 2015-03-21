@@ -135,6 +135,11 @@ class UniversesController < ApplicationController
       }
     end
 
-    p.require(:universe).permit(:name, :description, :published, locations_attributes: [:id, :name, :group, :hidden])
+    p.require(:universe).permit(
+      :name,
+      :description,
+      :published,
+      locations_attributes: [:id, :name, :group, :hidden]
+    )
   end
 end

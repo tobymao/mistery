@@ -1,23 +1,21 @@
 # == Schema Information
 #
-# Table name: contacts
+# Table name: suspects
 #
 #  id          :integer          not null, primary key
-#  text        :text
+#  name        :string           not null
 #  scenario_id :integer          not null
-#  location_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 # Indexes
 #
-#  index_contacts_on_scenario_id_and_location_id  (scenario_id,location_id) UNIQUE
+#  index_suspects_on_scenario_id_and_name  (scenario_id) UNIQUE
 #
 
 FactoryGirl.define do
-  factory :contact do
-    text "contact text"
+  factory :suspect do
+    name "suspect"
     association :scenario
-    association :location
   end
 end

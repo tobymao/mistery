@@ -15,6 +15,10 @@ class ScenariosController < ApplicationController
   # GET /scenarios/1
   # GET /scenarios/1.json
   def show
+    if !@scenario.published && !@owner
+      render_bad_credentials
+    end
+
     @play = Play.new(scenario: @scenario)
   end
 
@@ -29,6 +33,7 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/1/edit
   def edit
+    @selected_location = @scenario.locations.find {|location| location.id.to_s == params[:location]}
   end
 
   # POST /scenarios
@@ -39,7 +44,7 @@ class ScenariosController < ApplicationController
 
     respond_to do |format|
       if @scenario.save
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully created.' }
+        format.html { redirect_to edit_scenario_path(@scenario), notice: 'Scenario was successfully created.' }
         format.json { render :show, status: :created, location: @scenario }
       else
         format.html { render :new }
@@ -53,11 +58,16 @@ class ScenariosController < ApplicationController
   def update
     respond_to do |format|
       if @scenario.update(scenario_params)
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully updated.' }
-        format.json { render :show, status: :ok, location: @scenario }
+        if params[:scenario][:questions_attributes]
+          format.html {redirect_to scenario_questions_path(@scenario, new_answer: params[:new_answer])}
+          format.json {render :show, status: :ok}
+        else
+          format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
+          format.json {render :show, status: :ok, location: @scenario}
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @scenario.errors, status: :unprocessable_entity }
+        format.html {redirect_to :back, flash: {error: "Error saving your scenario. #{@scenario.errors.full_messages}"}}
+        format.json {render json: @scenario.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -83,6 +93,42 @@ class ScenariosController < ApplicationController
     end
 
     def scenario_params
-      params.require(:scenario).permit(:name, :description, :solution, :par, :universe_id, :published)
+      # Because changing the question type submits the form. Bad attributes can be sent.
+      # This sanitizes them. Ideally, the client would handle this, but I don't have a good way now.
+      if questions = params[:scenario][:questions_attributes]
+        questions.each do |q_index, question|
+          category = question[:category].to_i
+
+          if answers = question[:answers_attributes]
+            answers.each do |a_index, answer|
+              answer.each do |k, v|
+                if v.blank?
+                  answers.delete(a_index)
+                  next
+                end
+              end
+
+              if (category == Question::CATEGORY_SUSPECT && answer[:location_id].present?) ||
+                  (category == Question::CATEGORY_LOCATION && answer[:suspect_id].present?)
+                answers.delete(a_index)
+              end
+            end
+          end
+        end
+      end
+
+      params.require(:scenario).permit(
+        :name,
+        :description,
+        :solution,
+        :par,
+        :universe_id,
+        :published,
+        contacts_attributes: [:id, :text, :location_id],
+        suspects_attributes: [:id, :name, :_destroy],
+        questions_attributes: [:id, :category, :text, :points, :_destroy, answers_attributes:[
+          :id, :location_id, :suspect_id, :text, :correct, :_destroy
+        ]],
+      )
     end
 end

@@ -7,7 +7,7 @@
 #  question_id :integer          not null
 #  answer_id   :integer
 #  location_id :integer
-#  contact_id  :integer
+#  suspect_id  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -21,7 +21,7 @@ require 'rails_helper'
 
 describe Guess do
   let(:location) {create(:location)}
-  let(:contact) {create(:contact)}
+  let(:suspect) {create(:suspect)}
   let(:question) {create(:question)}
   let(:play) {create(:play)}
   let(:answer) {create(:answer, question: question, text: 'answer')}
@@ -37,16 +37,17 @@ describe Guess do
   it 'should create with answer' do
     guess = Guess.new
     guess.play = play
+    question.category = Question::CATEGORY_MULTIPLE_CHOICE
     guess.question = question
     guess.answer = answer
     expect(guess.save).to be_truthy
   end
 
-  it 'should create with contact' do
+  it 'should create with suspect' do
     guess = Guess.new
     guess.play = play
     guess.question = question
-    guess.contact = contact
+    guess.suspect = suspect
     expect(guess.save).to be_truthy
   end
 

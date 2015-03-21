@@ -5,7 +5,7 @@ class Views::Guesses::Index < Views::Layouts::Page
   def main
     h1 "Guess a question!"
 
-    guesses = Guess.where(play: play).includes(:question, :contact, :location, :answer)
+    guesses = Guess.where(play: play).includes(:question, :suspect, :location, :answer)
     answered_questions = guesses.map(&:question)
     unanswered_questions = play.scenario.questions - answered_questions
 
@@ -20,9 +20,9 @@ class Views::Guesses::Index < Views::Layouts::Page
     guesses.each do |guess|
       div class: 'mainText' do
         label guess.question.text
-        label guess.contact.name if guess.contact
-        label guess.location.name if guess.location
-        label guess.answer.text if guess.answer
+        label guess.suspect.name if guess.suspect_id
+        label guess.location.name if guess.location_id
+        label guess.answer.text if guess.answer_id
       end
     end
 

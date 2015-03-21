@@ -4,7 +4,8 @@ describe ContactsController do
   let(:user) {create(:user)}
   let(:authenticate) {allow(controller).to receive(:current_user).and_return(user)}
   let(:scenario) {create(:scenario, user: user)}
-  let(:contact) {create(:contact, scenario: scenario)}
+  let(:location) {create(:location)}
+  let(:contact) {create(:contact, scenario: scenario, location: location)}
 
   let(:auth_other) do
     allow(controller).to receive(:current_user).and_return(
@@ -13,8 +14,8 @@ describe ContactsController do
   end
 
   let(:valid_attributes) {{
-    name: "changed name",
     text: "changed text",
+    location_id: location.id,
   }}
 
   let(:invalid_attributes) {{
@@ -126,7 +127,6 @@ describe ContactsController do
         it {expect(response).to redirect_to([scenario, Contact.first])}
 
         subject(:my_contact) {Contact.first}
-        it {expect(my_contact.name).to eq("changed name")}
         it {expect(my_contact.text).to eq("changed text")}
         it {expect(my_contact.scenario).to eq(scenario)}
       end
@@ -166,7 +166,6 @@ describe ContactsController do
         it {expect(response).to redirect_to([scenario, Contact.first])}
 
         subject(:my_contact) {Contact.first}
-        it {expect(my_contact.name).to eq("changed name")}
         it {expect(my_contact.text).to eq("changed text")}
         it {expect(my_contact.scenario).to eq(scenario)}
       end

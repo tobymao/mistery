@@ -18,7 +18,7 @@ class Views::Guesses::New < Views::Layouts::Page
       f.hidden_field :question_id, value: question.id
 
       if question.multiple_choice?
-        question.answers.each do |answer|
+        question.answers.order('random()').each do |answer|
           div class: 'mainText'do
             f.radio_button :answer_id, answer.id
             f.label :answer_id, answer.text
@@ -26,9 +26,9 @@ class Views::Guesses::New < Views::Layouts::Page
         end
       end
 
-      if question.contact?
-        f.label "Choose a contact"
-        f.collection_select :contact_id, play.scenario.contacts.named, :id, :name
+      if question.suspect?
+        f.label "Choose a suspect"
+        f.collection_select :suspect_id, play.scenario.suspects, :id, :name
       end
 
       if question.location?

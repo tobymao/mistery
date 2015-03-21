@@ -70,10 +70,10 @@ CREATE TABLE answers (
     question_id integer NOT NULL,
     correct boolean DEFAULT true NOT NULL,
     location_id integer,
-    contact_id integer,
     text text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    suspect_id integer
 );
 
 
@@ -102,10 +102,9 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 CREATE TABLE contacts (
     id integer NOT NULL,
-    name character varying,
     text text,
     scenario_id integer NOT NULL,
-    location_id integer,
+    location_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -140,9 +139,9 @@ CREATE TABLE guesses (
     question_id integer NOT NULL,
     answer_id integer,
     location_id integer,
-    contact_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    suspect_id integer
 );
 
 
@@ -243,7 +242,8 @@ CREATE TABLE questions (
     points integer NOT NULL,
     scenario_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    category integer DEFAULT 1 NOT NULL
 );
 
 
@@ -344,6 +344,38 @@ CREATE SEQUENCE sessions_id_seq
 --
 
 ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
+
+
+--
+-- Name: suspects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE suspects (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    scenario_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: suspects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE suspects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: suspects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE suspects_id_seq OWNED BY suspects.id;
 
 
 --
@@ -482,6 +514,13 @@ ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY suspects ALTER COLUMN id SET DEFAULT nextval('suspects_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY universes ALTER COLUMN id SET DEFAULT nextval('universes_id_seq'::regclass);
 
 
@@ -565,6 +604,14 @@ ALTER TABLE ONLY sessions
 
 
 --
+-- Name: suspects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY suspects
+    ADD CONSTRAINT suspects_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: universes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -592,13 +639,6 @@ CREATE UNIQUE INDEX index_actions_on_play_id_and_location_id ON actions USING bt
 --
 
 CREATE INDEX index_answers_on_question_id ON answers USING btree (question_id);
-
-
---
--- Name: index_answers_on_question_id_and_contact_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_answers_on_question_id_and_contact_id ON answers USING btree (question_id, contact_id);
 
 
 --
@@ -700,6 +740,13 @@ CREATE INDEX index_sessions_on_user_id ON sessions USING btree (user_id);
 
 
 --
+-- Name: index_suspects_on_scenario_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_suspects_on_scenario_id_and_name ON suspects USING btree (scenario_id, lower((name)::text));
+
+
+--
 -- Name: index_universes_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -765,4 +812,10 @@ INSERT INTO schema_migrations (version) VALUES ('20150218062604');
 INSERT INTO schema_migrations (version) VALUES ('20150314032122');
 
 INSERT INTO schema_migrations (version) VALUES ('20150316060538');
+
+INSERT INTO schema_migrations (version) VALUES ('20150318052056');
+
+INSERT INTO schema_migrations (version) VALUES ('20150318053400');
+
+INSERT INTO schema_migrations (version) VALUES ('20150320055847');
 
