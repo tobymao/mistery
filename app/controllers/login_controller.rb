@@ -36,10 +36,23 @@ class LoginController < ApplicationController
 
   # POST /send_password
   def send_password
+    params = send_password_params
+    user = User.find_by_email(:email)
+
+    if !user
+      redirect_to :back, flash: {error: "Wrong email"}
+    else
+      redirect_to :back, flash: {error: "Password sent"}
+    end
   end
 
   private
   def login_params
     params.require(:login).permit(:login, :password)
   end
+
+  def send_password_params
+   params.require(:email)
+  end
+
 end

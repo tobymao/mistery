@@ -4,8 +4,6 @@ class Views::Login::ForgotPassword < Views::Layouts::Page
 
         form_tag send_password_path do
             fields_for 'send_password' do |f|
-            f.label 'Username'
-            f.text_field :login
 
             f.label 'Email'
             f.text_field :email
