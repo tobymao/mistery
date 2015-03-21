@@ -22,12 +22,20 @@ class LoginController < ApplicationController
     redirect_to root_path
   end
 
-  # POST /forgotuser
-  def forgotuser
+  # GET /forgot_username
+  def forgot_username
   end
 
-  # POST /forgotpass
-  def forgotpass
+  # GET /forgot_password
+  def forgot_password
+  end
+
+  # POST /send_username
+  def send_username
+  end
+
+  # POST /send_password
+  def send_password
   end
 
   private

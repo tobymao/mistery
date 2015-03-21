@@ -14,8 +14,6 @@ needs :current_user
       end
     end
 
-    #text_field asdf
-
     form_tag user_path(current_user), method: 'PUT' do
       fields_for 'current_user' do |f|
 
