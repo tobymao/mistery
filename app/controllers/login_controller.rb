@@ -22,6 +22,14 @@ class LoginController < ApplicationController
     redirect_to root_path
   end
 
+  # POST /forgotuser
+  def forgotuser
+  end
+
+  # POST /forgotpass
+  def forgotpass
+  end
+
   private
   def login_params
     params.require(:login).permit(:login, :password)
