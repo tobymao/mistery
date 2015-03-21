@@ -52,21 +52,16 @@ class ScenariosController < ApplicationController
   # PATCH/PUT /scenarios/1
   # PATCH/PUT /scenarios/1.json
   def update
-    questions = scenario_params[:questions_attributes]
-
     respond_to do |format|
       if @scenario.update(scenario_params)
-        if questions
-          puts "GOT QUESTIONS"
+        if params[:scenario][:questions_attributes]
           format.html {redirect_to scenario_questions_path(@scenario)}
           format.json {render :show, status: :ok}
         else
-          puts "NO QUESTIONS"
           format.html {redirect_to edit_scenario_path(@scenario, location: params[:location])}
           format.json {render :show, status: :ok, location: @scenario}
         end
       else
-        puts "ERROR #{@scenario.errors.full_messages}"
         format.html {redirect_to :back, flash: {error: "Error saving your scenario. #{@scenario.errors.full_messages}"}}
         format.json {render json: @scenario.errors, status: :unprocessable_entity}
       end
@@ -94,6 +89,28 @@ class ScenariosController < ApplicationController
     end
 
     def scenario_params
+      # Because changing the question type submits the form. Bad attributes can be sent.
+      # This sanitizes them. Ideally, the client would handle this, but I don't have a good way now.
+      if questions = params[:scenario][:questions_attributes]
+        questions.each do |q_index, question|
+          category = question[:category].to_i
+
+          question[:answers_attributes].each do |a_index, answer|
+            answer.each do |k, v|
+              if v.blank?
+                question[:answers_attributes].delete(a_index)
+                next
+              end
+            end
+
+            if (category == Question::CATEGORY_SUSPECT && answer[:location_id].present?) ||
+                (category == Question::CATEGORY_LOCATION && answer[:suspect_id].present?)
+              question[:answers_attributes].delete(a_index)
+            end
+          end
+        end
+      end
+
       params.require(:scenario).permit(
         :name,
         :description,

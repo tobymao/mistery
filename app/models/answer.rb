@@ -24,11 +24,21 @@ class Answer < ActiveRecord::Base
   belongs_to :suspect
 
   validates_presence_of :question_id
-  validates_presence_of :location, :if => lambda {|a| !a.suspect_id && text.nil?}
-  validates_presence_of :suspect, :if => lambda {|a| !a.location_id && a.text.nil?}
-  validates_presence_of :text, allow_blank: false, :if => lambda {|a| !a.location_id && !a.suspect_id}
+  validate :check_category
 
   def text=(new_text)
     super(new_text) if new_text.present? && new_text.strip.present?
+  end
+
+  private
+  def check_category
+    case question.category
+    when Question::CATEGORY_SUSPECT
+      raise if !suspect_id || location_id || text
+    when Question::CATEGORY_LOCATION
+      raise if !location_id || suspect_id || text
+    when Question::CATEGORY_MULTIPLE_CHOICE
+      raise if text.nil? || suspect_id || location_id
+    end
   end
 end

@@ -28,11 +28,11 @@ class Views::Questions::Index < Views::Layouts::Page
 
                   if question.suspect?
                     ff.fields_for :answers, answer do |fff|
-                      fff.collection_select :suspect_id, scenario.suspects, :id, :name
+                      fff.collection_select :suspect_id, scenario.suspects, :id, :name, include_blank: true
                     end
                   elsif question.location?
                     ff.fields_for :answers, answer do |fff|
-                      fff.collection_select :location_id, scenario.locations.sorted_by_name.visible, :id, :name
+                      fff.collection_select :location_id, scenario.locations.sorted_by_name.visible, :id, :name, include_blank: true
                     end
                   end
                 end
