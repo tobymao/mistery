@@ -36,6 +36,7 @@ class CreateSuspects < ActiveRecord::Migration
     add_column :answers, :suspect_id, :integer
 
     Answer.where.not(contact_id: nil).each do |answer|
+      next if answer.text.present?
       answer.suspect = contact_suspect[answer.contact_id]
       answer.save
     end
