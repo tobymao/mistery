@@ -5,7 +5,7 @@ class Views::Guesses::Index < Views::Layouts::Page
   def main
     h1 "Guess a question!"
 
-    guesses = Guess.where(play: play).includes(:question, :contact, :location, :answer)
+    guesses = Guess.where(play: play).includes(:question, :suspect, :location, :answer)
     answered_questions = guesses.map(&:question)
     unanswered_questions = play.scenario.questions - answered_questions
 

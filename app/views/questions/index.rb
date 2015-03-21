@@ -83,10 +83,11 @@ class Views::Questions::Index < Views::Layouts::Page
       end
     end
 
-    h2 "After you choose the type of question and add it, you can add answers."
-    h2 "For location and suspect questions, all answers are needed for a correct answer."
-    h2 "For multiple choice, only the first answer will be correct. All others will be shown as options."
-    h2 "WARNING: If you change the question type. All answers for that questions will be deleted"
+    h2 'After you choose the type of question and add it, you can add answers.'
+    h2 'For location and suspect questions, all options will be presented to the user.'
+    h2 'If there is more than one answer, then the user needs to guess all of them in order to score points.'
+    h2 'For multiple choice, only the first answer will be correct. All others will be shown as options.'
+    h2 'WARNING: If you change the question type. All answers for that questions will be deleted'
     link_to 'Back To Scenario', edit_scenario_path(scenario), class: 'mainLink'
   end
 

@@ -99,7 +99,7 @@ class PlaysController < ApplicationController
 
   private
   def guesses
-    Guess.includes({question: :answers}, :answer, :location, :contact).where(play: @play)
+    Guess.includes({question: :answers}, :answer, :location, :suspect).where(play: @play)
   end
 
   def set_play
