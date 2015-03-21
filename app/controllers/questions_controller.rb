@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
     end
 
     def set_scenario
-      @scenario = Scenario.find(params[:scenario_id])
+      @scenario = Scenario.includes(questions: :answers).find(params[:scenario_id])
     end
 
     def require_permission

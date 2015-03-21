@@ -3,7 +3,7 @@ class Views::Questions::Index < Views::Layouts::Page
   needs :new_answer
 
   def main
-    questions = scenario.questions.order(:id)
+    questions = scenario.questions.sort_by(&:id)
 
     form_for scenario do |f|
       table do
@@ -43,7 +43,7 @@ class Views::Questions::Index < Views::Layouts::Page
                 end
               end
 
-              question.answers.offset(1).each do |answer|
+              question.answers.drop(1).each do |answer|
                 additional_answer_row {answer_field(ff, question, answer, false)}
               end
 
@@ -87,7 +87,6 @@ class Views::Questions::Index < Views::Layouts::Page
     h2 'After you choose the type of question and add it, you can add answers.'
     h2 'Multiple location and suspect questions are not currently supported.'
     h2 'For location and suspect questions, all options will be presented to the user.'
-    h2 'If there is more than one answer, then the user needs to guess all of them in order to score points.'
     h2 'For multiple choice, only the first answer will be correct. All others will be shown as options.'
     h2 'WARNING: If you change the question type. All answers for that questions will be deleted'
     link_to 'Back To Scenario', edit_scenario_path(scenario), class: 'mainLink'
