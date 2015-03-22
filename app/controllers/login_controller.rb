@@ -37,7 +37,7 @@ class LoginController < ApplicationController
   # POST /send_password
   def send_password
     params = send_password_params
-    user = User.find_by_email(:email)
+    user = User.find_by_email(params[:email])
 
     if !user
       redirect_to :back, flash: {error: "Wrong email"}
