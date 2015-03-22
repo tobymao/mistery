@@ -29,6 +29,10 @@ Rails.application.routes.draw do
   resources :scenarios do
     resources :contacts
     resources :questions
+
+    member do
+      get 'purchase' => 'scenarios#purchase'
+    end
   end
 
   # Login Controller

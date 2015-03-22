@@ -24,6 +24,8 @@ module Mistery
     config.active_record.raise_in_transactional_callbacks = true
     config.active_record.schema_format = :sql
 
+    config.autoload_paths += %W(#{config.root}/lib)
+
     # Mail Stuff
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true

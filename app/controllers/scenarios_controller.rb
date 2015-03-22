@@ -1,6 +1,6 @@
 class ScenariosController < ApplicationController
-  before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_scenario, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, only: [:new, :create, :edit, :update, :destroy, :purchase]
+  before_action :set_scenario, only: [:show, :edit, :update, :destroy, :purchase]
   before_action :require_permission, only: [:edit, :update, :destroy]
 
   # GET /scenarios
@@ -70,6 +70,11 @@ class ScenariosController < ApplicationController
         format.json {render json: @scenario.errors, status: :unprocessable_entity}
       end
     end
+  end
+
+  # GET /scenario/1/purchase
+  def purchase
+    @payment_url = Payments::Paypal.new.pay
   end
 
   # DELETE /scenarios/1

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'unicorn', "~> 4.8.3"
 gem 'rails', "~> 4.2.0"
+gem 'paypal-sdk-adaptivepayments'
 gem 'pg'
 gem 'sass-rails'
 gem 'uglifier'

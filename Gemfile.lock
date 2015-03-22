@@ -88,6 +88,11 @@ GEM
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    paypal-sdk-adaptivepayments (1.117.0)
+      paypal-sdk-core (~> 0.3.0)
+    paypal-sdk-core (0.3.1)
+      multi_json (~> 1.0)
+      xml-simple
     pg (0.18.1)
     query_trail (1.0)
       rails (~> 4.0)
@@ -184,6 +189,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -197,6 +203,7 @@ DEPENDENCIES
   capistrano-rvm
   factory_girl_rails
   fortitude
+  paypal-sdk-adaptivepayments
   pg
   query_trail
   rails (~> 4.2.0)
