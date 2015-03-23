@@ -3,13 +3,11 @@ class Views::Login::ForgotPassword < Views::Layouts::Page
         h1 "You forgot your password"
 
         form_tag send_password_path do
-            fields_for 'send_password' do |f|
 
-            f.label 'Email'
-            f.text_field :email
+            label_tag 'Email'
+            text_field_tag :email
 
-            f.submit 'Reset Password'
+            submit_tag 'Reset Password'
         end
-      end
   end
 end

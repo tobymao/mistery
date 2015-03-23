@@ -16,9 +16,9 @@ class Views::Login::Index < Views::Layouts::Page
 
     link_to("Create Account", new_user_path)
     br
-    link_to("Forgot Username?", forgot_password_path)
+    link_to("Forgot Username", forgot_username_path)
     br
-    link_to("Forgot Password?", forgot_password_path)
+    link_to("Forgot Password", forgot_password_path)
   end
 
 end

@@ -1,25 +1,15 @@
 class LoginHelp < ApplicationMailer
-  
-  def index
+
+  def username_email(user)
+    @user = user
+
+    mail to: "cscampbell@gmail.com", subject: "Your Username is Bob", body: "asdfw"
+    #mail to: user.email, subject: "Your Username is #{user.login}"
+    #user.username
   end
 
-  def username(user_email)
-
-    if users.email.include? user_email
-      
-      mail to: current_user.email, subject "Your Username is #{current_user.username}"
-    else
-      respond_to do |format|
-        format.html {redirect_to login_help, notice: "Username not found"}
-        format.json {render json: :new}
-      end
-    end
-
-
-    
-  end
-
-  def password
+  def password_email(user)
+    @user = user
     @greeting = "Hi"
 
     mail to: "cscampbell@gmail.com"
