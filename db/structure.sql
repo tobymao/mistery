@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: actions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: actions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE actions (
@@ -62,7 +62,7 @@ ALTER SEQUENCE actions_id_seq OWNED BY actions.id;
 
 
 --
--- Name: answers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: answers; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE answers (
@@ -97,7 +97,7 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
--- Name: contacts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: contacts; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE contacts (
@@ -130,7 +130,7 @@ ALTER SEQUENCE contacts_id_seq OWNED BY contacts.id;
 
 
 --
--- Name: guesses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: guesses; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE guesses (
@@ -165,7 +165,7 @@ ALTER SEQUENCE guesses_id_seq OWNED BY guesses.id;
 
 
 --
--- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE locations (
@@ -199,7 +199,7 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 
 --
--- Name: password_resets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: password_resets; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE password_resets (
@@ -232,7 +232,7 @@ ALTER SEQUENCE password_resets_id_seq OWNED BY password_resets.id;
 
 
 --
--- Name: payments_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE payments_notifications (
@@ -264,7 +264,7 @@ ALTER SEQUENCE payments_notifications_id_seq OWNED BY payments_notifications.id;
 
 
 --
--- Name: payments_order_items; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_order_items; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE payments_order_items (
@@ -297,7 +297,7 @@ ALTER SEQUENCE payments_order_items_id_seq OWNED BY payments_order_items.id;
 
 
 --
--- Name: payments_orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_orders; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE payments_orders (
@@ -332,7 +332,7 @@ ALTER SEQUENCE payments_orders_id_seq OWNED BY payments_orders.id;
 
 
 --
--- Name: payments_products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_products; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE payments_products (
@@ -365,7 +365,7 @@ ALTER SEQUENCE payments_products_id_seq OWNED BY payments_products.id;
 
 
 --
--- Name: payments_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE payments_profiles (
@@ -398,7 +398,7 @@ ALTER SEQUENCE payments_profiles_id_seq OWNED BY payments_profiles.id;
 
 
 --
--- Name: payments_purchases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_purchases; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE payments_purchases (
@@ -431,7 +431,7 @@ ALTER SEQUENCE payments_purchases_id_seq OWNED BY payments_purchases.id;
 
 
 --
--- Name: plays; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: plays; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE plays (
@@ -465,7 +465,7 @@ ALTER SEQUENCE plays_id_seq OWNED BY plays.id;
 
 
 --
--- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE questions (
@@ -499,7 +499,7 @@ ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
 
 
 --
--- Name: scenarios; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: scenarios; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE scenarios (
@@ -537,7 +537,7 @@ ALTER SEQUENCE scenarios_id_seq OWNED BY scenarios.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE schema_migrations (
@@ -546,7 +546,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: sessions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sessions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE sessions (
@@ -579,7 +579,7 @@ ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 
 --
--- Name: suspects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: suspects; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE suspects (
@@ -611,7 +611,7 @@ ALTER SEQUENCE suspects_id_seq OWNED BY suspects.id;
 
 
 --
--- Name: universes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: universes; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE universes (
@@ -645,7 +645,7 @@ ALTER SEQUENCE universes_id_seq OWNED BY universes.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE users (
@@ -813,7 +813,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY actions
@@ -821,7 +821,7 @@ ALTER TABLE ONLY actions
 
 
 --
--- Name: answers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: answers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY answers
@@ -829,7 +829,7 @@ ALTER TABLE ONLY answers
 
 
 --
--- Name: contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY contacts
@@ -837,7 +837,7 @@ ALTER TABLE ONLY contacts
 
 
 --
--- Name: guesses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: guesses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY guesses
@@ -845,7 +845,7 @@ ALTER TABLE ONLY guesses
 
 
 --
--- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY locations
@@ -853,7 +853,7 @@ ALTER TABLE ONLY locations
 
 
 --
--- Name: password_resets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: password_resets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY password_resets
@@ -861,7 +861,7 @@ ALTER TABLE ONLY password_resets
 
 
 --
--- Name: payments_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY payments_notifications
@@ -869,7 +869,7 @@ ALTER TABLE ONLY payments_notifications
 
 
 --
--- Name: payments_order_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_order_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY payments_order_items
@@ -877,7 +877,7 @@ ALTER TABLE ONLY payments_order_items
 
 
 --
--- Name: payments_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY payments_orders
@@ -885,7 +885,7 @@ ALTER TABLE ONLY payments_orders
 
 
 --
--- Name: payments_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY payments_products
@@ -893,7 +893,7 @@ ALTER TABLE ONLY payments_products
 
 
 --
--- Name: payments_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY payments_profiles
@@ -901,7 +901,7 @@ ALTER TABLE ONLY payments_profiles
 
 
 --
--- Name: payments_purchases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments_purchases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY payments_purchases
@@ -909,7 +909,7 @@ ALTER TABLE ONLY payments_purchases
 
 
 --
--- Name: plays_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: plays_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY plays
@@ -917,7 +917,7 @@ ALTER TABLE ONLY plays
 
 
 --
--- Name: questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY questions
@@ -925,7 +925,7 @@ ALTER TABLE ONLY questions
 
 
 --
--- Name: scenarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: scenarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY scenarios
@@ -933,7 +933,7 @@ ALTER TABLE ONLY scenarios
 
 
 --
--- Name: sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY sessions
@@ -941,7 +941,7 @@ ALTER TABLE ONLY sessions
 
 
 --
--- Name: suspects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: suspects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY suspects
@@ -949,7 +949,7 @@ ALTER TABLE ONLY suspects
 
 
 --
--- Name: universes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: universes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY universes
@@ -957,7 +957,7 @@ ALTER TABLE ONLY universes
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -965,224 +965,224 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_actions_on_play_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_actions_on_play_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_actions_on_play_id_and_location_id ON actions USING btree (play_id, location_id);
 
 
 --
--- Name: index_answers_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_answers_on_question_id ON answers USING btree (question_id);
 
 
 --
--- Name: index_answers_on_question_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_question_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_answers_on_question_id_and_location_id ON answers USING btree (question_id, location_id);
 
 
 --
--- Name: index_answers_on_question_id_and_text; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_question_id_and_text; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_answers_on_question_id_and_text ON answers USING btree (question_id, text);
 
 
 --
--- Name: index_contacts_on_scenario_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_contacts_on_scenario_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_contacts_on_scenario_id_and_location_id ON contacts USING btree (scenario_id, location_id);
 
 
 --
--- Name: index_guesses_on_play_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_guesses_on_play_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_guesses_on_play_id ON guesses USING btree (play_id);
 
 
 --
--- Name: index_guesses_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_guesses_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_guesses_on_question_id ON guesses USING btree (question_id);
 
 
 --
--- Name: index_locations_on_universe_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_locations_on_universe_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_locations_on_universe_id_and_name ON locations USING btree (universe_id, lower((name)::text));
 
 
 --
--- Name: index_password_resets_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_password_resets_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_password_resets_on_user_id ON password_resets USING btree (user_id);
 
 
 --
--- Name: index_payments_notifications_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_notifications_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_notifications_on_order_id ON payments_notifications USING btree (order_id);
 
 
 --
--- Name: index_payments_order_items_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_order_items_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_order_items_on_order_id ON payments_order_items USING btree (order_id);
 
 
 --
--- Name: index_payments_order_items_on_product_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_order_items_on_product_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_order_items_on_product_id ON payments_order_items USING btree (product_id);
 
 
 --
--- Name: index_payments_orders_on_transaction_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_orders_on_transaction_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_orders_on_transaction_id ON payments_orders USING btree (transaction_id);
 
 
 --
--- Name: index_payments_orders_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_orders_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_orders_on_user_id ON payments_orders USING btree (user_id);
 
 
 --
--- Name: index_payments_products_on_purchasable_type_and_purchasable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_products_on_purchasable_type_and_purchasable_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_products_on_purchasable_type_and_purchasable_id ON payments_products USING btree (purchasable_type, purchasable_id);
 
 
 --
--- Name: index_payments_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_profiles_on_user_id ON payments_profiles USING btree (user_id);
 
 
 --
--- Name: index_payments_purchases_on_purchased_type_and_purchased_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_purchases_on_purchased_type_and_purchased_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_purchases_on_purchased_type_and_purchased_id ON payments_purchases USING btree (purchased_type, purchased_id);
 
 
 --
--- Name: index_payments_purchases_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_purchases_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_payments_purchases_on_user_id ON payments_purchases USING btree (user_id);
 
 
 --
--- Name: index_plays_on_scenario_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_plays_on_scenario_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_plays_on_scenario_id ON plays USING btree (scenario_id);
 
 
 --
--- Name: index_plays_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_plays_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_plays_on_user_id ON plays USING btree (user_id);
 
 
 --
--- Name: index_questions_on_scenario_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_scenario_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_questions_on_scenario_id ON questions USING btree (scenario_id);
 
 
 --
--- Name: index_scenarios_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_scenarios_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_scenarios_on_name ON scenarios USING btree (lower((name)::text));
 
 
 --
--- Name: index_scenarios_on_universe_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_scenarios_on_universe_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_scenarios_on_universe_id ON scenarios USING btree (universe_id);
 
 
 --
--- Name: index_scenarios_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_scenarios_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_scenarios_on_user_id ON scenarios USING btree (user_id);
 
 
 --
--- Name: index_sessions_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_sessions_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_sessions_on_token ON sessions USING btree (token);
 
 
 --
--- Name: index_sessions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_sessions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_sessions_on_user_id ON sessions USING btree (user_id);
 
 
 --
--- Name: index_suspects_on_scenario_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_suspects_on_scenario_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_suspects_on_scenario_id_and_name ON suspects USING btree (scenario_id, lower((name)::text));
 
 
 --
--- Name: index_universes_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_universes_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_universes_on_name ON universes USING btree (lower((name)::text));
 
 
 --
--- Name: index_universes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_universes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_universes_on_user_id ON universes USING btree (user_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (lower((email)::text));
 
 
 --
--- Name: index_users_on_login; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_login; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_users_on_login ON users USING btree (lower((email)::text));
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);

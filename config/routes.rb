@@ -31,8 +31,15 @@ Rails.application.routes.draw do
     resources :questions
 
     member do
-      get 'purchase' => 'scenarios#purchase'
+      post 'purchase' => 'scenarios#purchase'
     end
+  end
+
+  namespace :payments do
+    resources :profiles, only: [:index, :create, :update, :destroy]
+    resources :products
+
+    post 'notifications/ipn' => 'notifications#ipn'
   end
 
   # Login Controller

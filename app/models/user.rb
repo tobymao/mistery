@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
   has_many :scenarios, inverse_of: :user
   has_many :plays, inverse_of: :user
   has_many :password_resets, inverse_of: :user
+  # payments
+  has_many :orders, inverse_of: :user, class_name: 'Payments::Order'
+  has_many :purchases, inverse_of: :user, class_name: 'Payments::Purchase'
+  has_one  :payment_profile, inverse_of: :user, class_name: 'Payments::Profile'
 
   validates_presence_of :login, message: "Username is required", unless: :guest
   validates_presence_of :email, message: "Email is required", unless: :guest

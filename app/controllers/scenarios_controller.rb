@@ -75,6 +75,7 @@ class ScenariosController < ApplicationController
   # GET /scenario/1/purchase
   def purchase
     @payment_url = Payments::Paypal.new.pay
+    redirect_to @payment_url
   end
 
   # DELETE /scenarios/1

@@ -16,8 +16,9 @@ class Views::Scenarios::Show < Views::Layouts::Page
       f.button 'Play This Scenario', class: 'mainLink'
     end
 
-    link_to 'Buy Scenario', purchase_scenario_path(scenario), class: 'mainLink'
-    br
+    form_tag purchase_scenario_path do |f|
+      button_tag 'Buy This Scenario', class: 'mainLink'
+    end
 
     if owner
       link_to "Edit Scenario", edit_scenario_path(scenario), class: 'mainLink'

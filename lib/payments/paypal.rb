@@ -6,15 +6,17 @@ module Payments
       # Build request object
       @pay = @api.build_pay({
         actionType: "PAY",
-        cancelUrl: "http://localhost:3000/",
+        cancelUrl: "http://24.23.159.158/",
         currencyCode: "USD",
         feesPayer: "SENDER",
-        ipnNotificationUrl: "http://localhost:3000/samples/adaptive_payments/ipn_notify",
+        ipnNotificationUrl: "http://24.23.159.158/payments/notifications/ipn",
+        returnUrl: "http://localhost:3000/scenarios",
         receiverList: {
           receiver: [{
-            amount: 8.0,
-            email: "platfo_1255612361_per@gmail.com" }] },
-            returnUrl: "http://localhost:3000/scenarios" })
+            amount: 1.0,
+            email: 'misterydotio-facilitator@gmail.com'
+          }]},
+      })
     end
 
     def pay
@@ -23,7 +25,6 @@ module Payments
 
       # Access response
       if @response.success? && @response.payment_exec_status != "ERROR"
-        #@response.payKey
         @api.payment_url(@response)  # Url to complete payment
       else
         @response.error[0].message
