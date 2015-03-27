@@ -28,13 +28,12 @@ class Scenario < ActiveRecord::Base
   has_many :questions, inverse_of: :scenario
   has_many :plays, inverse_of: :scenario
   has_many :locations, through: :universe
-  #payments
-  has_one :product, as: :purchasable
-  has_many :purchases, as: :purchased
 
+  has_one :product, as: :purchasable, class_name: 'Payments::Product'
+  has_many :purchases, as: :purchased, class_name: 'Payments::Product'
 
   validates_presence_of :name, :description, :solution, :universe, :user
-  accepts_nested_attributes_for :contacts
+  accepts_nested_attributes_for :contacts, reject_if: :all_blank
   accepts_nested_attributes_for :suspects, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :questions, allow_destroy: true, reject_if: :all_blank
 
