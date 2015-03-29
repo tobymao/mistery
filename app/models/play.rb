@@ -21,6 +21,7 @@ class Play < ActiveRecord::Base
   belongs_to :scenario, inverse_of: :plays, counter_cache: true
   has_many :actions, inverse_of: :play
   has_many :guesses, inverse_of: :play
+  accepts_nested_attributes_for :guesses, allow_destroy: true, reject_if: :all_blank
   validates_presence_of :user, :scenario
 
   LOCATION_PENTALTY = 5

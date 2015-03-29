@@ -1,6 +1,5 @@
 class Views::Plays::Result < Views::Layouts::Page
   needs :play
-  needs :guesses
 
   def main
     h1 "Finished Game"
@@ -10,6 +9,10 @@ class Views::Plays::Result < Views::Layouts::Page
     end
 
     div "Score #{play.points}"
+
+    guesses = Guess
+      .includes({question: {answers: [:location, :suspect]}}, :answer, :location, :suspect)
+      .where(play: play)
 
     guesses.each do |guess|
       br

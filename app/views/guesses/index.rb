@@ -3,31 +3,49 @@ class Views::Guesses::Index < Views::Layouts::Page
   needs :current_path
 
   def main
-    h1 "Guess a question!"
+    guesses = Guess
+      .includes(:question, :answer, :location, :suspect)
+      .where(play: play)
 
-    guesses = Guess.where(play: play).includes(:question, :suspect, :location, :answer)
-    answered_questions = guesses.map(&:question)
-    unanswered_questions = play.scenario.questions - answered_questions
+    questions = Question.includes(:answers).where(scenario: play.scenario)
 
-    unanswered_questions.each do |question|
-      div class: 'mainText' do
-        link_to question.text, new_play_guess_path(play, question: question), class: 'mainLink'
+    suspects = play.scenario.suspects.order(:name)
+    locations = play.scenario.locations.order(:name)
+
+    form_for play do |f|
+      table do
+        tbody do
+          tr do
+            th 'Question'
+            th 'Answer'
+          end
+
+          questions.each do |question|
+            guess = guesses.find {|guess| guess.question == question} || Guess.new
+
+            f.fields_for :guesses, guess do |ff|
+              tr do
+                ff.hidden_field :question_id, value: question.id
+                td question.text
+
+                td do
+                  if question.suspect?
+                    ff.collection_select :suspect_id, suspects, :id, :name
+                  elsif question.location?
+                    ff.collection_select :location_id, locations, :id, :name
+                  else
+                    ff.collection_select :answer_id, question.answers.shuffle, :id, :text
+                  end
+                end
+              end
+            end
+          end
+
+          tr do
+            td {f.button 'Finish Game', class: 'edit'}
+          end
+        end
       end
-    end
-
-    h1 "Answered Questions"
-
-    guesses.each do |guess|
-      div class: 'mainText' do
-        label guess.question.text
-        label guess.suspect.name if guess.suspect_id
-        label guess.location.name if guess.location_id
-        label guess.answer.text if guess.answer_id
-      end
-    end
-
-    form_tag finish_play_path(play) do
-      button_tag 'Finish Game'
     end
   end
 

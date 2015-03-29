@@ -132,24 +132,4 @@ describe PlaysController do
       it {expect(response).to be_success}
     end
   end
-
-  describe 'POST finish' do
-    context 'unauthenticated' do
-      before :each do
-        post :finish, {id: play.id}
-      end
-
-      it {expect(response).not_to be_success}
-      it {expect(response.status).to eq(401)}
-    end
-
-    context 'authenticated' do
-      before :each do
-        authenticate
-        post :finish, {id: play.id}
-      end
-
-      it {expect(response.status).to eq(302)}
-    end
-  end
 end
