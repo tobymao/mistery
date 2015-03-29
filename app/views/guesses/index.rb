@@ -3,11 +3,6 @@ class Views::Guesses::Index < Views::Layouts::Page
   needs :current_path
 
   def main
-
-    guesses = Guess.where(play: play).includes(:question, :suspect, :location, :answer)
-    answered_questions = guesses.map(&:question)
-    unanswered_questions = play.scenario.questions - answered_questions
-
     form_for play do |f|
       table do
         tbody do
@@ -16,8 +11,12 @@ class Views::Guesses::Index < Views::Layouts::Page
             th 'Answer'
           end
 
+          guesses = Guess
+            .includes(:question, :answer, :location, :suspect)
+            .where(play: play)
+
           play.scenario.questions.each do |question|
-            guess = Guess.new
+            guess = guesses.find {|guess| guess.question == question} || Guess.new
 
             f.fields_for :guesses, guess do |ff|
               tr do
@@ -30,7 +29,7 @@ class Views::Guesses::Index < Views::Layouts::Page
                   elsif question.location?
                     ff.collection_select :location_id, play.scenario.locatons, :id, :name
                   else
-                    ff.collection_select :answer_id, question.answers, :id, :text
+                    ff.collection_select :answer_id, question.answers.order('random()'), :id, :text
                   end
                 end
               end
@@ -38,7 +37,7 @@ class Views::Guesses::Index < Views::Layouts::Page
           end
 
           tr do
-            td {f.button 'Make Guess', class: 'edit'}
+            td {f.button 'Finish Game', class: 'edit'}
           end
         end
       end

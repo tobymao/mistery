@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :plays, only: [:index, :show, :create, :update] do
-    resources :guesses, only: [:index, :new, :edit, :create] do
+    resources :guesses, only: [:index, :new] do
       collection do
         post 'start', to: 'guesses#start', as: :start
       end
@@ -22,7 +22,6 @@ Rails.application.routes.draw do
       get 'visit/:location_id', to: 'plays#visit', as: :visit
       post 'visit', to: 'plays#book', as: :book
       get 'result', to: 'plays#result', as: :result
-      post 'finish', to: 'plays#finish', as: :finish
     end
   end
 

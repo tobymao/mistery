@@ -1,5 +1,5 @@
 class PlaysController < ApplicationController
-  before_action :set_play, expect: [:index, :create]
+  before_action :set_play, except: [:index, :create]
   before_action :set_location, only: [:visit, :book]
   before_action :require_permission, except: [:index, :create]
 
@@ -44,11 +44,19 @@ class PlaysController < ApplicationController
   # PATCH/PUT /plays/1
   # PATCH/PUT /plays/1.json
   def update
-    puts "****"
-    puts play_params
-
     respond_to do |format|
-      if @play.update(play_params)
+      if @play.points || @play.update(play_params)
+        if !@play.points
+          @play.points = 0
+          @play.points -= (@play.actions.size - @play.scenario.par) * Play::LOCATION_PENTALTY
+
+          @play.guesses.each do |guess|
+            @play.points += guess.points if guess.points
+          end
+
+          @play.save
+        end
+
         format.html {redirect_to result_play_path @play}
         format.json {render :show, status: :ok}
       else
@@ -85,39 +93,9 @@ class PlaysController < ApplicationController
 
   # GET /plays/result
   def result
-    @guesses = guesses
-  end
-
-  # POST /plays/1/finish
-  # POST /plays/1/finish.json
-  def finish
-    if !@play.points
-      @play.points = 0
-      @play.points -= (@play.actions.size - @play.scenario.par) * Play::LOCATION_PENTALTY
-
-      guesses.each do |guess|
-        @play.points += guess.points if guess.points
-      end
-
-      @play.save
-    end
-
-    respond_to do |format|
-      if @play.points
-        format.html {redirect_to result_play_path(@play)}
-        format.json {render json: @play.points}
-      else
-        format.html {redirect_to play_guesses_path(@play)}
-        format.json {render json: @action.errors, status: :unprocessable_entity}
-      end
-    end
   end
 
   private
-  def guesses
-    Guess.includes({question: :answers}, :answer, :location, :suspect).where(play: @play)
-  end
-
   def set_play
     @play = Play.find(params[:id])
   end
