@@ -3,31 +3,45 @@ class Views::Guesses::Index < Views::Layouts::Page
   needs :current_path
 
   def main
-    h1 "Guess a question!"
 
     guesses = Guess.where(play: play).includes(:question, :suspect, :location, :answer)
     answered_questions = guesses.map(&:question)
     unanswered_questions = play.scenario.questions - answered_questions
 
-    unanswered_questions.each do |question|
-      div class: 'mainText' do
-        link_to question.text, new_play_guess_path(play, question: question), class: 'mainLink'
+    form_for play do |f|
+      table do
+        tbody do
+          tr do
+            th 'Question'
+            th 'Answer'
+          end
+
+          play.scenario.questions.each do |question|
+            guess = Guess.new
+
+            f.fields_for :guesses, guess do |ff|
+              tr do
+                ff.hidden_field :question_id, value: question.id
+                td question.text
+
+                td do
+                  if question.suspect?
+                    ff.collection_select :suspect_id, play.scenario.suspects, :id, :name
+                  elsif question.location?
+                    ff.collection_select :location_id, play.scenario.locatons, :id, :name
+                  else
+                    ff.collection_select :answer_id, question.answers, :id, :text
+                  end
+                end
+              end
+            end
+          end
+
+          tr do
+            td {f.button 'Make Guess', class: 'edit'}
+          end
+        end
       end
-    end
-
-    h1 "Answered Questions"
-
-    guesses.each do |guess|
-      div class: 'mainText' do
-        label guess.question.text
-        label guess.suspect.name if guess.suspect_id
-        label guess.location.name if guess.location_id
-        label guess.answer.text if guess.answer_id
-      end
-    end
-
-    form_tag finish_play_path(play) do
-      button_tag 'Finish Game'
     end
   end
 

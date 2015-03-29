@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :plays, only: [:index, :show, :create] do
+  resources :plays, only: [:index, :show, :create, :update] do
     resources :guesses, only: [:index, :new, :edit, :create] do
       collection do
         post 'start', to: 'guesses#start', as: :start

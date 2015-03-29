@@ -1,5 +1,5 @@
 class PlaysController < ApplicationController
-  before_action :set_play, only: [:show, :visit, :book, :finish, :result]
+  before_action :set_play, expect: [:index, :create]
   before_action :set_location, only: [:visit, :book]
   before_action :require_permission, except: [:index, :create]
 
@@ -36,6 +36,23 @@ class PlaysController < ApplicationController
         format.json {render :show, status: :created, location: @play}
       else
         format.html {redirect_to plays_url}
+        format.json {render json: @play.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  # PATCH/PUT /plays/1
+  # PATCH/PUT /plays/1.json
+  def update
+    puts "****"
+    puts play_params
+
+    respond_to do |format|
+      if @play.update(play_params)
+        format.html {redirect_to result_play_path @play}
+        format.json {render :show, status: :ok}
+      else
+        format.html {redirect_to :back, flash: {error: "Error saving your guesses. #{@play.errors.full_messages}"}}
         format.json {render json: @play.errors, status: :unprocessable_entity}
       end
     end
@@ -96,7 +113,6 @@ class PlaysController < ApplicationController
     end
   end
 
-
   private
   def guesses
     Guess.includes({question: :answers}, :answer, :location, :suspect).where(play: @play)
@@ -115,6 +131,6 @@ class PlaysController < ApplicationController
   end
 
   def play_params
-    params.require(:play).permit(:scenario_id)
+    params.require(:play).permit(:scenario_id, guesses_attributes: [:id, :question_id, :answer_id, :suspect_id, :location_id])
   end
 end
