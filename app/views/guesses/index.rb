@@ -3,6 +3,15 @@ class Views::Guesses::Index < Views::Layouts::Page
   needs :current_path
 
   def main
+    guesses = Guess
+      .includes(:question, :answer, :location, :suspect)
+      .where(play: play)
+
+    questions = Question.includes(:answers).where(scenario: play.scenario)
+
+    suspects = play.scenario.suspects.order(:name)
+    locations = play.scenario.locations.order(:name)
+
     form_for play do |f|
       table do
         tbody do
@@ -11,11 +20,7 @@ class Views::Guesses::Index < Views::Layouts::Page
             th 'Answer'
           end
 
-          guesses = Guess
-            .includes(:question, :answer, :location, :suspect)
-            .where(play: play)
-
-          play.scenario.questions.each do |question|
+          questions.each do |question|
             guess = guesses.find {|guess| guess.question == question} || Guess.new
 
             f.fields_for :guesses, guess do |ff|
@@ -25,11 +30,11 @@ class Views::Guesses::Index < Views::Layouts::Page
 
                 td do
                   if question.suspect?
-                    ff.collection_select :suspect_id, play.scenario.suspects, :id, :name
+                    ff.collection_select :suspect_id, suspects, :id, :name
                   elsif question.location?
-                    ff.collection_select :location_id, play.scenario.locatons, :id, :name
+                    ff.collection_select :location_id, locations, :id, :name
                   else
-                    ff.collection_select :answer_id, question.answers.order('random()'), :id, :text
+                    ff.collection_select :answer_id, question.answers.shuffle, :id, :text
                   end
                 end
               end
