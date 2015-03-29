@@ -17,6 +17,7 @@ class Views::Guesses::Index < Views::Layouts::Page
         tbody do
           tr do
             th 'Question'
+            th 'Points'
             th 'Answer'
           end
 
@@ -27,6 +28,7 @@ class Views::Guesses::Index < Views::Layouts::Page
               tr do
                 ff.hidden_field :question_id, value: question.id
                 td question.text
+                td question.points
 
                 td do
                   if question.suspect?
