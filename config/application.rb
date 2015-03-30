@@ -23,12 +23,17 @@ module Mistery
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.active_record.schema_format = :sql
-    config.action_mailer.delivery_method = :smtp
+
+    # Tell Action Mailer not to deliver emails to the real world.
+    # The :test delivery method accumulates sent emails in the
+    # ActionMailer::Base.deliveries array.
+    config.action_mailer.delivery_method = :test
+    config.action_mailer.perform_deliveries = true
 
     config.action_mailer.smtp_settings = {
         address: "smtp.gmail.com",
         port: 587,
-        domain: "gmail.com",
+        domain: "mistery.io",
         authentication: "plain",
         user_name: ENV['EMAIL_USERNAME'],
         password: ENV['EMAIL_PASSWORD'],

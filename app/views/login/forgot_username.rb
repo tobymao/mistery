@@ -9,6 +9,7 @@ class Views::Login::ForgotUsername < Views::Layouts::Page
 
             submit_tag 'Send Username'
         end
+        
     end
 
 end

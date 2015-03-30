@@ -3,15 +3,12 @@ class LoginHelp < ApplicationMailer
   def username_email(user)
     @user = user
 
-    mail to: "cscampbell@gmail.com", subject: "Your Username is Bob", body: "asdfw"
-    #mail to: user.email, subject: "Your Username is #{user.login}"
-    #user.username
+    mail to: user.email, subject: "Mistery.io Username", body: "Your Username is #{user.login}"
   end
 
   def password_email(user)
     @user = user
-    @greeting = "Hi"
 
-    mail to: "cscampbell@gmail.com"
+    mail to: user.email, subject: "Mistery.io Password", body: "Your Password is #{user.password}"
   end
 end
