@@ -5,7 +5,7 @@ RSpec.describe LoginHelp, type: :mailer do
 
 
   describe "username" do
-    let(:mail) { LoginHelp.username_email(:user) }
+    let(:mail) { LoginHelp.username_email(user) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Mistery.io Username")
@@ -19,7 +19,7 @@ RSpec.describe LoginHelp, type: :mailer do
   end
 
   describe "password" do
-    let(:mail) { LoginHelp.password_email(:user) }
+    let(:mail) { LoginHelp.password_email(user) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Mistery.io Password")
