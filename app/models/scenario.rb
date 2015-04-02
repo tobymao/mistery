@@ -30,7 +30,7 @@ class Scenario < ActiveRecord::Base
   has_many :locations, through: :universe
 
   has_one :product, as: :purchasable, class_name: 'Payments::Product'
-  has_many :purchases, as: :purchased, class_name: 'Payments::Product'
+  has_many :purchases, as: :purchased, class_name: 'Payments::Purchase'
 
   validates_presence_of :name, :description, :solution, :universe, :user
   accepts_nested_attributes_for :contacts, reject_if: :all_blank
@@ -38,4 +38,8 @@ class Scenario < ActiveRecord::Base
   accepts_nested_attributes_for :questions, allow_destroy: true, reject_if: :all_blank
 
   scope :published, -> {where(published: true)}
+
+  def price
+    product ? product.price : 0
+  end
 end

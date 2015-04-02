@@ -10,7 +10,7 @@ class Views::Payments::Products::Index < Views::Layouts::Page
         f.hidden_field :purchasable_type, value: scenario.class
         f.label :price, "Price"
         f.text_field :price
-        button_tag 'Make Sellable'
+        button_tag 'Make Sellable', class: 'edit'
       end
     end
   end

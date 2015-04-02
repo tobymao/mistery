@@ -18,7 +18,7 @@ class Views::Scenarios::Show < Views::Layouts::Page
 
     form_tag purchase_scenario_path do |f|
       button_tag 'Buy This Scenario', class: 'mainLink'
-    end
+    end if scenario.price > 0
 
     if owner
       link_to "Edit Scenario", edit_scenario_path(scenario), class: 'mainLink'

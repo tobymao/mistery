@@ -1,9 +1,26 @@
 class Payments::NotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token, :current_user
 
+  PAYPAL_STATUS_COMPLETED = 'Completed'
+
   def ipn
     case validate_ipn(request.raw_post)
     when 'VERIFIED'
+      order = Payments::Order.find_by(id: params[:invoice])
+
+      if order.transaction_id != params[:txn_id]
+        order.transaction_id = params[:txn_id]
+        order.save
+      end
+
+      notification = Payments::Notification.new
+      notification.params = request.request_parameters
+      notification.order = order
+      notification.save
+
+      if order && params[:payment_status] == PAYPAL_STATUS_COMPLETED
+        create_purchases_for_order(order)
+      end
     when 'INVALID'
     else
     end
@@ -12,6 +29,15 @@ class Payments::NotificationsController < ApplicationController
   end
 
   private
+  def create_purchases_for_order(order)
+    order.order_items.each do |order_item|
+      purchase = Payments::Purchase.new
+      purchase.user = order.user
+      purchase.purchased = order_item.product.purchasable
+      purchase.save
+    end
+  end
+
   def validate_ipn(raw)
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host, uri.port)

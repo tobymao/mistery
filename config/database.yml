@@ -6,6 +6,8 @@ default: &default
 development:
   <<: *default
   database: mistery_development
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 test:
   <<: *default

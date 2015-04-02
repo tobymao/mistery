@@ -72,9 +72,26 @@ class ScenariosController < ApplicationController
     end
   end
 
-  # GET /scenario/1/purchase
+  # POST /scenario/1/purchase
   def purchase
-    @payment_url = Payments::Paypal.new.pay
+    order = Payments::Order.new
+    order.user = current_user
+    order.ip_address = request.remote_ip
+    order.status = Payments::Order::STATUS_NEW
+    order.amount = @scenario.product.price
+    order.save
+
+    item = Payments::OrderItem.new
+    item.order = order
+    item.product = @scenario.product
+    item.save
+
+    @payment_url = Payments::Paypal.new(
+      cancel_url: scenario_url(@scenario),
+      return_url: scenario_url(@scenario),
+      product: @scenario.product
+    ).payment_url
+
     redirect_to @payment_url
   end
 

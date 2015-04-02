@@ -3,7 +3,7 @@ class CreatePaymentsNotifications < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.references :order, index: true, null: false
+      t.references :order, index: true
       t.text :params
 
       t.timestamps null: false
