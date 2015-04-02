@@ -7,7 +7,7 @@ class Views::Guesses::Index < Views::Layouts::Page
       .includes(:question, :answer, :location, :suspect)
       .where(play: play)
 
-    questions = Question.includes(:answers).where(scenario: play.scenario)
+    questions = Question.includes(:answers).where(scenario: play.scenario).order(:id)
 
     suspects = play.scenario.suspects.order(:name)
     locations = play.scenario.locations.order(:name)
