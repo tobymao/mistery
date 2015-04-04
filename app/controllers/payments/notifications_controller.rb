@@ -6,7 +6,9 @@ class Payments::NotificationsController < ApplicationController
   def ipn
     case validate_ipn(request.raw_post)
     when 'VERIFIED'
-      order = Payments::Order.find_by(id: params[:invoice])
+      order = Payments::Order
+        .includes(order_items: {product: :purchasable})
+        .find_by(id: params[:invoice])
 
       if order.transaction_id != params[:txn_id]
         order.transaction_id = params[:txn_id]
@@ -18,6 +20,7 @@ class Payments::NotificationsController < ApplicationController
       notification.order = order
       notification.save
 
+      # TODO: Check price and senders
       if order && params[:payment_status] == PAYPAL_STATUS_COMPLETED
         create_purchases_for_order(order)
       end
