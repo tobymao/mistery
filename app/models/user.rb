@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     User.new({guest: true})
   end
 
+  def purchased?(product)
+    purchases.where(purchased: product).exists?
+  end
+
   def password
     pass = read_attribute(:password)
     BCrypt::Password.new(pass) if pass

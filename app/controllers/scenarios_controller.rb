@@ -74,6 +74,7 @@ class ScenariosController < ApplicationController
 
   # POST /scenario/1/purchase
   def purchase
+    # TODO Check For Duplicate Orders
     order = Payments::Order.new
     order.user = current_user
     order.ip_address = request.remote_ip
