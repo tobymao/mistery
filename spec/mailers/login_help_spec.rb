@@ -10,7 +10,7 @@ RSpec.describe LoginHelp, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Mistery.io Username")
       expect(mail.to).to eq(["test@example.com"])
-      #expect(mail.from).to eq(["TBD@mistery.io"]) #Add from email when mail server emails are finalized
+      expect(mail.from).to eq(["mistery.io.help@gmail.com"])
     end
 
     it "renders the body" do
@@ -24,11 +24,11 @@ RSpec.describe LoginHelp, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Mistery.io Password")
       expect(mail.to).to eq(["test@example.com"])
-      #expect(mail.from).to eq(["TBD@mistery.io"]) #Add from email when mail server emails are finalized
+      expect(mail.from).to eq(["mistery.io.help@gmail.com"])
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Your Password is password")
+      expect(mail.body.encoded).to start_with("Your password has been reset. Your new temporary password is ")
     end
   end
 

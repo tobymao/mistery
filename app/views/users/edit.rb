@@ -4,25 +4,18 @@ needs :current_user
   def main
     h1 "Edit User"
 
-    form_tag user_path(current_user), method: 'PUT' do
-      fields_for 'current_user' do |f|
+    form_for current_user do |f|
+      f.label :email, 'Your Email'
+      f.text_field :email
 
-        f.label :email, 'Your Email'
-        f.text_field :email
-
-        f.submit 'Update Email'
-      end
+      f.submit 'Update Email'
     end
 
-    form_tag user_path(current_user), method: 'PUT' do
-      fields_for 'current_user' do |f|
+    form_for current_user do |f|
+      f.label :password, 'Your Password'
+      f.text_field :password, value: ""
 
-        f.label :password, 'Your Password'
-        f.text_field :password
-
-        f.submit 'Update Password'
-      end
+      f.submit 'Update Password'
     end
-
   end
 end
