@@ -23,12 +23,7 @@ module Mistery
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.active_record.schema_format = :sql
-
-    
-    # The :test delivery method accumulates sent emails in the
-    # ActionMailer::Base.deliveries array.
     config.action_mailer.delivery_method = :smtp
-    # Tell Action Mailer not to deliver emails to the real world.
     config.action_mailer.perform_deliveries = true
 
     config.action_mailer.smtp_settings = {
