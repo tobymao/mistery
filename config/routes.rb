@@ -34,4 +34,8 @@ Rails.application.routes.draw do
   get 'login' => 'login#index'
   post 'login' => 'login#login'
   post 'logout' => 'login#logout'
+  get 'forgot_username' => 'login#forgot_username'
+  get 'forgot_password' => 'login#forgot_password'
+  post 'send_username' => 'login#send_username'
+  post 'send_password' => 'login#send_password'
 end
