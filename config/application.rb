@@ -23,17 +23,14 @@ module Mistery
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.active_record.schema_format = :sql
+
+    # Mail Stuff
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
-
     config.action_mailer.smtp_settings = {
-        address: "smtp.gmail.com",
-        port: 587,
-        domain: "mistery.io",
-        authentication: "plain",
-        user_name: ENV['EMAIL_USERNAME'],
-        password: ENV['EMAIL_PASSWORD'],
-        enable_starttls_auto: true
+      address: "mistery.io",
+      port: 25,
+      enable_starttls_auto: false
     }
   end
 end
