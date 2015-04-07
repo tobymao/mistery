@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   # /PUT /users/1
   # /PUT /users/1.json
   def reset_password
-    password_reset = PasswordReset.find_by(token: params[:password_reset])
+    password_reset = PasswordReset.find_by(token: params[:token])
 
     if !password_reset || !password_reset.token_valid?
       return render_bad_credentials
