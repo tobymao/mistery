@@ -13,7 +13,7 @@ needs :current_user
 
     form_for current_user do |f|
       f.label :password, 'Your Password'
-      f.text_field :password, value: ""
+      f.password_field :password
 
       f.submit 'Update Password'
     end

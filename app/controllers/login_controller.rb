@@ -16,6 +16,11 @@ class LoginController < ApplicationController
     end
   end
 
+  # GET /reset_password
+  def reset_password
+    @password_reset = PasswordReset.find_by(token: params[:token])
+  end
+
   # POST /logout
   def logout
     Session.where(user: current_user).destroy_all
@@ -38,7 +43,7 @@ class LoginController < ApplicationController
       redirect_to :back, flash: {error: "This email is not registered"}
     else
       LoginHelp.username_email(user).deliver_now
-      redirect_to :back, flash: {error: "Username sent to #{user.email}"}
+      redirect_to :back, notice: "Username sent to #{user.email}"
     end
   end
 
@@ -49,8 +54,9 @@ class LoginController < ApplicationController
     if !user
       redirect_to :back, flash: {error: "This email is not registered"}
     else
-      LoginHelp.password_email(user).deliver_now
-      redirect_to :back, flash: {error: "Password sent to #{user.email}"}
+      password_reset = PasswordReset.create(user: user, token: SecureRandom.hex)
+      LoginHelp.password_email(user, password_reset).deliver_now
+      redirect_to :back, notice: "Password Reset Link sent to #{user.email}"
     end
   end
 

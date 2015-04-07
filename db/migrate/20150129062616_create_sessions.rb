@@ -1,5 +1,6 @@
 class CreateSessions < ActiveRecord::Migration
   TABLE = :sessions
+
   def change
     create_table TABLE do |t|
       t.string :token, null: false

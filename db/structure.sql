@@ -199,6 +199,238 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 
 --
+-- Name: password_resets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE password_resets (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    token character varying NOT NULL,
+    used boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: password_resets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE password_resets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: password_resets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE password_resets_id_seq OWNED BY password_resets.id;
+
+
+--
+-- Name: payments_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments_notifications (
+    id integer NOT NULL,
+    order_id integer,
+    params text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_notifications_id_seq OWNED BY payments_notifications.id;
+
+
+--
+-- Name: payments_order_items; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments_order_items (
+    id integer NOT NULL,
+    order_id integer NOT NULL,
+    product_id integer NOT NULL,
+    amount integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_order_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_order_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_order_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_order_items_id_seq OWNED BY payments_order_items.id;
+
+
+--
+-- Name: payments_orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments_orders (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    ip_address character varying NOT NULL,
+    status character varying NOT NULL,
+    transaction_id character varying,
+    amount integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_orders_id_seq OWNED BY payments_orders.id;
+
+
+--
+-- Name: payments_products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments_products (
+    id integer NOT NULL,
+    purchasable_id integer,
+    purchasable_type character varying,
+    price integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_products_id_seq OWNED BY payments_products.id;
+
+
+--
+-- Name: payments_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments_profiles (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    email character varying NOT NULL,
+    validated boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_profiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_profiles_id_seq OWNED BY payments_profiles.id;
+
+
+--
+-- Name: payments_purchases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments_purchases (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    purchased_id integer,
+    purchased_type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_purchases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_purchases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_purchases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_purchases_id_seq OWNED BY payments_purchases.id;
+
+
+--
 -- Name: plays; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -486,6 +718,55 @@ ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY password_resets ALTER COLUMN id SET DEFAULT nextval('password_resets_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments_notifications ALTER COLUMN id SET DEFAULT nextval('payments_notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments_order_items ALTER COLUMN id SET DEFAULT nextval('payments_order_items_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments_orders ALTER COLUMN id SET DEFAULT nextval('payments_orders_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments_products ALTER COLUMN id SET DEFAULT nextval('payments_products_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments_profiles ALTER COLUMN id SET DEFAULT nextval('payments_profiles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments_purchases ALTER COLUMN id SET DEFAULT nextval('payments_purchases_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY plays ALTER COLUMN id SET DEFAULT nextval('plays_id_seq'::regclass);
 
 
@@ -569,6 +850,62 @@ ALTER TABLE ONLY guesses
 
 ALTER TABLE ONLY locations
     ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: password_resets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY password_resets
+    ADD CONSTRAINT password_resets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments_notifications
+    ADD CONSTRAINT payments_notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_order_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments_order_items
+    ADD CONSTRAINT payments_order_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments_orders
+    ADD CONSTRAINT payments_orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments_products
+    ADD CONSTRAINT payments_products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments_profiles
+    ADD CONSTRAINT payments_profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_purchases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments_purchases
+    ADD CONSTRAINT payments_purchases_pkey PRIMARY KEY (id);
 
 
 --
@@ -681,6 +1018,76 @@ CREATE INDEX index_guesses_on_question_id ON guesses USING btree (question_id);
 --
 
 CREATE UNIQUE INDEX index_locations_on_universe_id_and_name ON locations USING btree (universe_id, lower((name)::text));
+
+
+--
+-- Name: index_password_resets_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_password_resets_on_user_id ON password_resets USING btree (user_id);
+
+
+--
+-- Name: index_payments_notifications_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_notifications_on_order_id ON payments_notifications USING btree (order_id);
+
+
+--
+-- Name: index_payments_order_items_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_order_items_on_order_id ON payments_order_items USING btree (order_id);
+
+
+--
+-- Name: index_payments_order_items_on_product_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_order_items_on_product_id ON payments_order_items USING btree (product_id);
+
+
+--
+-- Name: index_payments_orders_on_transaction_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_orders_on_transaction_id ON payments_orders USING btree (transaction_id);
+
+
+--
+-- Name: index_payments_orders_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_orders_on_user_id ON payments_orders USING btree (user_id);
+
+
+--
+-- Name: index_payments_products_on_purchasable_type_and_purchasable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_products_on_purchasable_type_and_purchasable_id ON payments_products USING btree (purchasable_type, purchasable_id);
+
+
+--
+-- Name: index_payments_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_profiles_on_user_id ON payments_profiles USING btree (user_id);
+
+
+--
+-- Name: index_payments_purchases_on_purchased_type_and_purchased_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_purchases_on_purchased_type_and_purchased_id ON payments_purchases USING btree (purchased_type, purchased_id);
+
+
+--
+-- Name: index_payments_purchases_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_payments_purchases_on_user_id ON payments_purchases USING btree (user_id);
 
 
 --
@@ -818,4 +1225,18 @@ INSERT INTO schema_migrations (version) VALUES ('20150317055847');
 INSERT INTO schema_migrations (version) VALUES ('20150318052056');
 
 INSERT INTO schema_migrations (version) VALUES ('20150318053400');
+
+INSERT INTO schema_migrations (version) VALUES ('20150322073139');
+
+INSERT INTO schema_migrations (version) VALUES ('20150322074350');
+
+INSERT INTO schema_migrations (version) VALUES ('20150322080051');
+
+INSERT INTO schema_migrations (version) VALUES ('20150323030628');
+
+INSERT INTO schema_migrations (version) VALUES ('20150323031529');
+
+INSERT INTO schema_migrations (version) VALUES ('20150324023246');
+
+INSERT INTO schema_migrations (version) VALUES ('20150407033416');
 

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :universes, inverse_of: :user
   has_many :scenarios, inverse_of: :user
   has_many :plays, inverse_of: :user
+  has_many :password_resets, inverse_of: :user
 
   validates_presence_of :login, message: "Username is required", unless: :guest
   validates_presence_of :email, message: "Email is required", unless: :guest

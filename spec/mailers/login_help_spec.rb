@@ -10,7 +10,6 @@ RSpec.describe LoginHelp, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Mistery.io Username")
       expect(mail.to).to eq(["test@example.com"])
-      expect(mail.from).to eq(["mistery.io.help@gmail.com"])
     end
 
     it "renders the body" do
@@ -24,7 +23,6 @@ RSpec.describe LoginHelp, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Mistery.io Password")
       expect(mail.to).to eq(["test@example.com"])
-      expect(mail.from).to eq(["mistery.io.help@gmail.com"])
     end
 
     it "renders the body" do

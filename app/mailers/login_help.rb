@@ -1,4 +1,5 @@
 class LoginHelp < ApplicationMailer
+  include Rails.application.routes.url_helpers
 
   def username_email(user)
     mail(
@@ -8,15 +9,12 @@ class LoginHelp < ApplicationMailer
     )
   end
 
-  def password_email(user)
-    random_password = Array.new(16).map { (65 + rand(58)).chr }.join
-    user.password = random_password
-    user.save
-
+  def password_email(user, password_reset)
+    params = {token: password_reset.token}
     mail(
       to: user.email,
       subject: "Mistery.io Password",
-      body: "Your password has been reset. Your new temporary password is #{random_password} . Please change your password after logging in"
+      body: "Click this link to reset your password. #{reset_password_url(params)}"
     )
   end
 end

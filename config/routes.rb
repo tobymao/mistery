@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get 'universes', to: 'users#universes', as: :universes
       get 'scenarios', to: 'users#scenarios', as: :scenarios
+      put 'reset_password', to: 'users#reset_password', as: :reset_password
     end
   end
 
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   get 'login' => 'login#index'
   post 'login' => 'login#login'
   post 'logout' => 'login#logout'
+  get 'reset_password' => 'login#reset_password'
   get 'forgot_username' => 'login#forgot_username'
   get 'forgot_password' => 'login#forgot_password'
   post 'send_username' => 'login#send_username'
