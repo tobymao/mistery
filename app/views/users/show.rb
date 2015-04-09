@@ -4,19 +4,19 @@ class Views::Users::Show < Views::Layouts::Page
 
   def main
     h1 "User Profile"
-    link_to "Edit Profile", edit_user_path(user)
+
+    link_to "Edit Profile", edit_user_path(user) if user == current_user
 
     p do
       text "Username: "
       text user.login
     end
 
-
     p do
       if(user == current_user)
         text "Your Email: "
         text user.email
-        text " "	
+        text " "
       else
         text "Email Private"
       end
