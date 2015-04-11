@@ -18,6 +18,17 @@ class Views::Universes::Show < Views::Layouts::Page
       end
     end
 
+    div class: 'listCollection' do
+      div "Locations", class: 'titleHeader'
+      universe.locations.visible.each do |location|
+        widget Views::Shared::Tile.new(
+            object: location,
+            title_gen: "asdf",
+            metadata: "Name: #{location.name} "
+          )
+      end
+    end
+
     p "Locations:" do
       universe.locations.visible.each do |location|
         div do
