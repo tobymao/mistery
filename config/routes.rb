@@ -35,12 +35,12 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :payments do
-    resources :profiles, only: [:index, :create, :update, :destroy]
-    resources :products
+  #namespace :payments do
+  #  resources :profiles, only: [:index, :create, :update, :destroy]
+  #  resources :products
 
-    post 'notifications/ipn' => 'notifications#ipn'
-  end
+  #  post 'notifications/ipn' => 'notifications#ipn'
+  #end
 
   # Login Controller
   get 'login' => 'login#index'
