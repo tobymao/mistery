@@ -3,7 +3,7 @@ class CreatePaymentsProducts < ActiveRecord::Migration
 
   def change
     create_table TABLE do |t|
-      t.references :purchasable, polymorphic: true, index: true, unique: true
+      t.references :purchasable, polymorphic: true, index: true, unique: true, null: false
       t.integer :price, null: false, default: 0
       t.timestamps null: false
     end

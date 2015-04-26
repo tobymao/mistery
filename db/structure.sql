@@ -337,8 +337,8 @@ ALTER SEQUENCE payments_orders_id_seq OWNED BY payments_orders.id;
 
 CREATE TABLE payments_products (
     id integer NOT NULL,
-    purchasable_id integer,
-    purchasable_type character varying,
+    purchasable_id integer NOT NULL,
+    purchasable_type character varying NOT NULL,
     price integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -404,8 +404,8 @@ ALTER SEQUENCE payments_profiles_id_seq OWNED BY payments_profiles.id;
 CREATE TABLE payments_purchases (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    purchased_id integer,
-    purchased_type character varying,
+    purchased_id integer NOT NULL,
+    purchased_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -965,6 +965,13 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: idx_user_id_purchased_id_purchased_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX idx_user_id_purchased_id_purchased_type ON payments_purchases USING btree (user_id, purchased_id, purchased_type);
+
+
+--
 -- Name: index_actions_on_play_id_and_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1084,13 +1091,6 @@ CREATE INDEX index_payments_purchases_on_purchased_type_and_purchased_id ON paym
 
 
 --
--- Name: index_payments_purchases_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_payments_purchases_on_user_id ON payments_purchases USING btree (user_id);
-
-
---
 -- Name: index_plays_on_scenario_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1102,13 +1102,6 @@ CREATE INDEX index_plays_on_scenario_id ON plays USING btree (scenario_id);
 --
 
 CREATE INDEX index_plays_on_user_id ON plays USING btree (user_id);
-
-
---
--- Name: index_purchases_on_u_id_p_id_p_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_purchases_on_u_id_p_id_p_type ON payments_purchases USING btree (user_id, purchased_id, purchased_type);
 
 
 --
