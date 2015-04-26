@@ -10,19 +10,20 @@ class Payments::NotificationsController < ApplicationController
         .includes(order_items: {product: :purchasable})
         .find_by(id: params[:invoice])
 
-      if order.transaction_id != params[:txn_id]
-        order.transaction_id = params[:txn_id]
-        order.save
-      end
-
       notification = Payments::Notification.new
       notification.params = request.request_parameters
       notification.order = order
       notification.save
 
-      # TODO: Check price and senders
-      if order && params[:payment_status] == PAYPAL_STATUS_COMPLETED
-        create_purchases_for_order(order)
+      if order
+        # TODO: Check price and senders
+        if params[:payment_status] == PAYPAL_STATUS_COMPLETED
+          create_purchases_for_order(order)
+          order.status = Payments::Order::STATUS_COMPLETED
+        end
+
+        order.transaction_id = params[:txn_id]
+        order.save
       end
     when 'INVALID'
     else
@@ -48,9 +49,11 @@ class Payments::NotificationsController < ApplicationController
     http.read_timeout = 15
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = true
-    http.post(uri.request_uri, raw,
-              'Content-Length' => "#{raw.size}",
-              'User-Agent' => 'misteryio'
-             ).body
+    http.post(
+      uri.request_uri,
+      raw,
+      'Content-Length' => "#{raw.size}",
+      'User-Agent' => 'misteryio'
+    ).body
   end
 end
