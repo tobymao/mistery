@@ -3,26 +3,43 @@ class Views::Layouts::Sidebar < Views::Base
   needs :current_path
 
   def content
-    html do
-      div class: 'sideSection' do
-        div "Create", class: 'group'
-        link "Universe", new_universe_path
-        link "Scenario", new_scenario_path
+    ul do
+      li do
+        path = (current_user && !current_user.guest) ? user_path(current_user) : new_user_path
+
+        link_to path, class: 'sideLink' do
+          image_tag 'side_bar/profile.png', height: '30px'
+          span 'MY PROFILE', class: 'sideLinkText'
+        end
       end
 
-      div class: 'sideSection' do
-        div "Browse", class: 'group'
-        link "Universes", universes_path
-        link "Scenarios", scenarios_path
+      li do
+        link_to nil, class: 'sideLink' do
+          image_tag 'side_bar/store.png', height: '30px'
+          span 'STORE', class: 'sideLinkText'
+        end
       end
-    end
-  end
 
-  def link(text, path)
-    if path == current_path
-        link_to text, path, class: 'sideLink selected'
-    else
-        link_to text, path, class: 'sideLink'
+      li do
+        link_to nil, class: 'sideLink' do
+          image_tag 'side_bar/universes.png', height: '30px'
+          span 'UNIVERSES', class: 'sideLinkText'
+        end
+      end
+
+      li do
+        link_to nil, class: 'sideLink' do
+          image_tag 'side_bar/scenarios.png', height: '30px'
+          span 'SCENARIOS', class: 'sideLinkText'
+        end
+      end
+
+      li do
+        link_to nil, class: 'sideLink' do
+          image_tag 'side_bar/library.png', height: '30px'
+          span 'MY LIBRARY', class: 'sideLinkText'
+        end
+      end
     end
   end
 end

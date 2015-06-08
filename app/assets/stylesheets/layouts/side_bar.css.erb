@@ -1,0 +1,76 @@
+.sideBar {
+  overflow: auto;
+  width: 250px;
+  position: absolute;
+  bottom: 0;
+  top: 60px;
+  background-color: <%= Styles::Colors::DARK_GREY %>;
+  font-family: 'OpenSans', sans-serif;
+
+}
+
+.sideBar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sideBar .sideSection {
+  margin: 2em 0;
+  text-align: center;
+  color: #CCCCCC;
+}
+
+.sidebar li {
+  height: 50px;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.sideBar .sideLink {
+  display: block;
+  text-decoration: none;
+  font-family: 'OpenSans', sans-serif;
+  color: <%= Styles::Colors::BLUE_GREY %>;
+  font-size: 1em;
+}
+
+.sideBar .sideLink img {
+  height: 30px;
+  padding: 10px 0 0 20px;
+}
+
+.sideBar .sideLink .sideLinkText{
+  position: absolute;
+  line-height: 50px;
+  left: 80px;
+}
+
+
+.sideBar button.sideLink{
+  width: 100%;
+  outline: none;
+}
+
+.sideSection .group {
+  font-size: 1.5em;
+  border-bottom: 1px solid #CCCCCC;
+  margin: 0 1em 0.5em 1em;
+}
+
+.sideSection .visited {
+  text-decoration: line-through;
+  color: #8F8F8F;
+}
+
+.sidebar li:hover {
+  background: <%= Styles::Colors::DARK_BLUE %>;
+}
+
+.sideLink.selected {
+  background: <%= Styles::Colors::DARK_BLUE %>;
+}

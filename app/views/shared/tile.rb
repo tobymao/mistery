@@ -7,7 +7,8 @@ class Views::Shared::Tile < Views::Base
     div class: 'tile' do
       title_gen.call('title')
       link_to "by #{object.user.login}", object.user, class: 'author'
-      div truncate(object.description, length:100), class: 'desc'
+      div object.created_at.strftime('%D'), class: 'date'
+      div truncate(object.description, length: 100), class: 'desc'
       div object.created_at.strftime('%D'), class: 'date'
       div metadata, class: 'metadata'
     end

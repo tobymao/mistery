@@ -8,5 +8,6 @@ class LandingController < ApplicationController
     @scenarios_new = scenarios.last(10).reverse
     @scenarios_top = scenarios.sort_by(&:plays_count).reverse.take(10)
     @universes_new = Universe.includes(:user).published.last(NEW_UNIVERSE_LIMIT).reverse
+    @scenario_featured = scenarios.first
   end
 end

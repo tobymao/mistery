@@ -12,27 +12,16 @@ class Views::Layouts::Navbar < Views::Base
 
       div class: 'navSetting' do
         if !current_user || current_user.guest
-          link 'Login', login_path
-          link 'Register', new_user_path
+          link 'LOGIN', login_path
+          link 'REGISTER', new_user_path
         else
-          link "Welcome #{current_user.login}", user_path(current_user)
+          link "WELCOME #{current_user.login}", user_path(current_user)
 
           form_tag logout_path do
-            button_tag "Logout"
+            button_tag "LOGOUT"
           end
         end
       end
-
-      div class: 'navDivider'
-
-      div class: 'navTab' do
-        unless current_user.guest
-          link 'My Universes', universes_user_path(current_user)
-          link 'My Scenarios', scenarios_user_path(current_user)
-        end
-
-        link "My Plays", plays_path
-      end if current_user
     end
   end
 

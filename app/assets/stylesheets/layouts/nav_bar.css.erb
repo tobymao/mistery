@@ -1,0 +1,54 @@
+.navBar {
+  position: relative;
+  background-color: <%= Styles::Colors::WHITE %>;
+  top: 0;
+  height: 60px;
+  line-height: 60px;
+  font-family: 'OpenSans', sans-serif;
+  min-width: 60em;
+}
+
+.navBar form {
+  display: inline-block;
+}
+
+.navBar button {
+  font-size: 0.9em;
+  background:none;
+  border:none;
+  cursor: pointer;
+  font-family: 'OpenSans', sans-serif;
+  margin: 0.5em 2.5em 0.5em 0.5em;
+}
+
+.navBar button:hover {
+  border-bottom: 3px solid #006699;
+}
+
+.navBar .navSetting a {
+  margin: 0.5em 2.5em 0.5em 0.5em; 
+  text-decoration: none;
+  font-size: 0.9em;
+  white-space: nowrap;
+  color: <%= Styles::Colors::BLUE %>;
+  padding-bottom: 0.25em;
+}
+
+.navBar .navSetting a:hover, .navTab a:hover {
+  border-bottom: 3px solid <%= Styles::Colors::BLUE %>;
+}
+
+.navBar .selected {
+  border-bottom: 3px solid <%= Styles::Colors::BLUE %>;
+}
+
+.navBar .navSetting {
+  float: right;
+}
+
+.navBar .logo {
+  display: inline-block;
+  float: left;
+  margin-left: 32px;
+  margin-top: 7px;
+}
