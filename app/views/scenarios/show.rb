@@ -4,7 +4,7 @@ class Views::Scenarios::Show < Views::Layouts::Page
   needs :owner
 
   def main
-    purchased = current_user.purchased?(scenario)
+    purchased = current_user.purchased?(scenario) if current_user
 
     h1 scenario.name
     h2 "by #{scenario.user.login}"
