@@ -1,7 +1,7 @@
 # config/unicorn.rb
 env = ENV["RAILS_ENV"] || "development"
 app_path = File.expand_path(File.dirname(__FILE__) + '/..')
-worker_processes (env == 'production' ? 4 : 1)
+worker_processes (env == 'production' ? 2 : 1)
 timeout 15
 
 preload_app true
