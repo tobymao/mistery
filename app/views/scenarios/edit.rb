@@ -78,6 +78,8 @@ class Views::Scenarios::Edit < Views::Layouts::Page
               scenario.locations.each do |location|
                 contact = contacts[location.id]
 
+                next if location.hidden && (!contact || contact.text.blank?)
+
                 tr do
                   td location.name
                   td location.group

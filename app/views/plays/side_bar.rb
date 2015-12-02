@@ -5,7 +5,13 @@ class Views::Plays::SideBar < Views::Base
   def content
     groups = Hash.new{|hash, key| hash[key] = []}
 
-    ids = play.scenario.contacts.map{|c| c.location_id}.compact
+    ids = play
+      .scenario
+      .contacts
+      .reject{|c| c.text.blank?}
+      .map{|c| c.location_id}
+      .compact
+
 
     play.scenario.locations.sorted_by_group_and_name.each do |location|
       groups[location.group] << location if !location.hidden || ids.include?(location.id)
