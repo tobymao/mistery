@@ -8,7 +8,7 @@ class Views::Plays::Visit < Views::Layouts::Page
     h1 location.name
 
     div do
-      if contact
+      if contact && contact.text.present?
         div simple_format contact.text, class: 'mainText'
       else
         text "There doesn't seem to be anybody here..."
