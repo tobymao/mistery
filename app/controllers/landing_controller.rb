@@ -1,7 +1,7 @@
 class LandingController < ApplicationController
   NEW_SCENARIO_LIMIT = 100
   NEW_UNIVERSE_LIMIT = 10
-  FEATURED_SCENARIO = 1
+  FEATURED_SCENARIO = 14
 
   # GET /
   def index
