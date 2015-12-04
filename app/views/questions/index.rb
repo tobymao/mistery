@@ -43,7 +43,7 @@ class Views::Questions::Index < Views::Layouts::Page
                 end
               end
 
-              question.answers.drop(1).each do |answer|
+              question.answers.reject(&:correct).each do |answer|
                 additional_answer_row {answer_field(ff, question, answer, false)}
               end
 
