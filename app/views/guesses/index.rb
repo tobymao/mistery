@@ -9,8 +9,17 @@ class Views::Guesses::Index < Views::Layouts::Page
 
     questions = Question.includes(:answers).where(scenario: play.scenario).order(:id)
 
+    ids = play
+      .scenario
+      .contacts
+      .reject{|c| c.text.blank?}
+      .map{|c| c.location_id}
+      .compact
+
     suspects = play.scenario.suspects.order(:name)
-    locations = play.scenario.locations.order(:name)
+    locations = play.scenario.locations.order(:name).reject do |location|
+      location.hidden && !ids.include?(location.id)
+    end
 
     form_for play do |f|
       table do
