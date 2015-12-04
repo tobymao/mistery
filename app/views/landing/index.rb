@@ -1,10 +1,12 @@
 class Views::Landing::Index < Views::Layouts::Page
+  needs :featured
   needs :scenarios_new
   needs :universes_new
   needs :scenarios_top
 
   def main
     intro
+    featured_scenario
     top_scenarios
     new_scenarios
     new_universes
@@ -59,15 +61,18 @@ class Views::Landing::Index < Views::Layouts::Page
 
   static :intro
 
+  def featured_scenario
+    div class: 'tileCollection' do
+      div "Featured Scenario - For Advanced Players!", class: 'tileHeader'
+      scenario_widget(featured)
+    end
+  end
+
   def top_scenarios
     div class: 'tileCollection' do
       div "Trending Scenarios", class: 'tileHeader'
       scenarios_top.each do |scenario|
-        widget Views::Shared::Tile.new(
-          object: scenario,
-          title_gen: -> (c) {link_to scenario.name, scenario, class: c},
-          metadata: "Plays: #{scenario.plays_count}"
-        )
+        scenario_widget(scenario)
       end
     end
   end
@@ -76,11 +81,7 @@ class Views::Landing::Index < Views::Layouts::Page
     div class: 'tileCollection' do
       div "New Scenarios", class: 'tileHeader'
       scenarios_new.each do |scenario|
-        widget Views::Shared::Tile.new(
-          object: scenario,
-          title_gen: -> (c) {link_to scenario.name, scenario, class: c},
-          metadata: "Plays: #{scenario.plays_count}"
-        )
+        scenario_widget(scenario)
       end
     end
   end
@@ -97,5 +98,13 @@ class Views::Landing::Index < Views::Layouts::Page
         )
       end
     end
+  end
+
+  def scenario_widget(scenario)
+    widget Views::Shared::Tile.new(
+      object: scenario,
+      title_gen: -> (c) {link_to scenario.name, scenario, class: c},
+      metadata: "Plays: #{scenario.plays_count}"
+    )
   end
 end

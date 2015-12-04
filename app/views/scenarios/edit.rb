@@ -96,6 +96,24 @@ class Views::Scenarios::Edit < Views::Layouts::Page
         end
       end
     end
+
+    form_for Location.new do |f|
+      div class: 'centered' do
+        f.hidden_field :universe_id, value: scenario.universe.id
+
+        td do
+          f.text_field :name, class: 'inlineBlock', placeholder: 'Name'
+        end
+
+        td do
+          f.text_field :group, class: 'inlineBlock', placeholder: 'Group'
+        end
+
+        td do
+          f.submit "New location", class: 'inlineBlock'
+        end
+      end
+    end if scenario.universe.user == current_user
   end
 
   def button(text, id)

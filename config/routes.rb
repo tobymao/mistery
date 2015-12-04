@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :locations, only: :create
+
   #namespace :payments do
   #  resources :profiles, only: [:index, :create, :update, :destroy]
   #  resources :products

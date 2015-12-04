@@ -26,7 +26,6 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    puts question_params
     @question = Question.new(question_params)
     @question.scenario = @scenario
 

@@ -80,3 +80,7 @@ h2 {
 .inlineBlock {
   display: inline-block;
 }
+
+.centered {
+  text-align: center;
+}
