@@ -30,7 +30,7 @@ module Mistery
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.smtp_settings = {
-      address: "mistery.io",
+      domain: "mistery.io",
       port: 25,
       enable_starttls_auto: false
     }
