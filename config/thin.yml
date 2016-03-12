@@ -1,16 +1,16 @@
 ---
 chdir: /home/deploy/apps/mistery/current
 environment: production
-address: 0.0.0.0
-port: 4000
+address: localhost
+port: 3000
 timeout: 30
 wait: 30
 log: /home/deploy/apps/mistery/shared/log/thin.log
 pid: /home/deploy/apps/mistery/shared/pids/thin.pid
-socket: /home/deploy/tmp/thin.sock
+socket: /tmp/mistery-thin.sock
 max_conns: 1024
 max_persistent_conns: 100
 require: []
-server: 2
+servers: 2
 daemonize: true
 onebyone: true
