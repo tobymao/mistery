@@ -1,29 +1,29 @@
 set :application, 'mistery'
 set :repo_url, 'git@github.com:tobymao/mistery.git'
-set :deploy_to, "/home/deployer/apps/mistery"
-set :tmp_dir, "/home/deployer/tmp"
-set :ssh_options, {
-  forward_agent: true,
-  keys: ['/Users/toby/.ssh/awskey.pem']
-}
+set :deploy_to, '/home/deploy/apps/mistery'
+set :current_dir, "#{fetch(:deploy_to)}/current"
+set :tmp_dir, "#{fetch(:deploy_to)}/tmp"
+set :ssh_options, forward_agent: true
 
+after "deploy", "deploy:restart"
 # Clean up all older releases
 after "deploy:restart", "deploy:cleanup"
 
-# This is where the actual deployment with Unicorn happens
 namespace :deploy do
-  desc 'Initiate a rolling restart by telling Unicorn to start the new application code and kill the old process when done.'
+  desc 'Rolling restart'
   task :restart do
     on roles :all do
-      execute "kill -s USR2 `cat /tmp/unicorn.mistery.pid`"
+      within fetch(:current_dir) do
+        execute 'bundle exec thin restart -C config/thin.yml'
+      end
     end
   end
 
-  desc "Start the Unicorn process when it isn't already running."
+  desc "Start the thin server"
   task :start do
     on roles :all do
-      within "#{fetch(:deploy_to)}/current/" do
-        execute :bundle, "exec unicorn -c config/unicorn.rb -D"
+      within fetch(:current_dir) do
+        execute :bundle, 'bundle exec thin start -C config/thin.yml'
       end
     end
   end
@@ -31,7 +31,9 @@ namespace :deploy do
   desc "Stop unicorn"
   task :stop do
     on roles :all do
-      execute "kill -s QUIT `cat /tmp/unicorn.mistery.pid`"
+      within fetch(:current_dir) do
+        execute :bundle, 'bundle exec thin stop -C config/thin.yml'
+      end
     end
   end
 end

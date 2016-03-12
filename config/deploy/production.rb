@@ -1,1 +1,1 @@
-server 'mistery.io', user: 'deployer', roles: %w{web app db}
+server 'mistery.io', user: 'deploy', roles: %w{web app db}
