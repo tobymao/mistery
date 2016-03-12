@@ -5,7 +5,6 @@ set :current_dir, "#{fetch(:deploy_to)}/current"
 set :tmp_dir, "#{fetch(:deploy_to)}/tmp"
 set :ssh_options, forward_agent: true
 
-after "deploy", "deploy:restart"
 # Clean up all older releases
 after "deploy:restart", "deploy:cleanup"
 
