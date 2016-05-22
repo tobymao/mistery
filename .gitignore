@@ -11,5 +11,6 @@
 /.bundle
 /vendor/bundle
 .rvmrc
+.tags
 
 config/initializers/secret_token.rb
