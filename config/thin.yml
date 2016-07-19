@@ -11,6 +11,6 @@ socket: /tmp/mistery-thin.sock
 max_conns: 1024
 max_persistent_conns: 100
 require: []
-servers: 2
+servers: 1
 daemonize: true
 onebyone: true
