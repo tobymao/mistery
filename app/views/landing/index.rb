@@ -16,6 +16,12 @@ class Views::Landing::Index < Views::Layouts::Page
     h1 "Welcome to Mistery.io!"
 
     div class: 'mainText' do
+      h1 do
+        text "I've decided not to renew the domain and will be taking the site down Feburary 20, 2017."
+        br
+        text "I hope you've all enjoyed the site. Thanks!"
+      end
+
       p do
       	text "This is a website where you can create and play your own mystery stories similar to the board game "
       	link_to("Sherlock Holmes: Consulting Detective", "http://boardgamegeek.com/boardgame/2511/sherlock-holmes-consulting-detective", target: "_blank")
